@@ -36,6 +36,13 @@ class Garment(db.Model, UserMixin):
     favorites = db.relationship("Favorite", back_populates="garment")
 
     def to_dict(self):
+        preview_image_url = None
+
+        preview_image = list(filter(lambda image: image.preview is True, self.images))
+
+        if preview_image:
+            preview_image_url = preview_image[0].url
+
         return {
             "id": self.id,
             "user_id": self.user_id,
@@ -47,4 +54,5 @@ class Garment(db.Model, UserMixin):
             "category": self.category,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
+            "preview_image_url": preview_image_url,
         }

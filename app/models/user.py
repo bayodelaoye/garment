@@ -53,3 +53,20 @@ class User(db.Model, UserMixin):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }
+
+    def to_dict_with_relationships(self):
+        return {
+            "id": self.id,
+            "first_name": self.first_name,
+            "last_name": self.last_name,
+            "email": self.email,
+            "username": self.username,
+            "hashed_password": self.hashed_password,
+            "profile_url": self.profile_url,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "favorites": [favorite.to_dict() for favorite in self.favorites],
+            "reviews": [review.to_dict() for review in self.reviews],
+            "cart": self.cart.to_dict_with_cart_items(),
+            "garments": [garment.to_dict() for garment in self.garments],
+        }

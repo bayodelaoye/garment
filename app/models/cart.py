@@ -30,3 +30,14 @@ class Cart(db.Model, UserMixin):
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }
+
+    def to_dict_with_cart_items(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id,
+            "created_at": self.created_at,
+            "updated_at": self.updated_at,
+            "cart_items": [
+                cart_item.to_dict_with_garments() for cart_item in self.cart_items
+            ],
+        }
