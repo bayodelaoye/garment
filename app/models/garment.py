@@ -31,7 +31,7 @@ class Garment(db.Model, UserMixin):
 
     reviews = db.relationship("Review", back_populates="garment")
 
-    cart_items = db.relationship("CartItem", back_populates="garments")
+    cart_items = db.relationship("CartItem", back_populates="garment")
 
     favorites = db.relationship("Favorite", back_populates="garment")
 
