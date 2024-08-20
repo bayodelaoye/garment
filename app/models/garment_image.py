@@ -21,6 +21,8 @@ class GarmentImage(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
+    garment = db.relationship("Garment", back_populates="images")
+
     def to_dict(self):
         return {
             "id": self.id,

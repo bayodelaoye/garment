@@ -23,6 +23,10 @@ class CartItem(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
+    garments = db.relationship("Garment", back_populates="cart_items")
+
+    cart = db.relationship("Cart", back_populates="cart_items")
+
     def to_dict(self):
         return {
             "id": self.id,

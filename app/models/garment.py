@@ -25,6 +25,16 @@ class Garment(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
+    user = db.relationship("User", back_populates="garments")
+
+    images = db.relationship("GarmentImage", back_populates="garment")
+
+    reviews = db.relationship("Review", back_populates="garment")
+
+    cart_items = db.relationship("CartItem", back_populates="garments")
+
+    favorites = db.relationship("Favorite", back_populates="garment")
+
     def to_dict(self):
         return {
             "id": self.id,

@@ -22,6 +22,10 @@ class Favorite(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
+    user = db.relationship("User", back_populates="favorites")
+
+    garment = db.relationship("Garment", back_populates="favorites")
+
     def to_dict(self):
         return {
             "id": self.id,

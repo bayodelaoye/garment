@@ -19,9 +19,16 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     profile_url = db.Column(db.String(255), nullable=False)
-    is_admin = db.Column(db.Boolean, nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
+
+    favorites = db.relationship("Favorite", back_populates="user")
+
+    reviews = db.relationship("Review", back_populates="user")
+
+    cart = db.relationship("Cart", uselist=False, back_populates="user")
+
+    garments = db.relationship("Garment", back_populates="user")
 
     @property
     def password(self):
@@ -43,7 +50,6 @@ class User(db.Model, UserMixin):
             "username": self.username,
             "hashed_password": self.hashed_password,
             "profile_url": self.profile_url,
-            "is_admin": self.is_admin,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }

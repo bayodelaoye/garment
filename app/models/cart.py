@@ -19,6 +19,10 @@ class Cart(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
+    user = db.relationship("User", back_populates="cart")
+
+    cart_items = db.relationship("CartItem", back_populates="cart")
+
     def to_dict(self):
         return {
             "id": self.id,
