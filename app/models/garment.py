@@ -27,13 +27,21 @@ class Garment(db.Model, UserMixin):
 
     user = db.relationship("User", back_populates="garments")
 
-    images = db.relationship("GarmentImage", back_populates="garment")
+    images = db.relationship(
+        "GarmentImage", back_populates="garment", cascade="all, delete-orphan"
+    )
 
-    reviews = db.relationship("Review", back_populates="garment")
+    reviews = db.relationship(
+        "Review", back_populates="garment", cascade="all, delete-orphan"
+    )
 
-    cart_items = db.relationship("CartItem", back_populates="garment")
+    cart_items = db.relationship(
+        "CartItem", back_populates="garment", cascade="all, delete-orphan"
+    )
 
-    favorites = db.relationship("Favorite", back_populates="garment")
+    favorites = db.relationship(
+        "Favorite", back_populates="garment", cascade="all, delete-orphan"
+    )
 
     def to_dict(self):
         preview_image_url = None
