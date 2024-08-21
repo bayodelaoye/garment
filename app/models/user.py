@@ -18,7 +18,6 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(50), nullable=False, unique=True)
     username = db.Column(db.String(40), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    profile_url = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.now)
     updated_at = db.Column(db.DateTime, default=datetime.now)
 
@@ -49,7 +48,6 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "username": self.username,
             "hashed_password": self.hashed_password,
-            "profile_url": self.profile_url,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
         }
@@ -62,7 +60,6 @@ class User(db.Model, UserMixin):
             "email": self.email,
             "username": self.username,
             "hashed_password": self.hashed_password,
-            "profile_url": self.profile_url,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
             "favorites": [favorite.to_dict() for favorite in self.favorites],
