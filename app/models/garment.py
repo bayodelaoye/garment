@@ -16,9 +16,9 @@ class Garment(db.Model, UserMixin):
     user_id = db.Column(
         db.Integer, db.ForeignKey(add_prefix_for_prod("users.id")), nullable=False
     )
-    title = db.Column(db.String(200), nullable=False)
+    title = db.Column(db.String(200), nullable=False, unique=True)
     price = db.Column(db.Numeric(10, 2), nullable=False)
-    discounted_price = db.Column(db.Numeric(10, 2), nullable=False)
+    discounted_price = db.Column(db.Numeric(10, 2), nullable=True)
     description = db.Column(db.Text, nullable=False)
     inventory = db.Column(db.Integer, nullable=False)
     category = db.Column(db.String(7), nullable=False)
