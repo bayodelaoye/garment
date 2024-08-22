@@ -45,5 +45,5 @@ class CartItem(db.Model, UserMixin):
             "quantity": self.quantity,
             "created_at": self.created_at,
             "updated_at": self.updated_at,
-            "garment": [garment.to_dict() for garment in self.garment],
+            "garment": self.garment.to_dict(),
         }

@@ -24,7 +24,7 @@ def new_review(garment_id):
     db.session.add(new_review)
     db.session.commit()
 
-    return {"review": new_review.to_dict()}
+    return {"review": new_review.to_dict()}, 200
 
 
 @review_routes.route("/<int:garment_id>")
@@ -35,7 +35,7 @@ def all_reviews_for_garment(garment_id):
         return {"message": "Not found"}, 404
 
     reviews = Review.query.filter(Review.garment_id == garment_id).all()
-    return {"reviews": [review.to_dict() for review in reviews]}
+    return {"reviews": [review.to_dict() for review in reviews]}, 200
 
 
 @review_routes.route("/<int:garment_id>", methods=["PUT"])
@@ -63,7 +63,7 @@ def update_review(garment_id):
 
     db.session.commit()
 
-    return {"review": user_review.to_dict()}
+    return {"review": user_review.to_dict()}, 200
 
 
 @review_routes.route("/<int:garment_id>", methods=["DELETE"])
@@ -78,4 +78,4 @@ def delete_review(garment_id):
 
     db.session.delete(user_review)
     db.session.commit()
-    return {"message": "Review deleted"}
+    return {"message": "Review deleted"}, 200

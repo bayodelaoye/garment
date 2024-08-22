@@ -75,6 +75,8 @@ fetch("/api/garments/1", {
   },
 });
 
+//---------------------------------------------------------------------------------------//
+
 // Create a review
 fetch("/api/reviews/1/new", {
   method: "POST",
@@ -111,6 +113,54 @@ fetch("/api/reviews/1", {
 
 // Delete a review by garment id
 fetch("/api/reviews/1", {
+  method: "DELETE",
+  headers: {
+    "content-type": "application/json",
+  },
+});
+
+//---------------------------------------------------------------------------------------//
+
+// Add to cart
+fetch("/api/cart", {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    garment_id: 1,
+  }),
+});
+
+// Read all items in cart
+fetch("/api/cart", {
+  method: "GET",
+  headers: {
+    "content-type": "application/json",
+  },
+});
+
+// Update a cart item
+fetch("/api/cart/2", {
+  method: "PUT",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    quantity: 9,
+  }),
+});
+
+// Delete a cart item
+fetch("/api/cart/1", {
+  method: "DELETE",
+  headers: {
+    "content-type": "application/json",
+  },
+});
+
+// Delete cart
+fetch("/api/cart", {
   method: "DELETE",
   headers: {
     "content-type": "application/json",

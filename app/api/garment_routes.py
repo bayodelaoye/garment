@@ -49,37 +49,37 @@ def new_garment():
     db.session.add(new_garment_image)
     db.session.commit()
 
-    return {"garment": garment.to_dict()}
+    return {"garment": garment.to_dict()}, 200
 
 
 @garment_routes.route("/")
 def all_garments():
     garments = Garment.query.all()
-    return {"garments": [garment.to_dict() for garment in garments]}
+    return {"garments": [garment.to_dict() for garment in garments]}, 200
 
 
 @garment_routes.route("/men")
 def all_garments_men():
     garments = Garment.query.filter(Garment.category == "MEN").all()
-    return {"garments": [garment.to_dict() for garment in garments]}
+    return {"garments": [garment.to_dict() for garment in garments]}, 200
 
 
 @garment_routes.route("/women")
 def all_garments_women():
     garments = Garment.query.filter(Garment.category == "WOMEN").all()
-    return {"garments": [garment.to_dict() for garment in garments]}
+    return {"garments": [garment.to_dict() for garment in garments]}, 200
 
 
 @garment_routes.route("/kids")
 def all_garments_kids():
     garments = Garment.query.filter(Garment.category == "KIDS").all()
-    return {"garments": [garment.to_dict() for garment in garments]}
+    return {"garments": [garment.to_dict() for garment in garments]}, 200
 
 
 @garment_routes.route("/<int:id>")
 def garment_details(id):
     garment = Garment.query.get(id)
-    return garment.to_dict()
+    return garment.to_dict(), 200
 
 
 @garment_routes.route("/<int:id>/edit", methods=["PUT"])
@@ -144,7 +144,7 @@ def update_garment(id):
         garment_image.url = upload["url"]
     db.session.commit()
 
-    return {"garment": garment.to_dict()}
+    return {"garment": garment.to_dict()}, 200
 
 
 @garment_routes.route("/<int:id>", methods=["DELETE"])
@@ -157,4 +157,4 @@ def delete_garment(id):
 
     db.session.delete(garment)
     db.session.commit()
-    return {"message": "Garment deleted"}
+    return {"message": "Garment deleted"}, 200
