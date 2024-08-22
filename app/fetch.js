@@ -166,3 +166,32 @@ fetch("/api/cart", {
     "content-type": "application/json",
   },
 });
+
+//---------------------------------------------------------------------------------------//
+
+// Add to favorites
+fetch("/api/favorites", {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    garment_id: 1,
+  }),
+});
+
+// Read all favorites
+fetch("/api/favorites", {
+  method: "GET",
+  headers: {
+    "content-type": "application/json",
+  },
+});
+
+// Delete a favorite by garment id
+fetch("/api/favorites/1", {
+  method: "DELETE",
+  headers: {
+    "content-type": "application/json",
+  },
+});
