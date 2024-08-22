@@ -1,15 +1,18 @@
-// Create a portfolio
-fetch("/api/garments/", {
+// Create a garment
+fetch("/api/garments/new", {
   method: "POST",
   headers: {
     "content-type": "application/json",
   },
   body: JSON.stringify({
-    portfolio_name: "New Portfolio",
-    cash_balance: 100,
-    total_amount: 200,
-    is_active: true,
     user_id: 1,
+    title: "Create New Garment",
+    price: 200,
+    discounted_price: 99.99,
+    description:
+      "Add a touch of sporty style to your child's wardrobe with the Striped Night Kids' Jacket. This sleek black jacket features a bold white stripe running down the sleeves, creating a dynamic, modern look. Made from a durable, water-resistant fabric, it provides reliable protection against the elements while ensuring comfort. The jacket includes a full-zip front, adjustable hood, and elastic cuffs for a snug fit. With its eye-catching design and practical features, it's perfect for school, sports, or casual outings.",
+    inventory: 50,
+    category: "MEN",
   }),
 });
 
@@ -64,8 +67,50 @@ fetch("/api/garments/1", {
   }),
 });
 
-// Delete a portfolio by its id
+// Delete a garment by it's id
 fetch("/api/garments/1", {
+  method: "DELETE",
+  headers: {
+    "content-type": "application/json",
+  },
+});
+
+// Create a review
+fetch("/api/reviews/1/new", {
+  method: "POST",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    user_id: 1,
+    title: "Create New Garment",
+    review: "This is a new review to test. I love this jacket",
+    stars: 5,
+  }),
+});
+
+// Read all reviews for a garment by garment id
+fetch("/api/reviews/1", {
+  method: "GET",
+  headers: {
+    "content-type": "application/json",
+  },
+});
+
+// Update a review by garment id
+fetch("/api/reviews/1", {
+  method: "PUT",
+  headers: {
+    "content-type": "application/json",
+  },
+  body: JSON.stringify({
+    review: "New updated review to test out",
+    stars: 1,
+  }),
+});
+
+// Delete a review by garment id
+fetch("/api/reviews/1", {
   method: "DELETE",
   headers: {
     "content-type": "application/json",

@@ -8,6 +8,7 @@ from flask_wtf.csrf import CSRFProtect, generate_csrf
 
 from .api.auth_routes import auth_routes
 from .api.garment_routes import garment_routes
+from .api.review_routes import review_routes
 from .api.user_routes import user_routes
 from .config import Config
 from .models import Cart, CartItem, Favorite, Garment, GarmentImage, Review, User, db
@@ -32,6 +33,7 @@ app.config.from_object(Config)
 app.register_blueprint(user_routes, url_prefix="/api/users")
 app.register_blueprint(auth_routes, url_prefix="/api/auth")
 app.register_blueprint(garment_routes, url_prefix="/api/garments")
+app.register_blueprint(review_routes, url_prefix="/api/reviews")
 db.init_app(app)
 Migrate(app, db)
 

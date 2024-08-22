@@ -82,6 +82,71 @@ def garment_details(id):
     return garment.to_dict()
 
 
+@garment_routes.route("/<int:id>/edit", methods=["PUT"])
+@login_required
+def update_garment(id):
+    garment_info = request.get_json()
+    garment = Garment.query.get(id)
+    title = garment_info.get("title")
+    price = garment_info.get("price")
+    discounted_price = garment_info.get("discounted_price")
+    description = garment_info.get("description")
+    inventory = garment_info.get("inventory")
+
+    if garment is None:
+        return {"message": "Not found"}, 404
+
+    if garment.user_id != current_user.id:
+        return {"message": "Unauthorized"}, 403
+
+    # Check if user inputted the values to edit
+    if title:
+        if len(title) > 30:
+            return {"message": "Length of title exceeds more than 30 characters"}, 400
+        garment_already_exists = Garment.query.filter(Garment.title == title).first()
+        if garment_already_exists:
+            return {"message": "Garment with that title already exists"}, 400
+        garment.title = title
+
+    if price is not None:
+        if price < 0:
+            return {"message": "Price cannot be a negative number"}, 400
+        garment.price = price
+
+    if discounted_price is not None:
+        if discounted_price < 0:
+            return {"message": "Discounted price cannot be a negative number"}, 400
+        garment.discounted_price = discounted_price
+
+    if description:
+        if len(description) < 100:
+            return {"message": "Description must be 100 characters or more"}, 400
+        garment.description = description
+
+    if inventory is not None:
+        if inventory < 0:
+            return {"message": "Inventory amount cannot be a negative number"}, 400
+        garment.inventory = inventory
+
+    # Handle file upload if the image is provided
+    if "image" in request.files:
+        image = request.files["image"]
+        image.filename = get_unique_filename(image.filename)
+        upload = upload_file_to_s3(image)
+        if "url" not in upload:
+            return {"message": "There was an error uploading the image"}, 500
+
+    garment_image = GarmentImage.query.filter(
+        GarmentImage.garment_id == garment.id
+    ).first()
+
+    if garment_image:
+        garment_image.url = upload["url"]
+    db.session.commit()
+
+    return {"garment": garment.to_dict()}
+
+
 @garment_routes.route("/<int:id>", methods=["DELETE"])
 @login_required
 def delete_garment(id):
