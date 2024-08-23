@@ -1,0 +1,59 @@
+.login-container {
+  width: 500px;
+  height: 430px;
+  padding: 30px;
+}
+
+.login-text-sign-up-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-text-sign-up-container button {
+  padding: 8px 30px 8px 30px;
+  border-radius: 25px;
+  border: 2px solid var(--black);
+  background-color: var(--white);
+  cursor: pointer;
+  font-weight: 550;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.login-text-sign-up-container button:hover {
+  background-color: var(--black);
+  color: var(--white);
+  border: 2px solid var(--black);
+}
+
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.email-password-login {
+  display: flex;
+  flex-direction: column;
+}
+
+.email-password-login input {
+  height: 35px;
+  padding-left: 8px;
+}
+
+.login-modal-btn {
+  padding: 8px 30px 8px 30px;
+  border: 1px solid var(--black);
+  background-color: var(--black);
+  border-radius: 20px;
+  color: var(--white);
+  font-weight: 550;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.login-modal-btn:hover {
+  background-color: var(--white);
+  color: var(--black);
+}

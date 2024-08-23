@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { thunkLogin } from "../../redux/session";
 import { useDispatch } from "react-redux";
+import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
+import SignupFormModal from "../SignupFormModal";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -29,10 +31,17 @@ function LoginFormModal() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <label>
+    <div className="login-container">
+      <div className="login-text-sign-up-container">
+        <h1>Log In</h1>
+        <OpenModalButton
+          buttonText={`Sign Up`}
+          onClose={closeModal}
+          modalComponent={<SignupFormModal />}
+        />
+      </div>
+      <form onSubmit={handleSubmit} className="login-form-container">
+        <label className="email-password-login">
           Email
           <input
             type="text"
@@ -42,7 +51,7 @@ function LoginFormModal() {
           />
         </label>
         {errors.email && <p>{errors.email}</p>}
-        <label>
+        <label className="email-password-login">
           Password
           <input
             type="password"
@@ -52,9 +61,14 @@ function LoginFormModal() {
           />
         </label>
         {errors.password && <p>{errors.password}</p>}
-        <button type="submit">Log In</button>
+        <button type="submit" className="login-modal-btn">
+          Log In
+        </button>
+        <button type="submit" className="login-modal-btn">
+          Log In as Demo User
+        </button>
       </form>
-    </>
+    </div>
   );
 }
 

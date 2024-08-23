@@ -1,3 +1,43 @@
-.profile-dropdown {
-  position: absolute;
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0px 50px;
+}
+
+.nav-links-container {
+  display: flex;
+  gap: 30px;
+}
+
+.nav-link {
+  color: var(--mid-gray);
+}
+
+.login-btn-shopping-bag {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+}
+
+.login-btn {
+  padding: 8px 30px 8px 30px;
+  border-radius: 20px;
+  border: 1.5px solid var(--mid-gray);
+  background-color: var(--white);
+  color: var(--mid-gray);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.login-btn:hover {
+  border: 1.5px solid var(--mid-gray);
+  background-color: var(--mid-gray);
+  color: var(--white);
+}
+
+.shopping-bag {
+  height: 30px;
+  width: 30px;
 }
