@@ -1,0 +1,25 @@
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  gap: 10px;
+}
+
+.circle-container {
+  position: relative;
+  width: 5rem;
+  height: 5rem;
+}
+
+.circle {
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  border: 0.5rem solid var(--light-gray);
+  border-top: 0.5rem solid var(--base-red);
+  border-radius: 50%;
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+}
