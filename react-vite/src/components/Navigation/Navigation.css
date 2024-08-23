@@ -11,7 +11,15 @@
 }
 
 .nav-link {
-  color: var(--mid-gray);
+  color: var(--black);
+  border-bottom: 2px solid transparent;
+  padding-bottom: 7px;
+}
+
+.nav-link:hover {
+  color: var(--base-red);
+  border-bottom: 2px solid var(--base-red);
+  padding-bottom: 7px;
 }
 
 .login-btn-shopping-bag {
@@ -23,21 +31,27 @@
 .login-btn {
   padding: 8px 30px 8px 30px;
   border-radius: 20px;
-  border: 1.5px solid var(--mid-gray);
+  border: 1.7px solid var(--base-red);
   background-color: var(--white);
-  color: var(--mid-gray);
-  font-weight: 500;
+  color: var(--base-red);
+  font-weight: 550;
   cursor: pointer;
   transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .login-btn:hover {
-  border: 1.5px solid var(--mid-gray);
-  background-color: var(--mid-gray);
+  border: 1.7px solid var(--base-red);
+  background-color: var(--base-red);
   color: var(--white);
 }
 
 .shopping-bag {
   height: 30px;
   width: 30px;
+}
+
+.user-menu-shopping-bag {
+  display: flex;
+  align-items: center;
+  gap: 30px;
 }

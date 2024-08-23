@@ -6,37 +6,61 @@ import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import LoginFormModal from "../LoginFormModal";
+import { useSelector } from "react-redux";
 
 function Navigation() {
+  const user = useSelector((state) => state.session.user);
   const { closeModal } = useModal();
 
   return (
-    <div className="navbar-container">
-      <img src={logo} alt="logo" />
-      <div className="nav-links-container">
-        <NavLink to="/men" className="nav-link">
-          Men
-        </NavLink>
-        <NavLink to="/men" className="nav-link">
-          Women
-        </NavLink>
-        <NavLink to="/men" className="nav-link">
-          Kids
-        </NavLink>
-      </div>
+    <>
+      {!user ? (
+        <div className="navbar-container">
+          <img src={logo} alt="logo" />
+          <div className="nav-links-container">
+            <NavLink to="/men" className="nav-link">
+              Men
+            </NavLink>
+            <NavLink to="/men" className="nav-link">
+              Women
+            </NavLink>
+            <NavLink to="/men" className="nav-link">
+              Kids
+            </NavLink>
+          </div>
 
-      <div className="login-btn-shopping-bag">
-        <OpenModalButton
-          buttonText={`Login`}
-          onClose={closeModal}
-          className="login-btn"
-          modalComponent={<LoginFormModal />}
-        />
-        <MdOutlineShoppingBag className="shopping-bag" />
-      </div>
+          <div className="login-btn-shopping-bag">
+            <OpenModalButton
+              buttonText={`Login`}
+              onClose={closeModal}
+              className="login-btn"
+              modalComponent={<LoginFormModal />}
+            />
+            <MdOutlineShoppingBag className="shopping-bag" />
+          </div>
+        </div>
+      ) : (
+        <div className="navbar-container">
+          <img src={logo} alt="logo" />
+          <div className="nav-links-container">
+            <NavLink to="/men" className="nav-link">
+              Men
+            </NavLink>
+            <NavLink to="/men" className="nav-link">
+              Women
+            </NavLink>
+            <NavLink to="/men" className="nav-link">
+              Kids
+            </NavLink>
+          </div>
 
-      {/* <ProfileButton /> */}
-    </div>
+          <div className="user-menu-shopping-bag">
+            <ProfileButton />
+            <MdOutlineShoppingBag className="shopping-bag" />
+          </div>
+        </div>
+      )}
+    </>
   );
 }
 

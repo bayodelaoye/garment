@@ -30,6 +30,22 @@ function LoginFormModal() {
     }
   };
 
+  const handleDemoLogin = async () => {
+    setErrors({});
+    const demoCredentials = {
+      email: "demo@aa.io",
+      password: "password",
+    };
+
+    const serverResponse = await dispatch(thunkLogin(demoCredentials));
+
+    if (serverResponse) {
+      setErrors(serverResponse);
+    } else {
+      closeModal();
+    }
+  };
+
   return (
     <div className="login-container">
       <div className="login-text-sign-up-container">
@@ -39,6 +55,12 @@ function LoginFormModal() {
           onClose={closeModal}
           modalComponent={<SignupFormModal />}
         />
+      </div>
+      <div className="login-sign-up-error-container">
+        {errors.email && <p className="login-sign-up-error">{errors.email}</p>}
+        {errors.password && (
+          <p className="login-sign-up-error">{errors.password}</p>
+        )}
       </div>
       <form onSubmit={handleSubmit} className="login-form-container">
         <label className="email-password-login">
@@ -50,7 +72,7 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.email && <p>{errors.email}</p>}
+
         <label className="email-password-login">
           Password
           <input
@@ -60,11 +82,14 @@ function LoginFormModal() {
             required
           />
         </label>
-        {errors.password && <p>{errors.password}</p>}
         <button type="submit" className="login-modal-btn">
           Log In
         </button>
-        <button type="submit" className="login-modal-btn">
+        <button
+          type="button"
+          className="login-modal-btn"
+          onClick={handleDemoLogin}
+        >
           Log In as Demo User
         </button>
       </form>

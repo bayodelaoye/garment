@@ -1,0 +1,31 @@
+.menu-btn {
+  border: none;
+  background-color: white;
+  position: relative;
+}
+
+.user-icon {
+  height: 20px;
+  width: 20px;
+  margin-top: 8px;
+}
+
+.profile-dropdown-div {
+  display: flex;
+  border: 1px solid #ccc;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  flex-direction: column;
+  gap: 10px;
+  z-index: 100;
+  position: absolute;
+  padding: 15px;
+  top: 0px;
+  right: 20px;
+  width: 200px;
+  border-radius: 8px;
+}
+
+.menu-bottom-border {
+  border-bottom: 1px solid var(--black);
+  padding: 5px;
+}

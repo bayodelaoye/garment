@@ -1,10 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { FaUserCircle } from 'react-icons/fa';
+import { FaUserCircle } from "react-icons/fa";
 import { thunkLogout } from "../../redux/session";
 import OpenModalMenuItem from "./OpenModalMenuItem";
 import LoginFormModal from "../LoginFormModal";
 import SignupFormModal from "../SignupFormModal";
+import { FaUser } from "react-icons/fa";
+import "./ProfileButton.css";
+import { Link } from "react-router-dom";
 
 function ProfileButton() {
   const dispatch = useDispatch();
@@ -41,35 +44,39 @@ function ProfileButton() {
 
   return (
     <>
-      <button onClick={toggleMenu}>
-        <FaUserCircle />
+      <button onClick={toggleMenu} className="menu-btn">
+        <FaUser className="user-icon" />
+        {showMenu && (
+          <div className="profile-dropdown" ref={ulRef}>
+            {user ? (
+              <div className="profile-dropdown-div">
+                <p className="menu-bottom-border">{user.username}</p>
+                <p className="menu-bottom-border">{user.email}</p>
+                <Link className="menu-bottom-border">Manage Products</Link>
+                <Link className="menu-bottom-border"> Your Favorites</Link>
+                <p>
+                  <button onClick={logout} className="login-btn">
+                    Log Out
+                  </button>
+                </p>
+              </div>
+            ) : (
+              <>
+                <OpenModalMenuItem
+                  itemText="Log In"
+                  onItemClick={closeMenu}
+                  modalComponent={<LoginFormModal />}
+                />
+                <OpenModalMenuItem
+                  itemText="Sign Up"
+                  onItemClick={closeMenu}
+                  modalComponent={<SignupFormModal />}
+                />
+              </>
+            )}
+          </div>
+        )}
       </button>
-      {showMenu && (
-        <ul className={"profile-dropdown"} ref={ulRef}>
-          {user ? (
-            <>
-              <li>{user.username}</li>
-              <li>{user.email}</li>
-              <li>
-                <button onClick={logout}>Log Out</button>
-              </li>
-            </>
-          ) : (
-            <>
-              <OpenModalMenuItem
-                itemText="Log In"
-                onItemClick={closeMenu}
-                modalComponent={<LoginFormModal />}
-              />
-              <OpenModalMenuItem
-                itemText="Sign Up"
-                onItemClick={closeMenu}
-                modalComponent={<SignupFormModal />}
-              />
-            </>
-          )}
-        </ul>
-      )}
     </>
   );
 }
