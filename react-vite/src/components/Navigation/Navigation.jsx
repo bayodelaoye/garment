@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import logo from "../../../public/logo.png";
@@ -21,10 +21,10 @@ function Navigation() {
             <NavLink to="/men" className="nav-link">
               Men
             </NavLink>
-            <NavLink to="/men" className="nav-link">
+            <NavLink to="/women" className="nav-link">
               Women
             </NavLink>
-            <NavLink to="/men" className="nav-link">
+            <NavLink to="/kids" className="nav-link">
               Kids
             </NavLink>
           </div>
@@ -41,15 +41,17 @@ function Navigation() {
         </div>
       ) : (
         <div className="navbar-container">
-          <img src={logo} alt="logo" />
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
           <div className="nav-links-container">
             <NavLink to="/men" className="nav-link">
               Men
             </NavLink>
-            <NavLink to="/men" className="nav-link">
+            <NavLink to="/women" className="nav-link">
               Women
             </NavLink>
-            <NavLink to="/men" className="nav-link">
+            <NavLink to="/kids" className="nav-link">
               Kids
             </NavLink>
           </div>

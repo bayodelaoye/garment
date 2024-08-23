@@ -1,0 +1,40 @@
+.category-page-container {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.category-page-title {
+  margin-left: 50px;
+}
+
+.garment-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 50px;
+}
+
+.individual-garment-container {
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.individual-garment-container:hover {
+  transform: scale(1.05);
+}
+
+.price-container {
+  display: flex;
+  gap: 30px;
+}
+
+.price {
+  font-weight: 550;
+}
+
+.discounted-price {
+  text-decoration: line-through;
+  color: var(--mid-gray);
+}
