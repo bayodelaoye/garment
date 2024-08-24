@@ -16,7 +16,9 @@ function Navigation() {
     <>
       {!user ? (
         <div className="navbar-container">
-          <img src={logo} alt="logo" />
+          <Link to="/">
+            <img src={logo} alt="logo" />
+          </Link>
           <div className="nav-links-container">
             <NavLink to="/men" className="nav-link">
               Men

@@ -1,6 +1,8 @@
 const GET_GARMENTS_MEN = "garment/getGarmentsMen";
 const GET_GARMENTS_WOMEN = "garment/getGarmentsWomen";
 const GET_GARMENTS_KIDS = "garment/getGarmentsKids";
+const GET_GARMENT_SINGLE = "garment/getGarmentSingle";
+const GET_GARMENT_IMAGES = "garment/getGarmentImages";
 
 const getGarmentsMen = (garments) => ({
   type: GET_GARMENTS_MEN,
@@ -15,6 +17,16 @@ const getGarmentsWomen = (garments) => ({
 const getGarmentsKids = (garments) => ({
   type: GET_GARMENTS_KIDS,
   payload: garments,
+});
+
+const getGarmentSingle = (garment) => ({
+  type: GET_GARMENT_SINGLE,
+  payload: garment,
+});
+
+const getGarmentImages = (garmentImages) => ({
+  type: GET_GARMENT_IMAGES,
+  payload: garmentImages,
 });
 
 export const obtainGarmentsMen = () => async (dispatch) => {
@@ -65,6 +77,38 @@ export const obtainGarmentsKids = () => async (dispatch) => {
   }
 };
 
+export const obtainGarmentSingle = (garmentId) => async (dispatch) => {
+  const response = await fetch(`/api/garments/${garmentId}`);
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(getGarmentSingle(data));
+
+    return data;
+  }
+};
+
+export const obtainGarmentImages = (garmentId) => async (dispatch) => {
+  const response = await fetch(`/api/garments/${garmentId}/images`);
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(getGarmentImages(data));
+
+    return data;
+  }
+};
+
 const initialState = { garments: null };
 
 function garmentReducer(state = initialState, action) {
@@ -75,6 +119,10 @@ function garmentReducer(state = initialState, action) {
       return { ...state, garmentsWomen: action.payload };
     case GET_GARMENTS_KIDS:
       return { ...state, garmentsKids: action.payload };
+    case GET_GARMENT_SINGLE:
+      return { ...state, currentGarment: action.payload };
+    case GET_GARMENT_IMAGES:
+      return { ...state, garmentImages: action.payload };
     default:
       return state;
   }

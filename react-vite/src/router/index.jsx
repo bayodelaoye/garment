@@ -5,6 +5,7 @@ import Layout from "./Layout";
 import MensPage from "../components/MensPage";
 import WomensPage from "../components/WomensPage";
 import KidsPage from "../components/KidsPage";
+import GarmentDetailsPage from "../components/Garment/GarmentDetailsPage";
 
 export const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ export const router = createBrowserRouter([
       {
         path: "/kids",
         element: <KidsPage />,
+      },
+      {
+        path: "/garments/:garmentId",
+        element: <GarmentDetailsPage />,
       },
     ],
   },

@@ -1,0 +1,91 @@
+.garment-details-page-container {
+  display: flex;
+  flex-direction: column;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+  gap: 30px;
+}
+
+.garment-details-navigation {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.garment-details-link {
+  color: var(--black);
+}
+
+.garment-details-container {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.garment-details-image-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.garment-details-sub-image-container {
+  display: flex;
+  gap: 30px;
+}
+
+.garment-details-sub-image-container img {
+  width: 80px;
+  border: 5px solid transparent;
+  cursor: pointer;
+  transition: transform 0.5s ease;
+}
+
+.garment-details-sub-image-container img:hover {
+  border: 5px solid var(--light-gray);
+}
+
+.garment-details-sub-image-container img:focus {
+  transform: scale(1.09);
+  filter: brightness(0.8);
+}
+
+.garment-details-text-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.rating-reviews-container {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.star-rating-container {
+  display: flex;
+  gap: 4px;
+}
+
+.filled-star-rating {
+  color: var(--base-red);
+}
+
+.garment-details-price-container {
+  display: flex;
+  gap: 30px;
+}
+
+.price-discounted-price {
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.garment-details-price {
+  text-decoration: line-through;
+  color: var(--mid-gray);
+}
+
+.garment-details-discounted-price {
+  color: var(--base-red);
+}

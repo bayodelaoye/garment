@@ -38,6 +38,26 @@ def all_reviews_for_garment(garment_id):
     return {"reviews": [review.to_dict() for review in reviews]}, 200
 
 
+@review_routes.route("/<int:garment_id>/rating")
+def reviews_for_garment_star_rating(garment_id):
+    garment = Garment.query.get(garment_id)
+    review_total_rating = 0
+
+    if garment is None:
+        return {"message": "Not found"}, 404
+
+    reviews = Review.query.filter(Review.garment_id == garment_id).all()
+    number_of_reviews = Review.query.filter(Review.garment_id == garment_id).count()
+
+    for review in reviews:
+        review_total_rating += review.stars
+
+    return {
+        "average_reviews_rating": review_total_rating / number_of_reviews,
+        "number_of_reviews": number_of_reviews,
+    }, 200
+
+
 @review_routes.route("/<int:garment_id>", methods=["PUT"])
 @login_required
 def update_review(garment_id):

@@ -20,6 +20,7 @@
 .individual-garment-container {
   transition: transform 0.5s ease;
   cursor: pointer;
+  color: var(--black);
 }
 
 .individual-garment-container:hover {
@@ -29,13 +30,14 @@
 .price-container {
   display: flex;
   gap: 30px;
+  align-items: center;
 }
 
 .price {
-  font-weight: 550;
+  text-decoration: line-through;
+  color: var(--mid-gray);
 }
 
 .discounted-price {
-  text-decoration: line-through;
-  color: var(--mid-gray);
+  font-weight: 550;
 }

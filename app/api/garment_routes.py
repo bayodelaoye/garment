@@ -82,6 +82,14 @@ def garment_details(id):
     return garment.to_dict(), 200
 
 
+@garment_routes.route("/<int:id>/images")
+def garment_images(id):
+    garment_images = GarmentImage.query.filter(
+        GarmentImage.garment_id == id, GarmentImage.preview == False
+    ).all()
+    return [garment_image.to_dict() for garment_image in garment_images], 200
+
+
 @garment_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def update_garment(id):
