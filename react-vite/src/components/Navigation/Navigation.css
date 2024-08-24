@@ -49,7 +49,7 @@
   color: var(--base-red);
   font-weight: 550;
   cursor: pointer;
-  transition: background-color 0.25s ease, color 0.25s ease;
+  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
 .login-btn:hover {

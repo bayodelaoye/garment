@@ -8,10 +8,14 @@ import { TbMathGreater } from "react-icons/tb";
 import "./GarmentDetailsPage.css";
 import { FaStar } from "react-icons/fa6";
 import { FaRegStar } from "react-icons/fa";
+import { GoDotFill } from "react-icons/go";
+import OpenModalButton from "../OpenModalButton";
+import { useModal } from "../../context/Modal";
 
 function GarmentDetailsPage() {
   const { garmentId } = useParams();
   const dispatch = useDispatch();
+  const { closeModal } = useModal();
   const garment = useSelector((state) => state.garments?.currentGarment);
   const garmentImages = useSelector((state) => state.garments?.garmentImages);
   const garmentReviewsRating = useSelector(
@@ -130,13 +134,45 @@ function GarmentDetailsPage() {
 
           <div className="garment-details-price-container">
             <p className="garment-details-price price-discounted-price">
-              ${garment.price}
+              ${garment?.price}
             </p>
             <p className="garment-details-discounted-price price-discounted-price">
-              ${garment.discounted_price}
+              ${garment?.discounted_price}
             </p>
           </div>
+          <p>{garment?.description}</p>
+
+          <div className="select-size-container">
+            <p>Select Size:</p>
+            <div className="size-btn-container">
+              <button>S</button>
+              <button>M</button>
+              <button>L</button>
+              <button>XL</button>
+              <button>XXL</button>
+            </div>
+          </div>
+          <button className="add-to-cart-btn">Add To Cart</button>
         </div>
+      </div>
+
+      <div className="reviews-container">
+        <div className="review-heading-container">
+          <div className="review-heading">
+            <p>{Math.floor(garmentReviewsRating?.average_reviews_rating)}</p>
+            <FaStar className="filled-star-rating" />
+            <p>out of 5 stars</p>
+            <GoDotFill />
+            <p>{garmentReviewsRating?.number_of_reviews} reviews in total</p>
+          </div>
+          <OpenModalButton
+            buttonText={`Leave Review`}
+            onClose={closeModal}
+            className="leave-review-btn"
+            // modalComponent={<LoginFormModal />}
+          />
+        </div>
+        <div className="review-container"></div>
       </div>
     </div>
   );

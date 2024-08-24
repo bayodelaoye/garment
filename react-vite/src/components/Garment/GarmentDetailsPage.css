@@ -20,7 +20,9 @@
 
 .garment-details-container {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-around;
+  border-bottom: 2px solid var(--base-red);
+  padding-bottom: 50px;
 }
 
 .garment-details-image-container {
@@ -54,6 +56,8 @@
 .garment-details-text-container {
   display: flex;
   flex-direction: column;
+  gap: 30px;
+  width: 550px;
 }
 
 .rating-reviews-container {
@@ -88,4 +92,90 @@
 
 .garment-details-discounted-price {
   color: var(--base-red);
+  font-weight: 550;
+}
+
+.select-size-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.size-btn-container {
+  display: flex;
+  gap: 10px;
+}
+
+.size-btn-container button {
+  padding: 8px 30px 8px 30px;
+  cursor: pointer;
+  border-radius: 20px;
+  background-color: var(--white);
+  color: var(--base-red);
+  border: 1.7px solid var(--base-red);
+  font-weight: 550;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.size-btn-container button:hover {
+  border: 1.7px solid var(--base-red);
+  background-color: var(--base-red);
+  color: var(--white);
+}
+
+.size-btn-container button:focus {
+  border: 1.7px solid var(--base-red);
+  background-color: var(--base-red);
+  color: var(--white);
+}
+
+.add-to-cart-btn {
+  padding: 8px 30px 8px 30px;
+  cursor: pointer;
+  /* border-radius: 20px; */
+  background-color: var(--white);
+  color: var(--base-red);
+  border: 1.7px solid var(--base-red);
+  font-weight: 550;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.add-to-cart-btn:hover {
+  border: 1.7px solid var(--base-red);
+  background-color: var(--base-red);
+  color: var(--white);
+}
+
+.reviews-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.review-heading-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-heading {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-size: 32px;
+}
+
+.leave-review-btn {
+  padding: 8px 30px 8px 30px;
+  cursor: pointer;
+  /* border-radius: 20px; */
+  background-color: var(--white);
+  color: var(--base-red);
+  border: 1.7px solid var(--base-red);
+  font-weight: 550;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.leave-review-btn:hover {
+  border: 1.7px solid var(--base-red);
+  background-color: var(--base-red);
+  color: var(--white);
 }
