@@ -3,6 +3,7 @@ import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import DeleteReview from "../Review/DeleteReview";
+import UpdateReview from "../Review/UpdateReview";
 
 function GarmentReviews({ review, users, garment }) {
   const { closeModal } = useModal();
@@ -39,7 +40,9 @@ function GarmentReviews({ review, users, garment }) {
               buttonText={`Update Review`}
               onClose={closeModal}
               className="leave-review-btn"
-              // modalComponent={<CreateReview garment={garment} />}
+              modalComponent={
+                <UpdateReview garment={garment} userReview={review} />
+              }
             />
           </div>
         ) : (

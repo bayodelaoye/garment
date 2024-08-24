@@ -4,6 +4,7 @@ import { useModal } from "../../context/Modal";
 import "./DeleteReview.css";
 import { removeReview } from "../../redux/review";
 import { obtainGarmentReviews } from "../../redux/review";
+import { obtainGarmentReviewsRating } from "../../redux/review";
 
 function DeleteReview({ garment }) {
   const { closeModal } = useModal();
@@ -14,7 +15,7 @@ function DeleteReview({ garment }) {
 
     await dispatch(removeReview(garment.id));
     await dispatch(obtainGarmentReviews(garment.id));
-    // await dispatch(obtainGarmentReviewsRating(garment.id));
+    await dispatch(obtainGarmentReviewsRating(garment.id));
 
     closeModal();
   };

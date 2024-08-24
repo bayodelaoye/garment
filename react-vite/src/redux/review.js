@@ -2,6 +2,7 @@ const GET_GARMENT_REVIEWS_RATING = "review/getGarmentReviewsRating";
 const GET_GARMENT_REVIEWS = "review/getGarmentReviews";
 const CREATE_REVIEW = "review/createReview";
 const DELETE_REVIEW = "review/deleteReview";
+const EDIT_REVIEW = "review/editReview";
 
 const getGarmentReviewsRating = (garmentReviewsRating) => ({
   type: GET_GARMENT_REVIEWS_RATING,
@@ -21,6 +22,11 @@ const createReview = (newReview) => ({
 const deleteReview = (deleteReviewMessage) => ({
   type: DELETE_REVIEW,
   payload: deleteReviewMessage,
+});
+
+const editReview = (updatedReview) => ({
+  type: EDIT_REVIEW,
+  payload: updatedReview,
 });
 
 export const obtainGarmentReviewsRating = (garmentId) => async (dispatch) => {
@@ -97,6 +103,30 @@ export const removeReview = (garmentId) => async (dispatch) => {
   }
 };
 
+export const updateReview = (reviewObject) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${reviewObject.garmentId}`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      garment_id: reviewObject.garmentId,
+      review: reviewObject.review,
+      stars: reviewObject.stars,
+    }),
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(editReview(data));
+
+    return data;
+  }
+};
+
 const initialState = { reviews: null };
 
 function reviewReducer(state = initialState, action) {
@@ -109,6 +139,8 @@ function reviewReducer(state = initialState, action) {
       return { ...state, createdReview: action.payload };
     case DELETE_REVIEW:
       return { ...state, deleteReviewMessage: action.payload };
+    case EDIT_REVIEW:
+      return { ...state, updatedReview: action.payload };
     default:
       return state;
   }
