@@ -211,6 +211,7 @@
 .review-content {
   display: flex;
   flex-direction: column;
+  gap: 10px;
   font-size: 20px;
   width: 100%;
 }
@@ -232,4 +233,9 @@
 
 .review-date {
   font-size: 0.75em;
+}
+
+.edit-delete-review-container {
+  display: flex;
+  gap: 30px;
 }

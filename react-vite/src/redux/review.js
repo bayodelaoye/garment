@@ -1,6 +1,7 @@
 const GET_GARMENT_REVIEWS_RATING = "review/getGarmentReviewsRating";
 const GET_GARMENT_REVIEWS = "review/getGarmentReviews";
 const CREATE_REVIEW = "review/createReview";
+const DELETE_REVIEW = "review/deleteReview";
 
 const getGarmentReviewsRating = (garmentReviewsRating) => ({
   type: GET_GARMENT_REVIEWS_RATING,
@@ -15,6 +16,11 @@ const getGarmentReviews = (garmentReviews) => ({
 const createReview = (newReview) => ({
   type: CREATE_REVIEW,
   payload: newReview,
+});
+
+const deleteReview = (deleteReviewMessage) => ({
+  type: DELETE_REVIEW,
+  payload: deleteReviewMessage,
 });
 
 export const obtainGarmentReviewsRating = (garmentId) => async (dispatch) => {
@@ -73,6 +79,24 @@ export const addReview = (reviewObject) => async (dispatch) => {
   }
 };
 
+export const removeReview = (garmentId) => async (dispatch) => {
+  const response = await fetch(`/api/reviews/${garmentId}`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(deleteReview(data));
+
+    return data;
+  }
+};
+
 const initialState = { reviews: null };
 
 function reviewReducer(state = initialState, action) {
@@ -83,6 +107,8 @@ function reviewReducer(state = initialState, action) {
       return { ...state, garmentReviews: action.payload };
     case CREATE_REVIEW:
       return { ...state, createdReview: action.payload };
+    case DELETE_REVIEW:
+      return { ...state, deleteReviewMessage: action.payload };
     default:
       return state;
   }

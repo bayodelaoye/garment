@@ -7,6 +7,10 @@
   gap: 30px;
 }
 
+.review-title {
+  margin: 0 auto;
+}
+
 .review-label {
   display: flex;
   flex-direction: column;

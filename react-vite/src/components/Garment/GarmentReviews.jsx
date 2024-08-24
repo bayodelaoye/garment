@@ -1,6 +1,12 @@
 import { FaStar } from "react-icons/fa6";
+import OpenModalButton from "../OpenModalButton";
+import { useModal } from "../../context/Modal";
+import { useDispatch, useSelector } from "react-redux";
+import DeleteReview from "../Review/DeleteReview";
 
-function GarmentReviews({ review, users }) {
+function GarmentReviews({ review, users, garment }) {
+  const { closeModal } = useModal();
+  const currentUser = useSelector((state) => state.session?.user);
   const user = users?.filter((user) => {
     return user?.id === review?.user_id;
   });
@@ -21,6 +27,24 @@ function GarmentReviews({ review, users }) {
         </div>
         <p className="review-date">{review?.created_at}</p>
         <p>{review?.review}</p>
+        {currentUser?.id === review?.user_id ? (
+          <div className="edit-delete-review-container">
+            <OpenModalButton
+              buttonText={`Delete Review`}
+              onClose={closeModal}
+              className="leave-review-btn"
+              modalComponent={<DeleteReview garment={garment} />}
+            />
+            <OpenModalButton
+              buttonText={`Update Review`}
+              onClose={closeModal}
+              className="leave-review-btn"
+              // modalComponent={<CreateReview garment={garment} />}
+            />
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

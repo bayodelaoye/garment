@@ -23,13 +23,16 @@ function GarmentDetailsPage() {
   const user = useSelector((state) => state.session?.user);
   const garment = useSelector((state) => state.garments?.currentGarment);
   const garmentImages = useSelector((state) => state.garments?.garmentImages);
+  const users = useSelector((state) => state.user?.users?.users);
   const garmentReviewsRating = useSelector(
     (state) => state.reviews?.reviewsRating
   );
   const garmentReviews = useSelector(
     (state) => state.reviews?.garmentReviews?.reviews
   );
-  const users = useSelector((state) => state.user?.users?.users);
+  const userAlreadyHasReview = garmentReviews?.filter((review) => {
+    return review?.user_id === user?.id;
+  });
 
   useEffect(() => {
     const getGarment = async () => {
@@ -185,12 +188,18 @@ function GarmentDetailsPage() {
             <p>{garmentReviewsRating?.number_of_reviews} reviews in total</p>
           </div>
           {user ? (
-            <OpenModalButton
-              buttonText={`Leave Review`}
-              onClose={closeModal}
-              className="leave-review-btn"
-              modalComponent={<CreateReview garment={garment} />}
-            />
+            <>
+              {userAlreadyHasReview?.length === 0 ? (
+                <OpenModalButton
+                  buttonText={`Leave Review`}
+                  onClose={closeModal}
+                  className="leave-review-btn"
+                  modalComponent={<CreateReview garment={garment} />}
+                />
+              ) : (
+                <></>
+              )}
+            </>
           ) : (
             <></>
           )}
@@ -200,7 +209,12 @@ function GarmentDetailsPage() {
             ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
             .map((review, index) => {
               return (
-                <GarmentReviews review={review} users={users} key={index} />
+                <GarmentReviews
+                  review={review}
+                  users={users}
+                  garment={garment}
+                  key={index}
+                />
               );
             })}
         </div>
