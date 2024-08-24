@@ -5,7 +5,7 @@ import { obtainGarmentReviewsRating } from "../../redux/review";
 import { obtainGarmentReviews } from "../../redux/review";
 import { obtainUsers } from "../../redux/user";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { TbMathGreater } from "react-icons/tb";
 import "./GarmentDetailsPage.css";
 import { FaStar } from "react-icons/fa6";
@@ -15,11 +15,13 @@ import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 import GarmentReviews from "./GarmentReviews";
 import CreateReview from "../Review/CreateReview";
+import Loading from "../Loading";
 
 function GarmentDetailsPage() {
   const { garmentId } = useParams();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+  const [isLoaded, setIsLoaded] = useState(false);
   const user = useSelector((state) => state.session?.user);
   const garment = useSelector((state) => state.garments?.currentGarment);
   const garmentImages = useSelector((state) => state.garments?.garmentImages);
@@ -35,6 +37,7 @@ function GarmentDetailsPage() {
   });
 
   useEffect(() => {
+    let timer;
     const getGarment = async () => {
       await dispatch(obtainGarmentSingle(garmentId));
     };
@@ -59,167 +62,191 @@ function GarmentDetailsPage() {
     getGarmentImages();
     getGarmentReviewsRating();
     getGarmentReviews();
-    getUsers();
+    getUsers().then(() => {
+      timer = setTimeout(() => setIsLoaded(true), 700);
+    });
+
+    return () => clearTimeout(timer);
   }, [dispatch]);
 
   return (
-    <div className="garment-details-page-container">
-      <div className="garment-details-navigation">
-        <Link to="/" className="garment-details-link">
-          Home
-        </Link>
-        <TbMathGreater />
-        <Link to={`/${garment?.category}`} className="garment-details-link">
-          {garment?.category}
-        </Link>
-        <TbMathGreater />
-        <p>{garment?.title}</p>
-      </div>
-
-      <div className="garment-details-container">
-        <div className="garment-details-image-container">
-          <img src={garment?.preview_image_url} alt="garment preview image" />
-          <div className="garment-details-sub-image-container">
-            {garmentImages?.map((garmentImage, index) => {
-              return (
-                <img
-                  src={garmentImage?.url}
-                  alt="garment sub image"
-                  key={index}
-                  tabindex="0"
-                />
-              );
-            })}
+    <>
+      {isLoaded ? (
+        <div className="garment-details-page-container">
+          <div className="garment-details-navigation">
+            <Link to="/" className="garment-details-link">
+              Home
+            </Link>
+            <TbMathGreater />
+            <Link to={`/${garment?.category}`} className="garment-details-link">
+              {garment?.category}
+            </Link>
+            <TbMathGreater />
+            <p>{garment?.title}</p>
           </div>
-        </div>
 
-        <div className="garment-details-text-container">
-          <h2>{garment?.title}</h2>
-          {Math.floor(garmentReviewsRating?.average_reviews_rating) === 1 ? (
-            <div className="rating-reviews-container">
-              <div className="star-rating-container">
-                <FaStar className="filled-star-rating" />
-                <FaRegStar />
-                <FaRegStar />
-                <FaRegStar />
-                <FaRegStar />
+          <div className="garment-details-container">
+            <div className="garment-details-image-container">
+              <img
+                src={garment?.preview_image_url}
+                alt="garment preview image"
+              />
+              <div className="garment-details-sub-image-container">
+                {garmentImages?.map((garmentImage, index) => {
+                  return (
+                    <img
+                      src={garmentImage?.url}
+                      alt="garment sub image"
+                      key={index}
+                      tabindex="0"
+                    />
+                  );
+                })}
               </div>
-              <p>({garmentReviewsRating?.number_of_reviews})</p>
             </div>
-          ) : Math.floor(garmentReviewsRating?.average_reviews_rating) === 2 ? (
-            <div className="rating-reviews-container">
-              <div className="star-rating-container">
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-                <FaRegStar />
-                <FaRegStar />
-                <FaRegStar />
-              </div>
-              <p>({garmentReviewsRating?.number_of_reviews})</p>
-            </div>
-          ) : Math.floor(garmentReviewsRating?.average_reviews_rating) === 3 ? (
-            <div className="rating-reviews-container">
-              <div className="star-rating-container">
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-                <FaRegStar />
-                <FaRegStar />
-              </div>
-              <p>({garmentReviewsRating?.number_of_reviews})</p>
-            </div>
-          ) : Math.floor(garmentReviewsRating?.average_reviews_rating) === 4 ? (
-            <div className="rating-reviews-container">
-              <div className="star-rating-container">
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-                <FaRegStar />
-              </div>
-              <p>({garmentReviewsRating?.number_of_reviews})</p>
-            </div>
-          ) : Math.floor(garmentReviewsRating?.average_reviews_rating) === 5 ? (
-            <div className="rating-reviews-container">
-              <div className="star-rating-container">
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-                <FaStar className="filled-star-rating" />
-              </div>
-              <p>({garmentReviewsRating?.number_of_reviews})</p>
-            </div>
-          ) : (
-            <></>
-          )}
 
-          <div className="garment-details-price-container">
-            <p className="garment-details-price price-discounted-price">
-              ${garment?.price}
-            </p>
-            <p className="garment-details-discounted-price price-discounted-price">
-              ${garment?.discounted_price}
-            </p>
-          </div>
-          <p>{garment?.description}</p>
-
-          <div className="select-size-container">
-            <p>Select Size:</p>
-            <div className="size-btn-container">
-              <button>S</button>
-              <button>M</button>
-              <button>L</button>
-              <button>XL</button>
-              <button>XXL</button>
-            </div>
-          </div>
-          <button className="add-to-cart-btn">Add To Cart</button>
-        </div>
-      </div>
-
-      <div className="reviews-container">
-        <div className="review-heading-container">
-          <div className="review-heading">
-            <p>{Math.floor(garmentReviewsRating?.average_reviews_rating)}</p>
-            <FaStar className="filled-star-rating" />
-            <p>out of 5 stars</p>
-            <GoDotFill />
-            <p>{garmentReviewsRating?.number_of_reviews} reviews in total</p>
-          </div>
-          {user ? (
-            <>
-              {userAlreadyHasReview?.length === 0 ? (
-                <OpenModalButton
-                  buttonText={`Leave Review`}
-                  onClose={closeModal}
-                  className="leave-review-btn"
-                  modalComponent={<CreateReview garment={garment} />}
-                />
+            <div className="garment-details-text-container">
+              <h2>{garment?.title}</h2>
+              {Math.floor(garmentReviewsRating?.average_reviews_rating) ===
+              1 ? (
+                <div className="rating-reviews-container">
+                  <div className="star-rating-container">
+                    <FaStar className="filled-star-rating" />
+                    <FaRegStar />
+                    <FaRegStar />
+                    <FaRegStar />
+                    <FaRegStar />
+                  </div>
+                  <p>({garmentReviewsRating?.number_of_reviews})</p>
+                </div>
+              ) : Math.floor(garmentReviewsRating?.average_reviews_rating) ===
+                2 ? (
+                <div className="rating-reviews-container">
+                  <div className="star-rating-container">
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                    <FaRegStar />
+                    <FaRegStar />
+                    <FaRegStar />
+                  </div>
+                  <p>({garmentReviewsRating?.number_of_reviews})</p>
+                </div>
+              ) : Math.floor(garmentReviewsRating?.average_reviews_rating) ===
+                3 ? (
+                <div className="rating-reviews-container">
+                  <div className="star-rating-container">
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                    <FaRegStar />
+                    <FaRegStar />
+                  </div>
+                  <p>({garmentReviewsRating?.number_of_reviews})</p>
+                </div>
+              ) : Math.floor(garmentReviewsRating?.average_reviews_rating) ===
+                4 ? (
+                <div className="rating-reviews-container">
+                  <div className="star-rating-container">
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                    <FaRegStar />
+                  </div>
+                  <p>({garmentReviewsRating?.number_of_reviews})</p>
+                </div>
+              ) : Math.floor(garmentReviewsRating?.average_reviews_rating) ===
+                5 ? (
+                <div className="rating-reviews-container">
+                  <div className="star-rating-container">
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                    <FaStar className="filled-star-rating" />
+                  </div>
+                  <p>({garmentReviewsRating?.number_of_reviews})</p>
+                </div>
               ) : (
                 <></>
               )}
-            </>
-          ) : (
-            <></>
-          )}
+
+              <div className="garment-details-price-container">
+                <p className="garment-details-price price-discounted-price">
+                  ${garment?.price}
+                </p>
+                <p className="garment-details-discounted-price price-discounted-price">
+                  ${garment?.discounted_price}
+                </p>
+              </div>
+              <p>{garment?.description}</p>
+
+              <div className="select-size-container">
+                <p>Select Size:</p>
+                <div className="size-btn-container">
+                  <button>S</button>
+                  <button>M</button>
+                  <button>L</button>
+                  <button>XL</button>
+                  <button>XXL</button>
+                </div>
+              </div>
+              <button className="add-to-cart-btn">Add To Cart</button>
+            </div>
+          </div>
+
+          <div className="reviews-container">
+            <div className="review-heading-container">
+              <div className="review-heading">
+                <p>
+                  {Math.floor(garmentReviewsRating?.average_reviews_rating)}
+                </p>
+                <FaStar className="filled-star-rating" />
+                <p>out of 5 stars</p>
+                <GoDotFill />
+                <p>
+                  {garmentReviewsRating?.number_of_reviews} reviews in total
+                </p>
+              </div>
+              {user ? (
+                <>
+                  {userAlreadyHasReview?.length === 0 ? (
+                    <OpenModalButton
+                      buttonText={`Leave Review`}
+                      onClose={closeModal}
+                      className="leave-review-btn"
+                      modalComponent={<CreateReview garment={garment} />}
+                    />
+                  ) : (
+                    <></>
+                  )}
+                </>
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="review-container">
+              {garmentReviews
+                ?.sort(
+                  (a, b) => new Date(b.created_at) - new Date(a.created_at)
+                )
+                .map((review, index) => {
+                  return (
+                    <GarmentReviews
+                      review={review}
+                      users={users}
+                      garment={garment}
+                      key={index}
+                    />
+                  );
+                })}
+            </div>
+          </div>
         </div>
-        <div className="review-container">
-          {garmentReviews
-            ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-            .map((review, index) => {
-              return (
-                <GarmentReviews
-                  review={review}
-                  users={users}
-                  garment={garment}
-                  key={index}
-                />
-              );
-            })}
-        </div>
-      </div>
-    </div>
+      ) : (
+        <Loading />
+      )}
+    </>
   );
 }
 
