@@ -5,17 +5,15 @@ function GarmentReviews({ review, users }) {
     return user?.id === review?.user_id;
   });
 
-  console.log(user);
-  console.log("test");
   return (
     <div className="individual-review-container">
       <div className="name-avatar">
-        <p>{user[0]?.first_name[0]}</p>
+        <p>{user ? user[0]?.first_name[0] : ""}</p>
       </div>
 
       <div className="review-content">
         <div className="review-name-rating">
-          <p className="review-first-name">{user[0]?.first_name}</p>
+          <p className="review-first-name">{user ? user[0]?.first_name : ""}</p>
           <div className="review-star-rating">
             <p>{review?.stars}</p>
             <FaStar className="filled-star-rating" />

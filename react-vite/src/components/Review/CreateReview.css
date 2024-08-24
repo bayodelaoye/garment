@@ -1,0 +1,48 @@
+.review-form {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 530px;
+  padding: 30px;
+  gap: 30px;
+}
+
+.review-label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.star-ratings-container {
+  display: flex;
+  gap: 10px;
+  font-size: 32px;
+  justify-content: center;
+}
+
+.rating-cursor-pointer {
+  cursor: pointer;
+}
+
+.review-input {
+  letter-spacing: 1.5px;
+  padding-top: 8px;
+  padding-left: 8px;
+  height: 80px;
+}
+
+.create-review-btn {
+  padding: 8px 30px 8px 30px;
+  border: 1px solid var(--black);
+  background-color: var(--black);
+  border-radius: 20px;
+  color: var(--white);
+  font-weight: 550;
+  cursor: pointer;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.create-review-btn:hover {
+  background-color: var(--white);
+  color: var(--black);
+}

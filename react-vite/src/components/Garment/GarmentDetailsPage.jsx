@@ -14,11 +14,13 @@ import { GoDotFill } from "react-icons/go";
 import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 import GarmentReviews from "./GarmentReviews";
+import CreateReview from "../Review/CreateReview";
 
 function GarmentDetailsPage() {
   const { garmentId } = useParams();
   const dispatch = useDispatch();
   const { closeModal } = useModal();
+  const user = useSelector((state) => state.session?.user);
   const garment = useSelector((state) => state.garments?.currentGarment);
   const garmentImages = useSelector((state) => state.garments?.garmentImages);
   const garmentReviewsRating = useSelector(
@@ -182,17 +184,25 @@ function GarmentDetailsPage() {
             <GoDotFill />
             <p>{garmentReviewsRating?.number_of_reviews} reviews in total</p>
           </div>
-          <OpenModalButton
-            buttonText={`Leave Review`}
-            onClose={closeModal}
-            className="leave-review-btn"
-            // modalComponent={<LoginFormModal />}
-          />
+          {user ? (
+            <OpenModalButton
+              buttonText={`Leave Review`}
+              onClose={closeModal}
+              className="leave-review-btn"
+              modalComponent={<CreateReview garment={garment} />}
+            />
+          ) : (
+            <></>
+          )}
         </div>
         <div className="review-container">
-          {garmentReviews?.map((review, index) => {
-            return <GarmentReviews review={review} users={users} key={index} />;
-          })}
+          {garmentReviews
+            ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            .map((review, index) => {
+              return (
+                <GarmentReviews review={review} users={users} key={index} />
+              );
+            })}
         </div>
       </div>
     </div>
