@@ -132,7 +132,6 @@
 .add-to-cart-btn {
   padding: 8px 30px 8px 30px;
   cursor: pointer;
-  /* border-radius: 20px; */
   background-color: var(--white);
   color: var(--base-red);
   border: 1.7px solid var(--base-red);
@@ -178,4 +177,59 @@
   border: 1.7px solid var(--base-red);
   background-color: var(--base-red);
   color: var(--white);
+}
+
+.review-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+.individual-review-container {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  margin-top: 30px;
+}
+
+.name-avatar {
+  width: 50px;
+  height: 50px;
+  background-color: var(--base-red);
+  border-radius: 50%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+.name-avatar p {
+  font-weight: 550;
+  color: var(--white);
+}
+
+.review-content {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  width: 100%;
+}
+
+.review-name-rating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.review-first-name {
+  font-weight: 550;
+}
+
+.review-star-rating {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.review-date {
+  font-size: 0.75em;
 }

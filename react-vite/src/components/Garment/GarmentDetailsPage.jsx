@@ -2,6 +2,8 @@ import { Link, useParams } from "react-router-dom";
 import { obtainGarmentSingle } from "../../redux/garment";
 import { obtainGarmentImages } from "../../redux/garment";
 import { obtainGarmentReviewsRating } from "../../redux/review";
+import { obtainGarmentReviews } from "../../redux/review";
+import { obtainUsers } from "../../redux/user";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { TbMathGreater } from "react-icons/tb";
@@ -11,6 +13,7 @@ import { FaRegStar } from "react-icons/fa";
 import { GoDotFill } from "react-icons/go";
 import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
+import GarmentReviews from "./GarmentReviews";
 
 function GarmentDetailsPage() {
   const { garmentId } = useParams();
@@ -21,6 +24,10 @@ function GarmentDetailsPage() {
   const garmentReviewsRating = useSelector(
     (state) => state.reviews?.reviewsRating
   );
+  const garmentReviews = useSelector(
+    (state) => state.reviews?.garmentReviews?.reviews
+  );
+  const users = useSelector((state) => state.user?.users?.users);
 
   useEffect(() => {
     const getGarment = async () => {
@@ -35,9 +42,19 @@ function GarmentDetailsPage() {
       await dispatch(obtainGarmentReviewsRating(garmentId));
     };
 
+    const getGarmentReviews = async () => {
+      await dispatch(obtainGarmentReviews(garmentId));
+    };
+
+    const getUsers = async () => {
+      await dispatch(obtainUsers());
+    };
+
     getGarment();
     getGarmentImages();
     getGarmentReviewsRating();
+    getGarmentReviews();
+    getUsers();
   }, [dispatch]);
 
   return (
@@ -172,7 +189,11 @@ function GarmentDetailsPage() {
             // modalComponent={<LoginFormModal />}
           />
         </div>
-        <div className="review-container"></div>
+        <div className="review-container">
+          {garmentReviews?.map((review, index) => {
+            return <GarmentReviews review={review} users={users} key={index} />;
+          })}
+        </div>
       </div>
     </div>
   );
