@@ -1,6 +1,6 @@
 .menu-btn {
   border: none;
-  background-color: white;
+  background-color: var(--white);
   position: relative;
 }
 
@@ -13,6 +13,7 @@
 .profile-dropdown-div {
   display: flex;
   border: 1px solid #ccc;
+  background-color: var(--white);
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   flex-direction: column;
   gap: 10px;
