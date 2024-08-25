@@ -75,11 +75,15 @@ function Navigation() {
 
           <div className="user-menu-shopping-bag">
             <ProfileButton />
+
             <MdOutlineShoppingBag
               className="shopping-bag"
               onClick={() => navigate("/cart")}
             />
-            <div className="amount-shopping-bag">
+            <div
+              className="amount-shopping-bag"
+              onClick={() => navigate("/cart")}
+            >
               <p>{amountOfCartItems ? amountOfCartItems : 0}</p>
             </div>
           </div>
