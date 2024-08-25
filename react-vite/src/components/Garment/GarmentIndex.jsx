@@ -20,8 +20,6 @@ function GarmentIndex({ garment }) {
   );
   const isFavorite = favoriteGarmentIds.has(garment?.id);
 
-  console.log(userFavorites);
-
   const toggleFavorite = async () => {
     if (isFavorite) {
       await dispatch(removeFavorite(garment.id));

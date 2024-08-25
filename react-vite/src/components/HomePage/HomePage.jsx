@@ -58,7 +58,7 @@ function HomePage() {
               </div>
               <p>New Collection Available</p>
 
-              <Link to="/men">
+              <Link to="/kids">
                 <button className="latest-collection-btn">
                   Latest Collection
                   <HiMiniArrowLongRight />

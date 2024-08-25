@@ -4,6 +4,11 @@
   padding: 10px 30px;
 }
 
+.sign-up-text {
+  display: flex;
+  justify-content: center;
+}
+
 .sign-up-form-container {
   display: flex;
   flex-direction: column;
@@ -27,8 +32,8 @@
 
 .sign-up-modal-btn {
   padding: 8px 30px 8px 30px;
-  border: 1px solid var(--black);
-  background-color: var(--black);
+  border: 1px solid var(--base-red);
+  background-color: var(--base-red);
   border-radius: 20px;
   color: var(--white);
   font-weight: 550;
@@ -38,5 +43,5 @@
 
 .sign-up-modal-btn:hover {
   background-color: var(--white);
-  color: var(--black);
+  color: var(--base-red);
 }

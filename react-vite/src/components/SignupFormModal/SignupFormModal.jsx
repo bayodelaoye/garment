@@ -58,7 +58,7 @@ function SignupFormModal() {
 
   return (
     <div className="sign-up-container">
-      <h1>Sign Up</h1>
+      <h1 className="sign-up-text">Sign Up</h1>
       {errors.server && <p className="login-sign-up-error">{errors.server}</p>}
       <form onSubmit={handleSubmit} className="sign-up-form-container">
         <label className="credentials-sign-up">

@@ -30,3 +30,14 @@
   border-bottom: 1px solid var(--black);
   padding: 5px;
 }
+
+.manage-products-favorites {
+  color: var(--black);
+  font-weight: 550;
+  transition: color 0.5s ease;
+}
+
+.manage-products-favorites:hover {
+  color: var(--base-red);
+  font-weight: 550;
+}
