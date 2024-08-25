@@ -8,6 +8,7 @@ import WomensPage from "../components/WomensPage";
 import KidsPage from "../components/KidsPage";
 import GarmentDetailsPage from "../components/Garment/GarmentDetailsPage";
 import FavoritePage from "../components/Favorite";
+import CartPage from "../components/Cart";
 
 export const router = createBrowserRouter([
   {
@@ -44,6 +45,10 @@ export const router = createBrowserRouter([
       {
         path: "/favorites",
         element: <FavoritePage />,
+      },
+      {
+        path: "/cart",
+        element: <CartPage />,
       },
     ],
   },

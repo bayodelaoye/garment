@@ -20,7 +20,6 @@ function FavoritePage() {
     favoriteGarmentIds.has(garment.id)
   );
 
-  console.log(favorites);
   useEffect(() => {
     let timer;
     const fetchGarments = async () => {

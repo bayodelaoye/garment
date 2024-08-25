@@ -58,13 +58,35 @@
   color: var(--white);
 }
 
-.shopping-bag {
-  height: 30px;
-  width: 30px;
-}
-
 .user-menu-shopping-bag {
   display: flex;
   align-items: center;
   gap: 30px;
+  position: relative;
+  width: 85px;
+}
+
+.link-to-cart {
+  color: var(--black);
+}
+
+.shopping-bag {
+  height: 30px;
+  width: 30px;
+  cursor: pointer;
+}
+
+.amount-shopping-bag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  background-color: var(--base-red);
+  border-radius: 50%;
+  color: var(--white);
+  font-size: 12px;
+  position: absolute;
+  right: 0px;
+  bottom: 15px;
 }

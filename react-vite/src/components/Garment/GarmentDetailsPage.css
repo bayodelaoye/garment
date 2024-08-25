@@ -144,6 +144,7 @@
   border: 1.7px solid var(--base-red);
   background-color: var(--base-red);
   color: var(--white);
+  outline: none;
 }
 
 .add-to-cart-btn {

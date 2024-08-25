@@ -21,6 +21,8 @@ import { FaHeart } from "react-icons/fa";
 import { addFavorite } from "../../redux/favorite";
 import { removeFavorite } from "../../redux/favorite";
 import { obtainFavoriteGarments } from "../../redux/favorite";
+import { addToBag } from "../../redux/cart";
+import { obtainAmountCartItems } from "../../redux/cart";
 
 function GarmentDetailsPage() {
   const { garmentId } = useParams();
@@ -73,7 +75,11 @@ function GarmentDetailsPage() {
     getGarmentReviewsRating();
     getGarmentReviews();
     getUsers().then(() => {
-      timer = setTimeout(() => setIsLoaded(true), 700);
+      timer = setTimeout(() => {
+        setIsLoaded(true);
+        const button = document.getElementById("medium-size-button");
+        if (button) button.focus();
+      }, 700);
     });
 
     return () => clearTimeout(timer);
@@ -86,6 +92,11 @@ function GarmentDetailsPage() {
       await dispatch(addFavorite(garment.id));
     }
     await dispatch(obtainFavoriteGarments());
+  };
+
+  const handleAddToCart = async () => {
+    await dispatch(addToBag(garmentId));
+    await dispatch(obtainAmountCartItems());
   };
 
   return (
@@ -222,13 +233,15 @@ function GarmentDetailsPage() {
                 <p>Select Size:</p>
                 <div className="size-btn-container">
                   <button>S</button>
-                  <button>M</button>
+                  <button id="medium-size-button">M</button>
                   <button>L</button>
                   <button>XL</button>
                   <button>XXL</button>
                 </div>
               </div>
-              <button className="add-to-cart-btn">Add To Cart</button>
+              <button className="add-to-cart-btn" onClick={handleAddToCart}>
+                Add To Cart
+              </button>
             </div>
           </div>
 

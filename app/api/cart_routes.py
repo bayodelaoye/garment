@@ -46,6 +46,19 @@ def read_cart_items_in_cart():
     return {"cart": cart.to_dict_with_cart_items()}, 200
 
 
+@cart_routes.route("/cart_item")
+@login_required
+def get_amount_of_cart_items_in_cart():
+    cart = Cart.query.filter(Cart.user_id == current_user.id).first()
+
+    if cart is None:
+        return {"message": "There are no items in your cart"}, 404
+
+    amount_of_cart_items = CartItem.query.filter(CartItem.cart_id == cart.id).count()
+
+    return {"amount_of_cart_items": amount_of_cart_items}, 200
+
+
 @cart_routes.route("/<int:cart_item_id>", methods=["PUT"])
 @login_required
 def update_cart_item_quantity(cart_item_id):

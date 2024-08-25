@@ -1,4 +1,4 @@
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import ProfileButton from "./ProfileButton";
 import "./Navigation.css";
 import logo from "../../../public/logo.png";
@@ -6,11 +6,26 @@ import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 import { MdOutlineShoppingBag } from "react-icons/md";
 import LoginFormModal from "../LoginFormModal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { obtainAmountCartItems } from "../../redux/cart";
 
 function Navigation() {
-  const user = useSelector((state) => state.session.user);
+  const navigate = useNavigate();
+  const user = useSelector((state) => state.session?.user);
+  const amountOfCartItems = useSelector(
+    (state) => state.cart?.amountOfCartItems?.amount_of_cart_items
+  );
+  const dispatch = useDispatch();
   const { closeModal } = useModal();
+
+  useEffect(() => {
+    const getAmountCartItems = async () => {
+      await dispatch(obtainAmountCartItems());
+    };
+
+    getAmountCartItems();
+  }, [dispatch]);
 
   return (
     <>
@@ -60,7 +75,13 @@ function Navigation() {
 
           <div className="user-menu-shopping-bag">
             <ProfileButton />
-            <MdOutlineShoppingBag className="shopping-bag" />
+            <MdOutlineShoppingBag
+              className="shopping-bag"
+              onClick={() => navigate("/cart")}
+            />
+            <div className="amount-shopping-bag">
+              <p>{amountOfCartItems ? amountOfCartItems : 0}</p>
+            </div>
           </div>
         </div>
       )}

@@ -10,6 +10,7 @@ import garmentReducer from "./garment";
 import reviewReducer from "./review";
 import userReducer from "./user";
 import favoriteReducer from "./favorite";
+import cartReducer from "./cart";
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   reviews: reviewReducer,
   user: userReducer,
   favorites: favoriteReducer,
+  cart: cartReducer,
 });
 
 let enhancer;
