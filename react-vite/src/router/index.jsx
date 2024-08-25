@@ -7,6 +7,7 @@ import MensPage from "../components/MensPage";
 import WomensPage from "../components/WomensPage";
 import KidsPage from "../components/KidsPage";
 import GarmentDetailsPage from "../components/Garment/GarmentDetailsPage";
+import FavoritePage from "../components/Favorite";
 
 export const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ export const router = createBrowserRouter([
       {
         path: "/garments/:garmentId",
         element: <GarmentDetailsPage />,
+      },
+      {
+        path: "/favorites",
+        element: <FavoritePage />,
       },
     ],
   },

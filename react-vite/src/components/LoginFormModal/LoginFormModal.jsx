@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 import "./LoginForm.css";
 import SignupFormModal from "../SignupFormModal";
+import { obtainFavoriteGarments } from "../../redux/favorite";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -26,6 +27,7 @@ function LoginFormModal() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
+      await dispatch(obtainFavoriteGarments());
       closeModal();
     }
   };
@@ -42,6 +44,7 @@ function LoginFormModal() {
     if (serverResponse) {
       setErrors(serverResponse);
     } else {
+      await dispatch(obtainFavoriteGarments());
       closeModal();
     }
   };

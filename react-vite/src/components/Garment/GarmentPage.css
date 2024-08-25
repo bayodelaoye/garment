@@ -10,6 +10,11 @@
   margin-left: 50px;
 }
 
+.no-favorites-text {
+  display: flex;
+  justify-content: center;
+}
+
 .garment-container {
   display: flex;
   flex-wrap: wrap;
@@ -20,11 +25,32 @@
 .individual-garment-container {
   transition: transform 0.5s ease;
   cursor: pointer;
-  color: var(--black);
+  position: relative;
 }
 
 .individual-garment-container:hover {
   transform: scale(1.05);
+}
+
+.individual-garment-link {
+  color: var(--black);
+}
+
+.heart-icon {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 10;
+  opacity: 0;
+}
+
+.individual-garment-container:hover .heart-icon {
+  opacity: 1;
+}
+
+.favorite-selected {
+  color: var(--base-red);
 }
 
 .price-container {

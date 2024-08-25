@@ -3,6 +3,7 @@ const GET_GARMENTS_WOMEN = "garment/getGarmentsWomen";
 const GET_GARMENTS_KIDS = "garment/getGarmentsKids";
 const GET_GARMENT_SINGLE = "garment/getGarmentSingle";
 const GET_GARMENT_IMAGES = "garment/getGarmentImages";
+const GET_GARMENTS_ALL = "garment/getGarmentsAll";
 
 const getGarmentsMen = (garments) => ({
   type: GET_GARMENTS_MEN,
@@ -27,6 +28,11 @@ const getGarmentSingle = (garment) => ({
 const getGarmentImages = (garmentImages) => ({
   type: GET_GARMENT_IMAGES,
   payload: garmentImages,
+});
+
+const getGarmentsAll = (allGarments) => ({
+  type: GET_GARMENTS_ALL,
+  payload: allGarments,
 });
 
 export const obtainGarmentsMen = () => async (dispatch) => {
@@ -109,6 +115,22 @@ export const obtainGarmentImages = (garmentId) => async (dispatch) => {
   }
 };
 
+export const obtainGarmentsAll = () => async (dispatch) => {
+  const response = await fetch("/api/garments/");
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(getGarmentsAll(data));
+
+    return data;
+  }
+};
+
 const initialState = { garments: null };
 
 function garmentReducer(state = initialState, action) {
@@ -123,6 +145,8 @@ function garmentReducer(state = initialState, action) {
       return { ...state, currentGarment: action.payload };
     case GET_GARMENT_IMAGES:
       return { ...state, garmentImages: action.payload };
+    case GET_GARMENTS_ALL:
+      return { ...state, allGarments: action.payload };
     default:
       return state;
   }

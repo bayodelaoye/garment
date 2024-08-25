@@ -16,6 +16,11 @@ import { useModal } from "../../context/Modal";
 import GarmentReviews from "./GarmentReviews";
 import CreateReview from "../Review/CreateReview";
 import Loading from "../Loading";
+import { FaRegHeart } from "react-icons/fa";
+import { FaHeart } from "react-icons/fa";
+import { addFavorite } from "../../redux/favorite";
+import { removeFavorite } from "../../redux/favorite";
+import { obtainFavoriteGarments } from "../../redux/favorite";
 
 function GarmentDetailsPage() {
   const { garmentId } = useParams();
@@ -35,6 +40,11 @@ function GarmentDetailsPage() {
   const userAlreadyHasReview = garmentReviews?.filter((review) => {
     return review?.user_id === user?.id;
   });
+  const favorites = useSelector(
+    (state) => state.favorites?.favorites?.favorites
+  );
+  const favoriteGarmentIds = new Set(favorites?.map((fav) => fav?.garment_id));
+  const isFavorite = favoriteGarmentIds.has(garment?.id);
 
   useEffect(() => {
     let timer;
@@ -69,6 +79,15 @@ function GarmentDetailsPage() {
     return () => clearTimeout(timer);
   }, [dispatch]);
 
+  const toggleFavorite = async () => {
+    if (isFavorite) {
+      await dispatch(removeFavorite(garment.id));
+    } else {
+      await dispatch(addFavorite(garment.id));
+    }
+    await dispatch(obtainFavoriteGarments());
+  };
+
   return (
     <>
       {isLoaded ? (
@@ -91,6 +110,24 @@ function GarmentDetailsPage() {
                 src={garment?.preview_image_url}
                 alt="garment preview image"
               />
+              {user ? (
+                <>
+                  {isFavorite ? (
+                    <FaHeart
+                      className="heart-icon favorite-selected"
+                      onClick={toggleFavorite}
+                    />
+                  ) : (
+                    <FaRegHeart
+                      className="heart-icon"
+                      onClick={toggleFavorite}
+                    />
+                  )}
+                </>
+              ) : (
+                <></>
+              )}
+
               <div className="garment-details-sub-image-container">
                 {garmentImages?.map((garmentImage, index) => {
                   return (

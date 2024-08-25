@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 function ProfileButton() {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
-  const user = useSelector((store) => store.session.user);
+  const user = useSelector((store) => store.session?.user);
   const ulRef = useRef();
 
   const toggleMenu = (e) => {
@@ -53,7 +53,10 @@ function ProfileButton() {
                 <p className="menu-bottom-border">{user.username}</p>
                 <p className="menu-bottom-border">{user.email}</p>
                 <Link className="menu-bottom-border">Manage Products</Link>
-                <Link className="menu-bottom-border"> Your Favorites</Link>
+                <Link to="/favorites" className="menu-bottom-border">
+                  {" "}
+                  Your Favorites
+                </Link>
                 <p>
                   <button onClick={logout} className="login-btn">
                     Log Out
