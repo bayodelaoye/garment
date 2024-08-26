@@ -78,7 +78,7 @@ function CartPage() {
                 <div className="fees-container">
                   <div className="total-shipping-container">
                     <p>Subtotal</p>
-                    <p>{total}</p>
+                    <p>{Number(total).toFixed(2)}</p>
                   </div>
                   <div className="total-shipping-container">
                     <p>Shipping Fee</p>
@@ -86,7 +86,7 @@ function CartPage() {
                   </div>
                   <div className="total-container">
                     <p>Total</p>
-                    <p>{total}</p>
+                    <p>{Number(total).toFixed(2)}</p>
                   </div>
                 </div>
               </div>
