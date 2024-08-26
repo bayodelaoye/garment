@@ -25,21 +25,13 @@ function HomePage() {
 
   useEffect(() => {
     let timer;
-    const getGarmentsMen = async () => {
+    const getCategoryGarments = async () => {
       await dispatch(obtainGarmentsMen());
-    };
-
-    const getGarmentsWomen = async () => {
       await dispatch(obtainGarmentsWomen());
-    };
-
-    const getGarmentsKids = async () => {
       await dispatch(obtainGarmentsKids());
     };
 
-    getGarmentsMen();
-    getGarmentsWomen();
-    getGarmentsKids().then(() => {
+    getCategoryGarments().then(() => {
       timer = setTimeout(() => setIsLoaded(true), 700);
     });
 

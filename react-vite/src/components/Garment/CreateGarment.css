@@ -1,0 +1,66 @@
+.create-garment-form-container {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-bottom: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.create-garment-fields-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: center;
+}
+
+.create-garment-label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 50%;
+}
+
+.create-garment-label input {
+  height: 35px;
+  padding-left: 8px;
+}
+
+.create-garment-description {
+  height: 90px;
+  padding-left: 8px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.create-garment-select-category {
+  width: 30%;
+  padding: 10px 8px;
+}
+
+.create-garment-submit-btn-container {
+  display: flex;
+  justify-content: center;
+}
+
+.create-garment-submit-btn-container button {
+  padding: 8px 30px 8px 30px;
+  border: 1.7px solid var(--base-red);
+  background-color: var(--base-red);
+  color: var(--white);
+  font-weight: 550;
+  cursor: pointer;
+  transition: all 0.5s ease, color 0.5s ease;
+  width: 50%;
+}
+
+.create-garment-submit-btn-container button:hover {
+  border: 1.7px solid var(--base-red);
+  background-color: var(--white);
+  color: var(--base-red);
+}
+
+.create-garment-upload-image-container {
+  border: 1px solid pink;
+}

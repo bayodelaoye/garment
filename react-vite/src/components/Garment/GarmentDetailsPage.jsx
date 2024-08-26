@@ -46,8 +46,8 @@ function GarmentDetailsPage() {
   const userAlreadyHasReview = garmentReviews?.filter((review) => {
     return review?.user_id === user?.id;
   });
-  const didUserCreateGarment = userGarments.find((userGarment) => {
-    return userGarment.id === +garmentId;
+  const didUserCreateGarment = userGarments?.find((userGarment) => {
+    return userGarment?.id === +garmentId;
   });
   const favorites = useSelector(
     (state) => state.favorites?.favorites?.favorites
@@ -63,7 +63,6 @@ function GarmentDetailsPage() {
       await dispatch(obtainGarmentReviewsRating(garmentId));
       await dispatch(obtainGarmentReviews(garmentId));
       await dispatch(obtainUsers());
-      await dispatch(obtainUserGarments());
     };
 
     fetchGarment().then(() => {

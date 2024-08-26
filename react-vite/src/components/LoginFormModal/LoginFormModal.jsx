@@ -7,6 +7,7 @@ import "./LoginForm.css";
 import SignupFormModal from "../SignupFormModal";
 import { obtainFavoriteGarments } from "../../redux/favorite";
 import { obtainAmountCartItems } from "../../redux/cart";
+import { obtainUserGarments } from "../../redux/garment";
 
 function LoginFormModal() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function LoginFormModal() {
     } else {
       await dispatch(obtainFavoriteGarments());
       await dispatch(obtainAmountCartItems());
+      await dispatch(obtainUserGarments());
       closeModal();
     }
   };
@@ -48,6 +50,7 @@ function LoginFormModal() {
     } else {
       await dispatch(obtainFavoriteGarments());
       await dispatch(obtainAmountCartItems());
+      await dispatch(obtainUserGarments());
       closeModal();
     }
   };

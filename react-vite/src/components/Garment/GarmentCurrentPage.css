@@ -9,9 +9,6 @@
 }
 
 .create-garment-btn-container {
-  border-top: 1px solid var(--black);
-  border-bottom: 1px solid var(--black);
-  padding: 30px;
   display: flex;
   justify-content: right;
 }
@@ -45,7 +42,7 @@
 
 .user-garments-edit-delete-btn {
   padding: 8px 30px 8px 30px;
-  border: 1px solid var(--base-red);
+  border: 1.7px solid var(--base-red);
   background-color: var(--white);
   color: var(--base-red);
   font-weight: 550;

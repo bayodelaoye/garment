@@ -4,9 +4,11 @@ import "./GarmentCurrentPage.css";
 import Loading from "../Loading";
 import GarmentCurrentIndex from "./GarmentCurrentIndex";
 import { obtainUserGarments } from "../../redux/garment";
+import { useNavigate } from "react-router-dom";
 
 function GarmentCurrentPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isLoaded, setIsLoaded] = useState(false);
   const userGarments = useSelector(
     (state) => state.garments?.userGarments?.garments
@@ -32,7 +34,9 @@ function GarmentCurrentPage() {
           <h2>User's Created Garments</h2>
 
           <div className="create-garment-btn-container">
-            <button>Create New Garment</button>
+            <button onClick={() => navigate("/garments/new")}>
+              Create New Garment
+            </button>
           </div>
 
           {userGarments?.length === 0 ? (

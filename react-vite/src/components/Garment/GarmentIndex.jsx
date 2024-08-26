@@ -24,17 +24,9 @@ function GarmentIndex({ garment }) {
     userFavorites?.map((fav) => fav?.garment_id)
   );
   const isFavorite = favoriteGarmentIds.has(garment?.id);
-  const didUserCreateGarment = userGarments.find((userGarment) => {
-    return userGarment.id === garment.id;
+  const didUserCreateGarment = userGarments?.find((userGarment) => {
+    return userGarment?.id === garment?.id;
   });
-
-  useEffect(() => {
-    const getUserGarments = async () => {
-      await dispatch(obtainUserGarments());
-    };
-
-    getUserGarments();
-  }, [dispatch]);
 
   const toggleFavorite = async () => {
     if (isFavorite) {
