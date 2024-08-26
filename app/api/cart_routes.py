@@ -43,7 +43,11 @@ def read_cart_items_in_cart():
     if cart is None:
         return {"message": "There are no items in your cart"}, 404
 
-    return {"cart": cart.to_dict_with_cart_items()}, 200
+    cart_items = cart.to_dict_with_cart_items()
+    sorted_cart_items = sorted(cart_items["cart_items"], key=lambda x: x["id"])
+    cart_items["cart_items"] = sorted_cart_items
+
+    return {"cart": cart_items}, 200
 
 
 @cart_routes.route("/cart_item")
