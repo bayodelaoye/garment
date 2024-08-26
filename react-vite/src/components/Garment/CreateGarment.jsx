@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./CreateGarment.css";
 import { useNavigate } from "react-router-dom";
+import { IoCloudUploadOutline } from "react-icons/io5";
+import { addGarment } from "../../redux/garment";
 
 const CreateGarment = () => {
   const [title, setTitle] = useState("");
@@ -20,9 +22,13 @@ const CreateGarment = () => {
   const navigate = useNavigate();
   const [isLoaded, setIsLoaded] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const newGarment = useSelector(
+    (state) => state.garments?.newGarment?.garments
+  );
 
   useEffect(() => {
     const errors = {};
+    const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg"];
 
     if (title.length < 15 || title.length > 50)
       errors.title =
@@ -44,12 +50,56 @@ const CreateGarment = () => {
 
     if (category === "") errors.category = "Must select a category";
 
+    if (
+      previewImage === "" ||
+      !ALLOWED_EXTENSIONS.includes(previewImage.split(".").pop().toLowerCase())
+    )
+      errors.previewImage =
+        "Please upload a valid image file: png, jpg, or jpeg";
+
     setFormErrors(errors);
-  }, [title, price, discountedPrice, description, inventory, category]);
+  }, [
+    title,
+    price,
+    discountedPrice,
+    description,
+    inventory,
+    category,
+    previewImage,
+  ]);
+
+  const handleFileUpload = (e) => {
+    e.preventDefault();
+    document.querySelector("#file-upload").click();
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPreviewImage(file.name);
+    }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
+
+    if (Object.keys(formErrors).length === 0) {
+      await dispatch(
+        addGarment({
+          title: title,
+          price: price,
+          discountedPrice: discountedPrice,
+          description: description,
+          inventory: inventory,
+          category: category,
+          previewImage: previewImage,
+          preview: true,
+        })
+      );
+
+      navigate(`/garments/${newGarment?.id}`);
+    }
   };
 
   return (
@@ -189,7 +239,34 @@ const CreateGarment = () => {
             </label>
 
             <div className="create-garment-upload-image-container">
-              <input type="file" name="fileup" accept="image/*" />
+              <label
+                htmlFor="file-upload"
+                class="custom-file-upload"
+                onClick={handleFileUpload}
+              >
+                <div className="file-upload-text-container">
+                  <p>{previewImage ? previewImage : "Upload Image"}</p>
+                  <IoCloudUploadOutline className="upload-icon" />
+                </div>
+              </label>
+              <input
+                id="file-upload"
+                type="file"
+                name="image"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              {isSubmitted ? (
+                Object.keys(formErrors).length > 0 ? (
+                  <p className="login-sign-up-error">
+                    {formErrors.previewImage}
+                  </p>
+                ) : (
+                  <></>
+                )
+              ) : (
+                <></>
+              )}
             </div>
           </div>
 

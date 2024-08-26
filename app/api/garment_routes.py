@@ -12,7 +12,7 @@ garment_routes = Blueprint("garments", __name__)
 def new_garment():
     garment_info = request.get_json()
 
-    if len(garment_info["title"]) > 30:
+    if len(garment_info["title"]) > 50:
         return {"message": "Length of title exceeds more than 30 characters"}, 400
 
     garment_already_exists = Garment.query.filter(
@@ -43,10 +43,10 @@ def new_garment():
         if "url" not in upload:
             return {"message": "There was an error uploading the image"}, 500
 
-    new_garment_image = GarmentImage(
-        garment_id=garment.id, url=upload["url"], preview=garment_info["preview"]
-    )
-    db.session.add(new_garment_image)
+        new_garment_image = GarmentImage(
+            garment_id=garment.id, url=upload["url"], preview=garment_info["preview"]
+        )
+        db.session.add(new_garment_image)
     db.session.commit()
 
     return {"garment": garment.to_dict()}, 200
