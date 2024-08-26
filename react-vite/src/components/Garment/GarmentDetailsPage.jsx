@@ -77,8 +77,6 @@ function GarmentDetailsPage() {
     getUsers().then(() => {
       timer = setTimeout(() => {
         setIsLoaded(true);
-        const button = document.getElementById("medium-size-button");
-        if (button) button.focus();
       }, 700);
     });
 
@@ -233,7 +231,7 @@ function GarmentDetailsPage() {
                 <p>Select Size:</p>
                 <div className="size-btn-container">
                   <button>S</button>
-                  <button id="medium-size-button">M</button>
+                  <button>M</button>
                   <button>L</button>
                   <button>XL</button>
                   <button>XXL</button>

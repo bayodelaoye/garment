@@ -3,6 +3,7 @@ const ADD_TO_CART = "cart/addToCart";
 const GET_CART_ITEMS = "cart/getCartItems";
 const UPDATE_CART = "cart/updateCart";
 const DELETE_CART_ITEM = "cart/deleteCartItem";
+const DELETE_CART = "cart/deleteCart";
 const RESET_CART_REDUCER = "cart/resetCartReducer";
 
 const getAmountCartItems = (amountOfCartItems) => ({
@@ -28,6 +29,11 @@ const updateCart = (updatedCartItem) => ({
 const deleteCartItem = (deleteCartItemMessage) => ({
   type: DELETE_CART_ITEM,
   payload: deleteCartItemMessage,
+});
+
+const deleteCart = (deleteCartMessage) => ({
+  type: DELETE_CART,
+  payload: deleteCartMessage,
 });
 
 export const resetCartReducer = () => ({
@@ -87,6 +93,8 @@ export const obtainCartItems = () => async (dispatch) => {
 
     return data;
   }
+  const data = await response.json();
+  dispatch(getCartItems(data));
 };
 
 export const editCart = (editCartObject) => async (dispatch) => {
@@ -129,6 +137,24 @@ export const removeCartItem = (cartItemId) => async (dispatch) => {
   }
 };
 
+export const removeCart = () => async (dispatch) => {
+  const response = await fetch(`/api/cart/`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(deleteCart(data));
+
+    return data;
+  }
+};
+
 const initialState = { cart: null };
 
 function cartReducer(state = initialState, action) {
@@ -143,6 +169,8 @@ function cartReducer(state = initialState, action) {
       return { ...state, updatedCartItem: action.payload };
     case DELETE_CART_ITEM:
       return { ...state, deleteCartItemMessage: action.payload };
+    case DELETE_CART:
+      return { ...state, deleteCartMessage: action.payload };
     case RESET_CART_REDUCER:
       return { cart: null };
     default:

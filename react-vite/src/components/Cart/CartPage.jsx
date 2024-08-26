@@ -2,15 +2,26 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import "./CartPage.css";
 import Loading from "../Loading";
+import { removeCart } from "../../redux/cart";
 import { obtainCartItems } from "../../redux/cart";
+import { obtainAmountCartItems } from "../../redux/cart";
 import CartItemIndex from "./CartItemIndex";
+import OpenModalButton from "../OpenModalButton";
+import { useModal } from "../../context/Modal";
+import GarmentPurchase from "../Garment/GarmentPurchase";
 
 function CartPage() {
   const dispatch = useDispatch();
+  const { closeModal } = useModal();
   const [isLoaded, setIsLoaded] = useState(true);
   const cartItems = useSelector(
     (state) => state.cart?.cartItems?.cart?.cart_items
   );
+  let total = 0;
+
+  for (let i = 0; i < cartItems?.length; i++) {
+    total += cartItems[i]?.quantity * cartItems[i]?.garment?.price;
+  }
 
   useEffect(() => {
     let timer;
@@ -24,6 +35,12 @@ function CartPage() {
 
     return () => clearTimeout(timer);
   }, [dispatch]);
+
+  const handleRemoveAllItems = async () => {
+    await dispatch(removeCart());
+    await dispatch(obtainCartItems());
+    await dispatch(obtainAmountCartItems());
+  };
 
   return (
     <>
@@ -47,6 +64,42 @@ function CartPage() {
               })}
             </div>
           </div>
+
+          {cartItems?.length === 0 || cartItems === undefined ? (
+            <></>
+          ) : (
+            <>
+              <div className="clear-cart-container">
+                <button onClick={handleRemoveAllItems}>Remove All Items</button>
+              </div>
+
+              <div className="cart-aggregate-container">
+                <h2>Cart Aggregate</h2>
+                <div className="fees-container">
+                  <div className="total-shipping-container">
+                    <p>Subtotal</p>
+                    <p>{total}</p>
+                  </div>
+                  <div className="total-shipping-container">
+                    <p>Shipping Fee</p>
+                    <p>Free</p>
+                  </div>
+                  <div className="total-container">
+                    <p>Total</p>
+                    <p>{total}</p>
+                  </div>
+                </div>
+              </div>
+
+              <div className="purchase-btn-container">
+                <OpenModalButton
+                  buttonText={`PURCHASE`}
+                  // onClose={closeModal}
+                  modalComponent={<GarmentPurchase />}
+                />
+              </div>
+            </>
+          )}
         </div>
       ) : (
         <Loading />

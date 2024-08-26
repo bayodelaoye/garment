@@ -13,6 +13,7 @@
   grid-template-columns: repeat(6, 1fr);
   border-bottom: 1px solid var(--black);
   font-weight: bold;
+  padding: 10px 0;
 }
 
 .cart-item-heading {
@@ -64,6 +65,112 @@
 }
 
 .cart-item-detail button:hover {
+  background-color: var(--white);
+  color: var(--base-red);
+}
+
+.clear-cart-container button {
+  padding: 8px 30px 8px 30px;
+  border: 1px solid var(--base-red);
+  background-color: var(--white);
+  border-radius: 20px;
+  color: var(--base-red);
+  font-weight: 550;
+  cursor: pointer;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.clear-cart-container button:hover {
+  border: 1px solid var(--base-red);
+  background-color: var(--base-red);
+  color: var(--white);
+}
+
+.cart-aggregate-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.fees-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 30%;
+}
+
+.total-shipping-container {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--mid-gray);
+  align-items: center;
+}
+
+.total-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 550;
+}
+
+.purchase-btn-container {
+  display: flex;
+  justify-content: right;
+}
+
+.purchase-btn-container button {
+  padding: 8px 30px 8px 30px;
+  border: 1px solid var(--base-red);
+  background-color: var(--base-red);
+  color: var(--white);
+  font-weight: 550;
+  cursor: pointer;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.purchase-btn-container button:hover {
+  border: 1px solid var(--base-red);
+  background-color: var(--white);
+  color: var(--base-red);
+}
+
+.order-confirmation-container {
+  display: flex;
+  flex-direction: column;
+  width: 500px;
+  height: 400px;
+  padding: 30px;
+  gap: 30px;
+}
+
+.order-confirmation-container h2 {
+  text-align: center;
+  border-bottom: 1px solid var(--black);
+  padding-bottom: 20px;
+}
+
+.order-confirmation-container p {
+  text-align: center;
+}
+
+.continue-shopping-container {
+  display: flex;
+  justify-content: center;
+}
+
+.continue-shopping-container button {
+  padding: 8px 30px 8px 30px;
+  border: 1px solid var(--base-red);
+  background-color: var(--base-red);
+  color: var(--white);
+  font-weight: 550;
+  cursor: pointer;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.continue-shopping-container button:hover {
+  border: 1px solid var(--base-red);
   background-color: var(--white);
   color: var(--base-red);
 }
