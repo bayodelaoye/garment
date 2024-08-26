@@ -23,6 +23,7 @@ import { removeFavorite } from "../../redux/favorite";
 import { obtainFavoriteGarments } from "../../redux/favorite";
 import { addToBag } from "../../redux/cart";
 import { obtainAmountCartItems } from "../../redux/cart";
+import { obtainUserGarments } from "../../redux/garment";
 
 function GarmentDetailsPage() {
   const { garmentId } = useParams();
@@ -39,8 +40,14 @@ function GarmentDetailsPage() {
   const garmentReviews = useSelector(
     (state) => state.reviews?.garmentReviews?.reviews
   );
+  const userGarments = useSelector(
+    (state) => state.garments?.userGarments?.garments
+  );
   const userAlreadyHasReview = garmentReviews?.filter((review) => {
     return review?.user_id === user?.id;
+  });
+  const didUserCreateGarment = userGarments.find((userGarment) => {
+    return userGarment.id === +garmentId;
   });
   const favorites = useSelector(
     (state) => state.favorites?.favorites?.favorites
@@ -50,34 +57,19 @@ function GarmentDetailsPage() {
 
   useEffect(() => {
     let timer;
-    const getGarment = async () => {
+    const fetchGarment = async () => {
       await dispatch(obtainGarmentSingle(garmentId));
-    };
-
-    const getGarmentImages = async () => {
       await dispatch(obtainGarmentImages(garmentId));
-    };
-
-    const getGarmentReviewsRating = async () => {
       await dispatch(obtainGarmentReviewsRating(garmentId));
-    };
-
-    const getGarmentReviews = async () => {
       await dispatch(obtainGarmentReviews(garmentId));
-    };
-
-    const getUsers = async () => {
       await dispatch(obtainUsers());
+      await dispatch(obtainUserGarments());
     };
 
-    getGarment();
-    getGarmentImages();
-    getGarmentReviewsRating();
-    getGarmentReviews();
-    getUsers().then(() => {
+    fetchGarment().then(() => {
       timer = setTimeout(() => {
         setIsLoaded(true);
-      }, 700);
+      }, 500);
     });
 
     return () => clearTimeout(timer);
@@ -121,16 +113,22 @@ function GarmentDetailsPage() {
               />
               {user ? (
                 <>
-                  {isFavorite ? (
-                    <FaHeart
-                      className="heart-icon favorite-selected"
-                      onClick={toggleFavorite}
-                    />
+                  {didUserCreateGarment ? (
+                    <></>
                   ) : (
-                    <FaRegHeart
-                      className="heart-icon"
-                      onClick={toggleFavorite}
-                    />
+                    <>
+                      {isFavorite ? (
+                        <FaHeart
+                          className="heart-icon favorite-selected"
+                          onClick={toggleFavorite}
+                        />
+                      ) : (
+                        <FaRegHeart
+                          className="heart-icon"
+                          onClick={toggleFavorite}
+                        />
+                      )}
+                    </>
                   )}
                 </>
               ) : (

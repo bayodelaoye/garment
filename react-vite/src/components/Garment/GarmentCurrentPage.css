@@ -1,0 +1,60 @@
+.user-garments-page-container {
+  padding-top: 50px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  padding-bottom: 50px;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+.create-garment-btn-container {
+  border-top: 1px solid var(--black);
+  border-bottom: 1px solid var(--black);
+  padding: 30px;
+  display: flex;
+  justify-content: right;
+}
+
+.create-garment-btn-container button {
+  padding: 8px 30px 8px 30px;
+  border: 1px solid var(--base-red);
+  background-color: var(--base-red);
+  border-radius: 20px;
+  color: var(--white);
+  font-weight: 550;
+  cursor: pointer;
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.create-garment-btn-container button:hover {
+  background-color: var(--white);
+  color: var(--base-red);
+}
+
+.individual-garment-container-with-btns {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-garments-edit-delete-btn-container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.user-garments-edit-delete-btn {
+  padding: 8px 30px 8px 30px;
+  border: 1px solid var(--base-red);
+  background-color: var(--white);
+  color: var(--base-red);
+  font-weight: 550;
+  cursor: pointer;
+  transition: all 0.5s ease, color 0.5s ease;
+}
+
+.user-garments-edit-delete-btn:hover {
+  border: 1.7px solid var(--base-red);
+  background-color: var(--base-red);
+  color: var(--white);
+}

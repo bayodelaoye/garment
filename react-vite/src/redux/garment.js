@@ -4,6 +4,8 @@ const GET_GARMENTS_KIDS = "garment/getGarmentsKids";
 const GET_GARMENT_SINGLE = "garment/getGarmentSingle";
 const GET_GARMENT_IMAGES = "garment/getGarmentImages";
 const GET_GARMENTS_ALL = "garment/getGarmentsAll";
+const GET_USER_GARMENTS = "garment/getUserGarments";
+const DELETE_GARMENT = "garment/deleteGarment";
 
 const getGarmentsMen = (garments) => ({
   type: GET_GARMENTS_MEN,
@@ -33,6 +35,16 @@ const getGarmentImages = (garmentImages) => ({
 const getGarmentsAll = (allGarments) => ({
   type: GET_GARMENTS_ALL,
   payload: allGarments,
+});
+
+const getUserGarments = (userGarments) => ({
+  type: GET_USER_GARMENTS,
+  payload: userGarments,
+});
+
+const deleteGarment = (deleteGarmentMessage) => ({
+  type: DELETE_GARMENT,
+  payload: deleteGarmentMessage,
 });
 
 export const obtainGarmentsMen = () => async (dispatch) => {
@@ -131,6 +143,40 @@ export const obtainGarmentsAll = () => async (dispatch) => {
   }
 };
 
+export const obtainUserGarments = () => async (dispatch) => {
+  const response = await fetch("/api/garments/user");
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(getUserGarments(data));
+
+    return data;
+  }
+};
+
+export const removeGarment = (garmentId) => async (dispatch) => {
+  const response = await fetch(`/api/garments/${garmentId}`, {
+    method: "DELETE",
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(deleteGarment(data));
+
+    return data;
+  }
+};
+
 const initialState = { garments: null };
 
 function garmentReducer(state = initialState, action) {
@@ -147,6 +193,10 @@ function garmentReducer(state = initialState, action) {
       return { ...state, garmentImages: action.payload };
     case GET_GARMENTS_ALL:
       return { ...state, allGarments: action.payload };
+    case GET_USER_GARMENTS:
+      return { ...state, userGarments: action.payload };
+    case DELETE_GARMENT:
+      return { ...state, deleteGarmentMessage: action.payload };
     default:
       return state;
   }

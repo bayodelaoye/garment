@@ -5,10 +5,15 @@ import { useSelector, useDispatch } from "react-redux";
 import { addFavorite } from "../../redux/favorite";
 import { removeFavorite } from "../../redux/favorite";
 import { obtainFavoriteGarments } from "../../redux/favorite";
+import { useEffect } from "react";
+import { obtainUserGarments } from "../../redux/garment";
 
 function GarmentIndex({ garment }) {
   const dispatch = useDispatch();
   const user = useSelector((store) => store.session?.user);
+  const userGarments = useSelector(
+    (state) => state.garments?.userGarments?.garments
+  );
   const favorites = useSelector(
     (state) => state.favorites?.favorites?.favorites
   );
@@ -19,6 +24,17 @@ function GarmentIndex({ garment }) {
     userFavorites?.map((fav) => fav?.garment_id)
   );
   const isFavorite = favoriteGarmentIds.has(garment?.id);
+  const didUserCreateGarment = userGarments.find((userGarment) => {
+    return userGarment.id === garment.id;
+  });
+
+  useEffect(() => {
+    const getUserGarments = async () => {
+      await dispatch(obtainUserGarments());
+    };
+
+    getUserGarments();
+  }, [dispatch]);
 
   const toggleFavorite = async () => {
     if (isFavorite) {
@@ -41,13 +57,19 @@ function GarmentIndex({ garment }) {
       </Link>
       {user ? (
         <>
-          {isFavorite ? (
-            <FaHeart
-              className="heart-icon favorite-selected"
-              onClick={toggleFavorite}
-            />
+          {didUserCreateGarment ? (
+            <></>
           ) : (
-            <FaRegHeart className="heart-icon" onClick={toggleFavorite} />
+            <>
+              {isFavorite ? (
+                <FaHeart
+                  className="heart-icon favorite-selected"
+                  onClick={toggleFavorite}
+                />
+              ) : (
+                <FaRegHeart className="heart-icon" onClick={toggleFavorite} />
+              )}
+            </>
           )}
         </>
       ) : (

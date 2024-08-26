@@ -58,6 +58,12 @@ def all_garments():
     return {"garments": [garment.to_dict() for garment in garments]}, 200
 
 
+@garment_routes.route("/user")
+def all_user_garments():
+    garments = Garment.query.filter(Garment.user_id == current_user.id).all()
+    return {"garments": [garment.to_dict() for garment in garments]}, 200
+
+
 @garment_routes.route("/men")
 def all_garments_men():
     garments = Garment.query.filter(Garment.category == "MEN").all()

@@ -9,6 +9,7 @@ import KidsPage from "../components/KidsPage";
 import GarmentDetailsPage from "../components/Garment/GarmentDetailsPage";
 import FavoritePage from "../components/Favorite";
 import CartPage from "../components/Cart";
+import GarmentCurrentPage from "../components/Garment/GarmentCurrentPage";
 
 export const router = createBrowserRouter([
   {
@@ -49,6 +50,10 @@ export const router = createBrowserRouter([
       {
         path: "/cart",
         element: <CartPage />,
+      },
+      {
+        path: "/garments/current",
+        element: <GarmentCurrentPage />,
       },
     ],
   },

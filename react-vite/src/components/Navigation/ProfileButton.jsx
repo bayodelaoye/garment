@@ -56,7 +56,10 @@ function ProfileButton() {
               <div className="profile-dropdown-div">
                 <p className="menu-bottom-border">{user.username}</p>
                 <p className="menu-bottom-border">{user.email}</p>
-                <Link className="menu-bottom-border manage-products-favorites">
+                <Link
+                  to="/garments/current"
+                  className="menu-bottom-border manage-products-favorites"
+                >
                   Manage Products
                 </Link>
                 <Link
