@@ -1,7 +1,7 @@
 .sign-up-container {
   width: 500px;
-  height: 600px;
-  padding: 10px 30px;
+  height: fit-content;
+  padding: 30px 30px;
 }
 
 .sign-up-text {

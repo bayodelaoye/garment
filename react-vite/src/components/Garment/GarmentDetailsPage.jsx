@@ -24,6 +24,7 @@ import { obtainFavoriteGarments } from "../../redux/favorite";
 import { addToBag } from "../../redux/cart";
 import { obtainAmountCartItems } from "../../redux/cart";
 import { obtainUserGarments } from "../../redux/garment";
+import LoginFormModal from "../LoginFormModal";
 
 function GarmentDetailsPage() {
   const { garmentId } = useParams();
@@ -224,7 +225,7 @@ function GarmentDetailsPage() {
               </div>
               <p>{garment?.description}</p>
 
-              <div className="select-size-container">
+              {/* <div className="select-size-container">
                 <p>Select Size:</p>
                 <div className="size-btn-container">
                   <button>S</button>
@@ -233,10 +234,19 @@ function GarmentDetailsPage() {
                   <button>XL</button>
                   <button>XXL</button>
                 </div>
-              </div>
-              <button className="add-to-cart-btn" onClick={handleAddToCart}>
-                Add To Cart
-              </button>
+              </div> */}
+              {user ? (
+                <button className="add-to-cart-btn" onClick={handleAddToCart}>
+                  Add To Cart
+                </button>
+              ) : (
+                <OpenModalButton
+                  buttonText={`Add To Cart`}
+                  onClose={closeModal}
+                  className="add-to-cart-btn"
+                  modalComponent={<LoginFormModal />}
+                />
+              )}
             </div>
           </div>
 
