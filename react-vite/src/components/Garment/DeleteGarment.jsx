@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { removeGarment } from "../../redux/garment";
 import { obtainUserGarments } from "../../redux/garment";
+import { obtainAmountCartItems } from "../../redux/cart";
 
 function DeleteGarment({ garment }) {
   const { closeModal } = useModal();
@@ -12,6 +13,7 @@ function DeleteGarment({ garment }) {
 
     await dispatch(removeGarment(garment.id));
     await dispatch(obtainUserGarments());
+    await dispatch(obtainAmountCartItems());
 
     closeModal();
   };

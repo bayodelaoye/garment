@@ -154,18 +154,18 @@ const CreateGarment = () => {
       formData.append("description", description);
       formData.append("inventory", inventory);
       formData.append("category", category);
-      await dispatch(addGarment(formData));
+      await dispatch(addGarment(formData)).then(async () => {
+        const formImagesData = new FormData();
+        formImagesData.append("title", title);
+        formImagesData.append("image", previewImage);
+        formImagesData.append("image", subImage1);
+        formImagesData.append("image", subImage2);
+        formImagesData.append("image", subImage3);
 
-      const formImagesData = new FormData();
-      formImagesData.append("title", title);
-      formImagesData.append("image", previewImage);
-      formImagesData.append("image", subImage1);
-      formImagesData.append("image", subImage2);
-      formImagesData.append("image", subImage3);
-
-      await dispatch(addGarmentImage(formImagesData));
-
-      navigate(`/garments/${newGarment.id}`);
+        await dispatch(addGarmentImage(formImagesData)).then(() =>
+          navigate(`/garments/${newGarment?.id}`)
+        );
+      });
     }
   };
 

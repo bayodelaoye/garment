@@ -56,6 +56,8 @@ function GarmentDetailsPage() {
   const favoriteGarmentIds = new Set(favorites?.map((fav) => fav?.garment_id));
   const isFavorite = favoriteGarmentIds.has(garment?.id);
 
+  console.log(didUserCreateGarment, userGarments);
+
   useEffect(() => {
     let timer;
     const fetchGarment = async () => {
@@ -64,6 +66,7 @@ function GarmentDetailsPage() {
       await dispatch(obtainGarmentReviewsRating(garmentId));
       await dispatch(obtainGarmentReviews(garmentId));
       await dispatch(obtainUsers());
+      await dispatch(obtainUserGarments());
     };
 
     fetchGarment().then(() => {
@@ -152,8 +155,21 @@ function GarmentDetailsPage() {
 
             <div className="garment-details-text-container">
               <h2>{garment?.title}</h2>
+
               {Math.floor(garmentReviewsRating?.average_reviews_rating) ===
-              1 ? (
+              0 ? (
+                <div className="rating-reviews-container">
+                  <div className="star-rating-container">
+                    <FaRegStar />
+                    <FaRegStar />
+                    <FaRegStar />
+                    <FaRegStar />
+                    <FaRegStar />
+                  </div>
+                  <p>({garmentReviewsRating?.number_of_reviews})</p>
+                </div>
+              ) : Math.floor(garmentReviewsRating?.average_reviews_rating) ===
+                1 ? (
                 <div className="rating-reviews-container">
                   <div className="star-rating-container">
                     <FaStar className="filled-star-rating" />
@@ -224,7 +240,9 @@ function GarmentDetailsPage() {
                   ${garment?.discounted_price}
                 </p>
               </div>
-              <p>{garment?.description}</p>
+              <p className="garment-details-description">
+                {garment?.description}
+              </p>
 
               {/* <div className="select-size-container">
                 <p>Select Size:</p>
@@ -266,7 +284,9 @@ function GarmentDetailsPage() {
               </div>
               {user ? (
                 <>
-                  {userAlreadyHasReview?.length === 0 ? (
+                  {didUserCreateGarment ? (
+                    <></>
+                  ) : userAlreadyHasReview?.length === 0 ? (
                     <OpenModalButton
                       buttonText={`Leave Review`}
                       onClose={closeModal}
@@ -282,20 +302,28 @@ function GarmentDetailsPage() {
               )}
             </div>
             <div className="review-container">
-              {garmentReviews
-                ?.sort(
-                  (a, b) => new Date(b.created_at) - new Date(a.created_at)
-                )
-                .map((review, index) => {
-                  return (
-                    <GarmentReviews
-                      review={review}
-                      users={users}
-                      garment={garment}
-                      key={index}
-                    />
-                  );
-                })}
+              {garmentReviews.length === 0 ? (
+                <p className="first-review-text">
+                  Be the first to leave a review...
+                </p>
+              ) : (
+                <>
+                  {garmentReviews
+                    ?.sort(
+                      (a, b) => new Date(b.created_at) - new Date(a.created_at)
+                    )
+                    .map((review, index) => {
+                      return (
+                        <GarmentReviews
+                          review={review}
+                          users={users}
+                          garment={garment}
+                          key={index}
+                        />
+                      );
+                    })}
+                </>
+              )}
             </div>
           </div>
         </div>

@@ -52,10 +52,16 @@ def reviews_for_garment_star_rating(garment_id):
     for review in reviews:
         review_total_rating += review.stars
 
-    return {
-        "average_reviews_rating": review_total_rating / number_of_reviews,
-        "number_of_reviews": number_of_reviews,
-    }, 200
+    if number_of_reviews == 0:
+        return {
+            "average_reviews_rating": 0,
+            "number_of_reviews": 0,
+        }, 200
+    else:
+        return {
+            "average_reviews_rating": review_total_rating / number_of_reviews,
+            "number_of_reviews": number_of_reviews,
+        }, 200
 
 
 @review_routes.route("/<int:garment_id>", methods=["PUT"])

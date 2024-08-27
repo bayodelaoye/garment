@@ -119,6 +119,13 @@
   font-weight: 550;
 }
 
+.garment-details-description {
+  width: 100%;
+  overflow-wrap: break-word;
+  word-break: break-word;
+  box-sizing: border-box;
+}
+
 .select-size-container {
   display: flex;
   flex-direction: column;
@@ -263,4 +270,9 @@
 .edit-delete-review-container {
   display: flex;
   gap: 30px;
+}
+
+.first-review-text {
+  margin-top: 30px;
+  font-size: 20px;
 }
