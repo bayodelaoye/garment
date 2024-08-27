@@ -4,6 +4,7 @@ import "./CreateGarment.css";
 import { useNavigate } from "react-router-dom";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { addGarment } from "../../redux/garment";
+import { addGarmentImage } from "../../redux/garment";
 
 const CreateGarment = () => {
   const [title, setTitle] = useState("");
@@ -23,7 +24,7 @@ const CreateGarment = () => {
   const [isLoaded, setIsLoaded] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const newGarment = useSelector(
-    (state) => state.garments?.newGarment?.garments
+    (state) => state.garments?.newGarment?.garment
   );
 
   useEffect(() => {
@@ -57,7 +58,34 @@ const CreateGarment = () => {
       )
     )
       errors.previewImage =
-        "Please upload a valid image file: png, jpg, or jpeg";
+        "Please upload a valid preview image file: png, jpg, or jpeg";
+
+    if (
+      subImage1 === "" ||
+      !ALLOWED_EXTENSIONS.includes(
+        subImage1?.name.split(".").pop().toLowerCase()
+      )
+    )
+      errors.subImage1 =
+        "Please upload a valid first sub image file: png, jpg, or jpeg";
+
+    if (
+      subImage2 === "" ||
+      !ALLOWED_EXTENSIONS.includes(
+        subImage2?.name.split(".").pop().toLowerCase()
+      )
+    )
+      errors.subImage2 =
+        "Please upload a valid second sub image file: png, jpg, or jpeg";
+
+    if (
+      subImage3 === "" ||
+      !ALLOWED_EXTENSIONS.includes(
+        subImage3?.name.split(".").pop().toLowerCase()
+      )
+    )
+      errors.subImage3 =
+        "Please upload a valid third sub image file: png, jpg, or jpeg";
 
     setFormErrors(errors);
   }, [
@@ -68,17 +96,49 @@ const CreateGarment = () => {
     inventory,
     category,
     previewImage,
+    subImage1,
+    subImage2,
+    subImage3,
   ]);
 
-  const handleFileUpload = (e) => {
+  const handlePreviewFileUpload = (e) => {
     e.preventDefault();
-    document.querySelector("#file-upload").click();
+
+    document.querySelector("#preview-image-upload").click();
+  };
+
+  const handleSubOneFileUpload = (e) => {
+    e.preventDefault();
+
+    document.querySelector("#sub-image1-upload").click();
+  };
+
+  const handleSubTwoFileUpload = (e) => {
+    e.preventDefault();
+
+    document.querySelector("#sub-image2-upload").click();
+  };
+
+  const handleSubThreeFileUpload = (e) => {
+    e.preventDefault();
+
+    document.querySelector("#sub-image3-upload").click();
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
+    const name = e.target.name;
+
     if (file) {
-      setPreviewImage(file);
+      if (name === "previewImage") {
+        setPreviewImage(file);
+      } else if (name === "subImage1") {
+        setSubImage1(file);
+      } else if (name === "subImage2") {
+        setSubImage2(file);
+      } else if (name === "subImage3") {
+        setSubImage3(file);
+      }
     }
   };
 
@@ -94,11 +154,18 @@ const CreateGarment = () => {
       formData.append("description", description);
       formData.append("inventory", inventory);
       formData.append("category", category);
-      formData.append("preview", 1); // Adding the preview flag as a string
-      formData.append("image", previewImage);
       await dispatch(addGarment(formData));
 
-      navigate(`/garments/${newGarment?.id}`);
+      const formImagesData = new FormData();
+      formImagesData.append("title", title);
+      formImagesData.append("image", previewImage);
+      formImagesData.append("image", subImage1);
+      formImagesData.append("image", subImage2);
+      formImagesData.append("image", subImage3);
+
+      await dispatch(addGarmentImage(formImagesData));
+
+      navigate(`/garments/${newGarment.id}`);
     }
   };
 
@@ -128,7 +195,6 @@ const CreateGarment = () => {
                 <></>
               )}
             </label>
-
             <label className="create-garment-label">
               Price:
               <input
@@ -148,7 +214,6 @@ const CreateGarment = () => {
                 <></>
               )}
             </label>
-
             <label className="create-garment-label">
               Discounted Price:
               <input
@@ -170,7 +235,6 @@ const CreateGarment = () => {
                 <></>
               )}
             </label>
-
             <label className="create-garment-label">
               Description:
               <textarea
@@ -192,7 +256,6 @@ const CreateGarment = () => {
                 <></>
               )}
             </label>
-
             <label className="create-garment-label">
               Inventory:
               <input
@@ -212,7 +275,6 @@ const CreateGarment = () => {
                 <></>
               )}
             </label>
-
             <label className="create-garment-label">
               Category:
               <select
@@ -237,22 +299,23 @@ const CreateGarment = () => {
                 <></>
               )}
             </label>
-
             <div className="create-garment-upload-image-container">
               <label
                 htmlFor="file-upload"
                 class="custom-file-upload"
-                onClick={handleFileUpload}
+                onClick={handlePreviewFileUpload}
               >
                 <div className="file-upload-text-container">
-                  <p>{previewImage ? previewImage.name : "Upload Image"}</p>
+                  <p>
+                    {previewImage ? previewImage.name : "Upload Preview Image"}
+                  </p>
                   <IoCloudUploadOutline className="upload-icon" />
                 </div>
               </label>
               <input
-                id="file-upload"
+                id="preview-image-upload"
                 type="file"
-                name="image"
+                name="previewImage"
                 accept="image/*"
                 onChange={handleFileChange}
               />
@@ -261,6 +324,93 @@ const CreateGarment = () => {
                   <p className="login-sign-up-error">
                     {formErrors.previewImage}
                   </p>
+                ) : (
+                  <></>
+                )
+              ) : (
+                <></>
+              )}
+            </div>
+
+            <div className="create-garment-upload-image-container">
+              <label
+                htmlFor="file-upload"
+                class="custom-file-upload"
+                onClick={handleSubOneFileUpload}
+              >
+                <div className="file-upload-text-container">
+                  <p>{subImage1 ? subImage1.name : "Upload First Sub Image"}</p>
+                  <IoCloudUploadOutline className="upload-icon" />
+                </div>
+              </label>
+              <input
+                id="sub-image1-upload"
+                type="file"
+                name="subImage1"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              {isSubmitted ? (
+                Object.keys(formErrors).length > 0 ? (
+                  <p className="login-sign-up-error">{formErrors.subImage1}</p>
+                ) : (
+                  <></>
+                )
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="create-garment-upload-image-container">
+              <label
+                htmlFor="file-upload"
+                class="custom-file-upload"
+                onClick={handleSubTwoFileUpload}
+              >
+                <div className="file-upload-text-container">
+                  <p>
+                    {subImage2 ? subImage2.name : "Upload Second Sub Image"}
+                  </p>
+                  <IoCloudUploadOutline className="upload-icon" />
+                </div>
+              </label>
+              <input
+                id="sub-image2-upload"
+                type="file"
+                name="subImage2"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              {isSubmitted ? (
+                Object.keys(formErrors).length > 0 ? (
+                  <p className="login-sign-up-error">{formErrors.subImage2}</p>
+                ) : (
+                  <></>
+                )
+              ) : (
+                <></>
+              )}
+            </div>
+            <div className="create-garment-upload-image-container">
+              <label
+                htmlFor="file-upload"
+                class="custom-file-upload"
+                onClick={handleSubThreeFileUpload}
+              >
+                <div className="file-upload-text-container">
+                  <p>{subImage3 ? subImage3.name : "Upload Third Sub Image"}</p>
+                  <IoCloudUploadOutline className="upload-icon" />
+                </div>
+              </label>
+              <input
+                id="sub-image3-upload"
+                type="file"
+                name="subImage3"
+                accept="image/*"
+                onChange={handleFileChange}
+              />
+              {isSubmitted ? (
+                Object.keys(formErrors).length > 0 ? (
+                  <p className="login-sign-up-error">{formErrors.subImage3}</p>
                 ) : (
                   <></>
                 )

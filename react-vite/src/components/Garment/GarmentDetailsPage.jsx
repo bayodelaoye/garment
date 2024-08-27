@@ -110,6 +110,7 @@ function GarmentDetailsPage() {
               <img
                 src={garment?.preview_image_url}
                 alt="garment preview image"
+                className="garment-details-preview-image"
               />
               {user ? (
                 <>

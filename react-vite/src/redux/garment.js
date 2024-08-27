@@ -7,6 +7,7 @@ const GET_GARMENTS_ALL = "garment/getGarmentsAll";
 const GET_USER_GARMENTS = "garment/getUserGarments";
 const DELETE_GARMENT = "garment/deleteGarment";
 const CREATE_GARMENT = "garment/createGarment";
+const CREATE_GARMENT_IMAGE = "garment/createGarmentImage";
 
 const getGarmentsMen = (garments) => ({
   type: GET_GARMENTS_MEN,
@@ -51,6 +52,11 @@ const deleteGarment = (deleteGarmentMessage) => ({
 const createGarment = (newGarment) => ({
   type: CREATE_GARMENT,
   payload: newGarment,
+});
+
+const createGarmentImage = (newGarmentImage) => ({
+  type: CREATE_GARMENT_IMAGE,
+  payload: newGarmentImage,
 });
 
 export const obtainGarmentsMen = () => async (dispatch) => {
@@ -202,6 +208,25 @@ export const addGarment = (formData) => async (dispatch) => {
   }
 };
 
+export const addGarmentImage = (formImagesData) => async (dispatch) => {
+  const response = await fetch(`/api/garments/new/image`, {
+    method: "POST",
+    body: formImagesData,
+  });
+
+  if (response.ok) {
+    const data = await response.json();
+
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(createGarmentImage(data));
+
+    return data;
+  }
+};
+
 const initialState = { garments: null };
 
 function garmentReducer(state = initialState, action) {
@@ -224,6 +249,8 @@ function garmentReducer(state = initialState, action) {
       return { ...state, deleteGarmentMessage: action.payload };
     case CREATE_GARMENT:
       return { ...state, newGarment: action.payload };
+    case CREATE_GARMENT_IMAGE:
+      return { ...state, newGarmentImage: action.payload };
     default:
       return state;
   }

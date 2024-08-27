@@ -17,7 +17,6 @@ def new_garment():
         "description": request.form["description"],
         "inventory": request.form["inventory"],
         "category": request.form["category"],
-        "preview": request.form["preview"],
     }
 
     if len(garment_info["title"]) > 50:
@@ -42,24 +41,34 @@ def new_garment():
     db.session.add(new_garment)
     db.session.commit()
 
+    return {"garment": new_garment.to_dict()}, 200
+
+
+@garment_routes.route("/new/image", methods=["POST"])
+@login_required
+def new_garment_images():
+    garment_info = {
+        "title": request.form["title"],
+    }
+
     garment = Garment.query.filter(Garment.title == garment_info["title"]).first()
 
-    if "image" in request.files:
-        image = request.files["image"]
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        if "url" not in upload:
-            return {"message": "There was an error uploading the image"}, 500
+    images = request.files.getlist("image")
+    for index, image in enumerate(images):
+        if image:
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            if "url" not in upload:
+                return {"message": "There was an error uploading the image"}, 500
 
-        new_garment_image = GarmentImage(
-            garment_id=garment.id,
-            url=upload["url"],
-            preview=int(garment_info["preview"]),
-        )
-        db.session.add(new_garment_image)
+            new_garment_image = GarmentImage(
+                garment_id=garment.id, url=upload["url"], preview=1 if index == 0 else 0
+            )
+            db.session.add(new_garment_image)
+            print(new_garment_image)
     db.session.commit()
 
-    return {"garment": garment.to_dict()}, 200
+    return {"message": "Created garment image"}, 200
 
 
 @garment_routes.route("/")

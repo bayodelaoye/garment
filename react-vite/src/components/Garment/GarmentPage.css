@@ -32,6 +32,12 @@
   transform: scale(1.05);
 }
 
+.index-preview-image {
+  width: 350px;
+  height: 418px;
+  object-fit: cover;
+}
+
 .individual-garment-link {
   color: var(--black);
 }

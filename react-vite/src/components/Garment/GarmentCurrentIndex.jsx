@@ -13,7 +13,11 @@ function GarmentCurrentIndex({ garment }) {
           to={`/garments/${garment.id}`}
           className="individual-garment-link"
         >
-          <img src={garment.preview_image_url} alt="mens garment" />
+          <img
+            src={garment.preview_image_url}
+            alt="mens garment"
+            className="index-preview-image"
+          />
           <p>{garment.title}</p>
           <div className="price-container">
             <p className="discounted-price">${garment.discounted_price}</p>
