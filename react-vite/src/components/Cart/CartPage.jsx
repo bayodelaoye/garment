@@ -30,7 +30,7 @@ function CartPage() {
     };
 
     getCartItems().then(() => {
-      timer = setTimeout(() => setIsLoaded(true), 700);
+      timer = setTimeout(() => setIsLoaded(true), 300);
     });
 
     return () => clearTimeout(timer);

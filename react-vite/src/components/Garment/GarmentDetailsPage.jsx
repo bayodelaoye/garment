@@ -59,7 +59,6 @@ function GarmentDetailsPage() {
   console.log(didUserCreateGarment, userGarments);
 
   useEffect(() => {
-    let timer;
     const fetchGarment = async () => {
       await dispatch(obtainGarmentSingle(garmentId));
       await dispatch(obtainGarmentImages(garmentId));
@@ -69,13 +68,7 @@ function GarmentDetailsPage() {
       await dispatch(obtainUserGarments());
     };
 
-    fetchGarment().then(() => {
-      timer = setTimeout(() => {
-        setIsLoaded(true);
-      }, 500);
-    });
-
-    return () => clearTimeout(timer);
+    fetchGarment().then(() => setIsLoaded(true));
   }, [dispatch]);
 
   const toggleFavorite = async () => {

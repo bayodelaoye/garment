@@ -28,6 +28,14 @@ function GarmentIndex({ garment }) {
     return userGarment?.id === garment?.id;
   });
 
+  useEffect(() => {
+    const fetchUserGarments = async () => {
+      await dispatch(obtainUserGarments());
+    };
+
+    fetchUserGarments();
+  }, [dispatch]);
+
   const toggleFavorite = async () => {
     if (isFavorite) {
       await dispatch(removeFavorite(garment.id));

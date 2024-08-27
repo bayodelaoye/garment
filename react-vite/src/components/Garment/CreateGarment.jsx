@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { IoCloudUploadOutline } from "react-icons/io5";
 import { addGarment } from "../../redux/garment";
 import { addGarmentImage } from "../../redux/garment";
+import Loading from "../Loading";
 
 const CreateGarment = () => {
   const [title, setTitle] = useState("");
@@ -21,11 +22,12 @@ const CreateGarment = () => {
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [loading, setLoading] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const newGarment = useSelector(
     (state) => state.garments?.newGarment?.garment
   );
+  const [garmentCreated, setGarmentCreated] = useState(false);
 
   useEffect(() => {
     const errors = {};
@@ -101,6 +103,10 @@ const CreateGarment = () => {
     subImage3,
   ]);
 
+  useEffect(() => {
+    if (garmentCreated) return navigate(`/garments/${newGarment.id}`);
+  }, [garmentCreated]);
+
   const handlePreviewFileUpload = (e) => {
     e.preventDefault();
 
@@ -145,6 +151,7 @@ const CreateGarment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
+    setLoading(false);
 
     if (Object.keys(formErrors).length === 0) {
       const formData = new FormData();
@@ -154,6 +161,7 @@ const CreateGarment = () => {
       formData.append("description", description);
       formData.append("inventory", inventory);
       formData.append("category", category);
+
       await dispatch(addGarment(formData)).then(async () => {
         const formImagesData = new FormData();
         formImagesData.append("title", title);
@@ -163,7 +171,7 @@ const CreateGarment = () => {
         formImagesData.append("image", subImage3);
 
         await dispatch(addGarmentImage(formImagesData)).then(() =>
-          navigate(`/garments/${newGarment?.id}`)
+          setGarmentCreated(true)
         );
       });
     }
@@ -171,7 +179,7 @@ const CreateGarment = () => {
 
   return (
     <>
-      {isLoaded ? (
+      {loading ? (
         <form className="create-garment-form-container" onSubmit={handleSubmit}>
           <h2>Create a new Garment</h2>
 
@@ -425,7 +433,7 @@ const CreateGarment = () => {
           </div>
         </form>
       ) : (
-        <>Loading</>
+        <Loading />
       )}
     </>
   );

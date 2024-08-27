@@ -32,7 +32,7 @@ function HomePage() {
     };
 
     getCategoryGarments().then(() => {
-      timer = setTimeout(() => setIsLoaded(true), 700);
+      timer = setTimeout(() => setIsLoaded(true), 200);
     });
 
     return () => clearTimeout(timer);
