@@ -10,7 +10,15 @@ garment_routes = Blueprint("garments", __name__)
 @garment_routes.route("/new", methods=["POST"])
 @login_required
 def new_garment():
-    garment_info = request.get_json()
+    garment_info = {
+        "title": request.form["title"],
+        "price": request.form["price"],
+        "discounted_price": request.form["discounted_price"],
+        "description": request.form["description"],
+        "inventory": request.form["inventory"],
+        "category": request.form["category"],
+        "preview": request.form["preview"],
+    }
 
     if len(garment_info["title"]) > 50:
         return {"message": "Length of title exceeds more than 30 characters"}, 400
@@ -44,7 +52,9 @@ def new_garment():
             return {"message": "There was an error uploading the image"}, 500
 
         new_garment_image = GarmentImage(
-            garment_id=garment.id, url=upload["url"], preview=garment_info["preview"]
+            garment_id=garment.id,
+            url=upload["url"],
+            preview=int(garment_info["preview"]),
         )
         db.session.add(new_garment_image)
     db.session.commit()

@@ -52,7 +52,9 @@ const CreateGarment = () => {
 
     if (
       previewImage === "" ||
-      !ALLOWED_EXTENSIONS.includes(previewImage.split(".").pop().toLowerCase())
+      !ALLOWED_EXTENSIONS.includes(
+        previewImage?.name.split(".").pop().toLowerCase()
+      )
     )
       errors.previewImage =
         "Please upload a valid image file: png, jpg, or jpeg";
@@ -76,7 +78,7 @@ const CreateGarment = () => {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      setPreviewImage(file.name);
+      setPreviewImage(file);
     }
   };
 
@@ -85,18 +87,16 @@ const CreateGarment = () => {
     setIsSubmitted(true);
 
     if (Object.keys(formErrors).length === 0) {
-      await dispatch(
-        addGarment({
-          title: title,
-          price: price,
-          discountedPrice: discountedPrice,
-          description: description,
-          inventory: inventory,
-          category: category,
-          previewImage: previewImage,
-          preview: true,
-        })
-      );
+      const formData = new FormData();
+      formData.append("title", title);
+      formData.append("price", price);
+      formData.append("discounted_price", discountedPrice);
+      formData.append("description", description);
+      formData.append("inventory", inventory);
+      formData.append("category", category);
+      formData.append("preview", 1); // Adding the preview flag as a string
+      formData.append("image", previewImage);
+      await dispatch(addGarment(formData));
 
       navigate(`/garments/${newGarment?.id}`);
     }
@@ -245,7 +245,7 @@ const CreateGarment = () => {
                 onClick={handleFileUpload}
               >
                 <div className="file-upload-text-container">
-                  <p>{previewImage ? previewImage : "Upload Image"}</p>
+                  <p>{previewImage ? previewImage.name : "Upload Image"}</p>
                   <IoCloudUploadOutline className="upload-icon" />
                 </div>
               </label>

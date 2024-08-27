@@ -183,20 +183,10 @@ export const removeGarment = (garmentId) => async (dispatch) => {
   }
 };
 
-export const addGarment = (garmentObject) => async (dispatch) => {
+export const addGarment = (formData) => async (dispatch) => {
   const response = await fetch(`/api/garments/new`, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      title: garmentObject.title,
-      price: garmentObject.price,
-      discounted_price: garmentObject.discountedPrice,
-      description: garmentObject.description,
-      inventory: garmentObject.inventory,
-      category: garmentObject.category,
-      image: garmentObject.previewImage,
-      preview: garmentObject.preview,
-    }),
+    body: formData,
   });
 
   if (response.ok) {
