@@ -11,6 +11,7 @@ import FavoritePage from "../components/Favorite";
 import CartPage from "../components/Cart";
 import GarmentCurrentPage from "../components/Garment/GarmentCurrentPage";
 import CreateGarment from "../components/Garment/CreateGarment";
+import EditGarment from "../components/Garment/EditGarment";
 
 export const router = createBrowserRouter([
   {
@@ -59,6 +60,10 @@ export const router = createBrowserRouter([
       {
         path: "/garments/new",
         element: <CreateGarment />,
+      },
+      {
+        path: "/garments/:garmentId/edit",
+        element: <EditGarment />,
       },
     ],
   },

@@ -6,6 +6,7 @@ import { IoCloudUploadOutline } from "react-icons/io5";
 import { addGarment } from "../../redux/garment";
 import { addGarmentImage } from "../../redux/garment";
 import Loading from "../Loading";
+import { obtainGarmentsAll } from "../../redux/garment";
 
 const CreateGarment = () => {
   const [title, setTitle] = useState("");
@@ -27,7 +28,19 @@ const CreateGarment = () => {
   const newGarment = useSelector(
     (state) => state.garments?.newGarment?.garment
   );
+  const allGarments = useSelector(
+    (state) => state.garments?.allGarments?.garments
+  );
   const [garmentCreated, setGarmentCreated] = useState(false);
+
+  useEffect(() => {
+    const getAllGarments = async () => {
+      await dispatch(obtainGarmentsAll());
+    };
+
+    getAllGarments();
+    if (garmentCreated) return navigate(`/garments/${newGarment.id}`);
+  }, [garmentCreated]);
 
   useEffect(() => {
     const errors = {};
@@ -56,7 +69,7 @@ const CreateGarment = () => {
     if (
       previewImage === "" ||
       !ALLOWED_EXTENSIONS.includes(
-        previewImage?.name.split(".").pop().toLowerCase()
+        previewImage?.name?.split(".").pop().toLowerCase()
       )
     )
       errors.previewImage =
@@ -65,7 +78,7 @@ const CreateGarment = () => {
     if (
       subImage1 === "" ||
       !ALLOWED_EXTENSIONS.includes(
-        subImage1?.name.split(".").pop().toLowerCase()
+        subImage1?.name?.split(".").pop().toLowerCase()
       )
     )
       errors.subImage1 =
@@ -74,7 +87,7 @@ const CreateGarment = () => {
     if (
       subImage2 === "" ||
       !ALLOWED_EXTENSIONS.includes(
-        subImage2?.name.split(".").pop().toLowerCase()
+        subImage2?.name?.split(".").pop().toLowerCase()
       )
     )
       errors.subImage2 =
@@ -83,11 +96,18 @@ const CreateGarment = () => {
     if (
       subImage3 === "" ||
       !ALLOWED_EXTENSIONS.includes(
-        subImage3?.name.split(".").pop().toLowerCase()
+        subImage3?.name?.split(".").pop().toLowerCase()
       )
     )
       errors.subImage3 =
         "Please upload a valid third sub image file: png, jpg, or jpeg";
+
+    const duplicateGarmentTitle = allGarments?.find((garment) => {
+      return garment.title === title;
+    });
+
+    if (duplicateGarmentTitle)
+      errors.duplicate = "A garment with that title already exists";
 
     setFormErrors(errors);
   }, [
@@ -102,10 +122,6 @@ const CreateGarment = () => {
     subImage2,
     subImage3,
   ]);
-
-  useEffect(() => {
-    if (garmentCreated) return navigate(`/garments/${newGarment.id}`);
-  }, [garmentCreated]);
 
   const handlePreviewFileUpload = (e) => {
     e.preventDefault();
@@ -427,6 +443,16 @@ const CreateGarment = () => {
               )}
             </div>
           </div>
+
+          {isSubmitted ? (
+            Object.keys(formErrors).length > 0 ? (
+              <p className="login-sign-up-error">{formErrors.duplicate}</p>
+            ) : (
+              <></>
+            )
+          ) : (
+            <></>
+          )}
 
           <div className="create-garment-submit-btn-container">
             <button type="submit">Create Garment</button>

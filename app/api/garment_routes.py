@@ -20,7 +20,7 @@ def new_garment():
     }
 
     if len(garment_info["title"]) > 50:
-        return {"message": "Length of title exceeds more than 30 characters"}, 400
+        return {"message": "Length of title exceeds more than 50 characters"}, 400
 
     garment_already_exists = Garment.query.filter(
         Garment.title == garment_info["title"]
@@ -118,48 +118,67 @@ def garment_images(id):
 @garment_routes.route("/<int:id>/edit", methods=["PUT"])
 @login_required
 def update_garment(id):
-    garment_info = request.get_json()
+    garment_info = {
+        "title": request.form["title"],
+        "price": request.form["price"],
+        "discounted_price": request.form["discounted_price"],
+        "description": request.form["description"],
+        "inventory": request.form["inventory"],
+        "category": request.form["category"],
+    }
+
+    if len(garment_info["title"]) > 50:
+        return {"message": "Length of title exceeds more than 50 characters"}, 400
+
+    garment_already_exists = Garment.query.filter(
+        Garment.title == garment_info["title"]
+    ).first()
+
+    if garment_already_exists:
+        return {"message": "Garment with that title already exists"}, 400
+
     garment = Garment.query.get(id)
-    title = garment_info.get("title")
-    price = garment_info.get("price")
-    discounted_price = garment_info.get("discounted_price")
-    description = garment_info.get("description")
-    inventory = garment_info.get("inventory")
+    garment.title = garment_info["title"]
+    garment.price = garment_info["price"]
+    garment.discounted_price = garment_info["discounted_price"]
+    garment.description = garment_info["description"]
+    garment.inventory = garment_info["inventory"]
+    garment.category = garment_info["category"]
 
-    if garment is None:
-        return {"message": "Not found"}, 404
+    db.session.commit()
 
-    if garment.user_id != current_user.id:
-        return {"message": "Unauthorized"}, 403
+    return {"garment": garment.to_dict()}, 200
 
-    # Check if user inputted the values to edit
-    if title:
-        if len(title) > 30:
-            return {"message": "Length of title exceeds more than 30 characters"}, 400
-        garment_already_exists = Garment.query.filter(Garment.title == title).first()
-        if garment_already_exists:
-            return {"message": "Garment with that title already exists"}, 400
-        garment.title = title
 
-    if price is not None:
-        if price < 0:
-            return {"message": "Price cannot be a negative number"}, 400
-        garment.price = price
+@garment_routes.route("/<int:id>/edit/image", methods=["PUT"])
+@login_required
+def update_garment_images(id):
+    garment_info = {
+        "title": request.form["title"],
+        "price": request.form["price"],
+        "discounted_price": request.form["discounted_price"],
+        "description": request.form["description"],
+        "inventory": request.form["inventory"],
+        "category": request.form["category"],
+    }
 
-    if discounted_price is not None:
-        if discounted_price < 0:
-            return {"message": "Discounted price cannot be a negative number"}, 400
-        garment.discounted_price = discounted_price
+    if len(garment_info["title"]) > 50:
+        return {"message": "Length of title exceeds more than 50 characters"}, 400
 
-    if description:
-        if len(description) < 100:
-            return {"message": "Description must be 100 characters or more"}, 400
-        garment.description = description
+    garment_already_exists = Garment.query.filter(
+        Garment.title == garment_info["title"]
+    ).first()
 
-    if inventory is not None:
-        if inventory < 0:
-            return {"message": "Inventory amount cannot be a negative number"}, 400
-        garment.inventory = inventory
+    if garment_already_exists:
+        return {"message": "Garment with that title already exists"}, 400
+
+    garment = Garment.query.get(id)
+    garment.title = garment_info["title"]
+    garment.price = garment_info["price"]
+    garment.discounted_price = garment_info["discounted_price"]
+    garment.description = garment_info["description"]
+    garment.inventory = garment_info["inventory"]
+    garment.category = garment_info["category"]
 
     # Handle file upload if the image is provided
     if "image" in request.files:

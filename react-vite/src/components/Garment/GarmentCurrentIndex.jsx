@@ -1,10 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import OpenModalButton from "../OpenModalButton";
 import { useModal } from "../../context/Modal";
 import DeleteGarment from "./DeleteGarment";
 
 function GarmentCurrentIndex({ garment }) {
   const { closeModal } = useModal();
+  const navigate = useNavigate();
 
   return (
     <div className="individual-garment-container-with-btns">
@@ -26,7 +27,12 @@ function GarmentCurrentIndex({ garment }) {
         </Link>
       </div>
       <div className="user-garments-edit-delete-btn-container">
-        <button className="user-garments-edit-delete-btn">Edit</button>
+        <button
+          className="user-garments-edit-delete-btn"
+          onClick={() => navigate(`/garments/${garment.id}/edit`)}
+        >
+          Edit
+        </button>
         <OpenModalButton
           buttonText={`Delete`}
           onClose={closeModal}
