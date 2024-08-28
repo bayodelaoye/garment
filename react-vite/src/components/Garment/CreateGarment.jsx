@@ -103,11 +103,11 @@ const CreateGarment = () => {
         "Please upload a valid third sub image file: png, jpg, or jpeg";
 
     const duplicateGarmentTitle = allGarments?.find((garment) => {
-      return garment.title === title;
+      return garment?.title === title;
     });
 
     if (duplicateGarmentTitle)
-      errors.duplicate = "A garment with that title already exists";
+      errors.duplicateTitle = "A garment with that title already exists";
 
     setFormErrors(errors);
   }, [
@@ -442,17 +442,18 @@ const CreateGarment = () => {
                 <></>
               )}
             </div>
-          </div>
-
-          {isSubmitted ? (
-            Object.keys(formErrors).length > 0 ? (
-              <p className="login-sign-up-error">{formErrors.duplicate}</p>
+            {isSubmitted ? (
+              Object.keys(formErrors).length > 0 ? (
+                <p className="login-sign-up-error">
+                  {formErrors.duplicateTitle}
+                </p>
+              ) : (
+                <></>
+              )
             ) : (
               <></>
-            )
-          ) : (
-            <></>
-          )}
+            )}
+          </div>
 
           <div className="create-garment-submit-btn-container">
             <button type="submit">Create Garment</button>

@@ -7,7 +7,7 @@ from app.models import SCHEMA, Garment, db, environment
 def seed_garments():
     for garment in [
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Emerald Green Utility Jacket",
             "price": 129.99,
             "discounted_price": 89.99,
@@ -16,7 +16,7 @@ def seed_garments():
             "category": "MEN",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Frosted Gray & White Windbreaker",
             "price": 99.99,
             "discounted_price": 69.99,
@@ -25,7 +25,7 @@ def seed_garments():
             "category": "MEN",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Noir Splash Graphic Jacket",
             "price": 119.99,
             "discounted_price": 84.99,
@@ -34,7 +34,7 @@ def seed_garments():
             "category": "MEN",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Crimson Bold Jacket",
             "price": 109.99,
             "discounted_price": 79.99,
@@ -115,7 +115,7 @@ def seed_garments():
             "category": "MEN",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Urban Black Women's Puffy Jacket",
             "price": 139.99,
             "discounted_price": 99.99,
@@ -124,7 +124,7 @@ def seed_garments():
             "category": "WOMEN",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Blush Pink Women’s Shirt",
             "price": 49.99,
             "discounted_price": 34.99,
@@ -133,7 +133,7 @@ def seed_garments():
             "category": "WOMEN",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Cocoa Comfort Sports Bra",
             "price": 34.99,
             "discounted_price": 24.99,
@@ -142,7 +142,7 @@ def seed_garments():
             "category": "WOMEN",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Elegant Burgundy A-Line Dress",
             "price": 119.99,
             "discounted_price": 89.99,
@@ -223,7 +223,7 @@ def seed_garments():
             "category": "WOMEN",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Sky Blue Kids' Hoodie",
             "price": 39.99,
             "discounted_price": 29.99,
@@ -232,7 +232,7 @@ def seed_garments():
             "category": "KIDS",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Midnight Black Kids' Hoodie",
             "price": 39.99,
             "discounted_price": 29.99,
@@ -241,7 +241,7 @@ def seed_garments():
             "category": "KIDS",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Kaleidoscope Kids' Hoodie",
             "price": 49.99,
             "discounted_price": 37.99,
@@ -250,7 +250,7 @@ def seed_garments():
             "category": "KIDS",
         },
         {
-            "user_id": 1,
+            "user_id": 75,
             "title": "Forest Green Kids' Jumper",
             "price": 49.99,
             "discounted_price": 37.99,

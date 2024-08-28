@@ -22,13 +22,6 @@ def new_garment():
     if len(garment_info["title"]) > 50:
         return {"message": "Length of title exceeds more than 50 characters"}, 400
 
-    garment_already_exists = Garment.query.filter(
-        Garment.title == garment_info["title"]
-    ).first()
-
-    if garment_already_exists:
-        return {"message": "Garment with that title already exists"}, 400
-
     new_garment = Garment(
         user_id=current_user.get_id(),
         title=garment_info["title"],
@@ -65,7 +58,7 @@ def new_garment_images():
                 garment_id=garment.id, url=upload["url"], preview=1 if index == 0 else 0
             )
             db.session.add(new_garment_image)
-            print(new_garment_image)
+
     db.session.commit()
 
     return {"message": "Created garment image"}, 200
@@ -131,16 +124,6 @@ def update_garment(id):
 
     if len(garment_info["title"]) > 50:
         return {"message": "Length of title exceeds more than 50 characters"}, 400
-
-    garment_already_exists = Garment.query.filter(
-        Garment.title == garment_info["title"], Garment.id != id
-    ).first()
-
-    if garment_already_exists:
-        return {
-            "message": "Garment with that title already exists",
-            "garment_already_exists": garment_already_exists.to_dict(),
-        }, 400
 
     garment.title = garment_info["title"]
     garment.price = garment_info["price"]

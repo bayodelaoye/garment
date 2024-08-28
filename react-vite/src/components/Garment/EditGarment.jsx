@@ -9,6 +9,7 @@ import { obtainGarmentImages } from "../../redux/garment";
 import { editGarment } from "../../redux/garment";
 import { editGarmentImages } from "../../redux/garment";
 import Page401 from "../Errors/Page401";
+import { obtainGarmentsAll } from "../../redux/garment";
 
 const EditGarment = () => {
   const { garmentId } = useParams();
@@ -26,6 +27,9 @@ const EditGarment = () => {
   const garmentInUserGarments = userGarments?.find((garment) => {
     return +garmentId === garment?.id;
   });
+  const allGarments = useSelector(
+    (state) => state.garments?.allGarments?.garments
+  );
   const [title, setTitle] = useState("");
   const [price, setPrice] = useState("");
   const [discountedPrice, setDiscountedPrice] = useState("");
@@ -43,6 +47,7 @@ const EditGarment = () => {
       await dispatch(obtainUserGarments());
       await dispatch(obtainGarmentSingle(garmentId));
       await dispatch(obtainGarmentImages(garmentId));
+      await dispatch(obtainGarmentsAll());
     };
 
     fetchGarments().then(() => {
@@ -137,6 +142,18 @@ const EditGarment = () => {
       errors.subImage3 =
         "Please upload a valid third sub image file: png, jpg, or jpeg";
 
+    const duplicateGarmentTitle = allGarments?.find((garment) => {
+      return garment?.title === title;
+    });
+
+    if (duplicateGarmentTitle && duplicateGarmentTitle?.id === +garmentId) {
+    } else if (
+      duplicateGarmentTitle &&
+      duplicateGarmentTitle?.id !== +garmentId
+    ) {
+      errors.duplicateTitle = "A garment with that title already exists";
+    }
+
     setFormErrors(errors);
   }, [
     title,
@@ -197,6 +214,7 @@ const EditGarment = () => {
     setIsSubmitted(true);
 
     if (Object.keys(formErrors).length === 0) {
+      setLoading(false);
       const formData = new FormData();
       formData.append("garmentId", garmentId);
       formData.append("title", title);
@@ -207,7 +225,6 @@ const EditGarment = () => {
       formData.append("category", category);
 
       await dispatch(editGarment(formData)).then(async () => {
-        setLoading(false);
         const formImagesData = new FormData();
         formImagesData.append("garmentId", garmentId);
         formImagesData.append("image", previewImage);

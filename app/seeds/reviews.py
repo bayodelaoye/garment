@@ -433,7 +433,7 @@ def seed_reviews():
             "stars": 5,
         },
         {
-            "user_id": 75,
+            "user_id": 1,
             "garment_id": 36,
             "review": "Nice jacket but the stripes aren't as bright as expected. Still a good buy for the price.",
             "stars": 4,
