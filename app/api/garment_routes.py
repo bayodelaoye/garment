@@ -127,17 +127,21 @@ def update_garment(id):
         "category": request.form["category"],
     }
 
+    garment = Garment.query.get(id)
+
     if len(garment_info["title"]) > 50:
         return {"message": "Length of title exceeds more than 50 characters"}, 400
 
     garment_already_exists = Garment.query.filter(
-        Garment.title == garment_info["title"]
+        Garment.title == garment_info["title"], Garment.id != id
     ).first()
 
     if garment_already_exists:
-        return {"message": "Garment with that title already exists"}, 400
+        return {
+            "message": "Garment with that title already exists",
+            "garment_already_exists": garment_already_exists.to_dict(),
+        }, 400
 
-    garment = Garment.query.get(id)
     garment.title = garment_info["title"]
     garment.price = garment_info["price"]
     garment.discounted_price = garment_info["discounted_price"]
@@ -150,53 +154,24 @@ def update_garment(id):
     return {"garment": garment.to_dict()}, 200
 
 
-@garment_routes.route("/<int:id>/edit/image", methods=["PUT"])
+@garment_routes.route("/<int:id>/edit/images", methods=["PUT"])
 @login_required
 def update_garment_images(id):
-    garment_info = {
-        "title": request.form["title"],
-        "price": request.form["price"],
-        "discounted_price": request.form["discounted_price"],
-        "description": request.form["description"],
-        "inventory": request.form["inventory"],
-        "category": request.form["category"],
-    }
+    garment_images = GarmentImage.query.filter(GarmentImage.garment_id == id).all()
 
-    if len(garment_info["title"]) > 50:
-        return {"message": "Length of title exceeds more than 50 characters"}, 400
+    images = request.files.getlist("image")
+    for index, image in enumerate(images):
+        if image:
+            image.filename = get_unique_filename(image.filename)
+            upload = upload_file_to_s3(image)
+            if "url" not in upload:
+                return {"message": "There was an error uploading the image"}, 500
 
-    garment_already_exists = Garment.query.filter(
-        Garment.title == garment_info["title"]
-    ).first()
+            garment_images[index].url = upload["url"]
 
-    if garment_already_exists:
-        return {"message": "Garment with that title already exists"}, 400
-
-    garment = Garment.query.get(id)
-    garment.title = garment_info["title"]
-    garment.price = garment_info["price"]
-    garment.discounted_price = garment_info["discounted_price"]
-    garment.description = garment_info["description"]
-    garment.inventory = garment_info["inventory"]
-    garment.category = garment_info["category"]
-
-    # Handle file upload if the image is provided
-    if "image" in request.files:
-        image = request.files["image"]
-        image.filename = get_unique_filename(image.filename)
-        upload = upload_file_to_s3(image)
-        if "url" not in upload:
-            return {"message": "There was an error uploading the image"}, 500
-
-    garment_image = GarmentImage.query.filter(
-        GarmentImage.garment_id == garment.id
-    ).first()
-
-    if garment_image:
-        garment_image.url = upload["url"]
     db.session.commit()
 
-    return {"garment": garment.to_dict()}, 200
+    return {"message": "Updated garment images"}, 200
 
 
 @garment_routes.route("/<int:id>", methods=["DELETE"])

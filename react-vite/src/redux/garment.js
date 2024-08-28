@@ -9,6 +9,7 @@ const DELETE_GARMENT = "garment/deleteGarment";
 const CREATE_GARMENT = "garment/createGarment";
 const CREATE_GARMENT_IMAGE = "garment/createGarmentImage";
 const UPDATE_GARMENT = "garment/updateGarment";
+const UPDATE_GARMENT_IMAGES = "garment/updateGarmentImages";
 
 const getGarmentsMen = (garments) => ({
   type: GET_GARMENTS_MEN,
@@ -63,6 +64,11 @@ const createGarmentImage = (newGarmentImage) => ({
 const updateGarment = (updatedGarment) => ({
   type: UPDATE_GARMENT,
   payload: updatedGarment,
+});
+
+const updateGarmentImages = (updateGarmentImagesMessage) => ({
+  type: UPDATE_GARMENT_IMAGES,
+  payload: updateGarmentImagesMessage,
 });
 
 export const obtainGarmentsMen = () => async (dispatch) => {
@@ -240,6 +246,29 @@ export const editGarment = (formData) => async (dispatch) => {
     body: formData,
   });
 
+  const data = await response.json();
+  if (response.ok) {
+    if (data.errors) {
+      return;
+    }
+
+    dispatch(updateGarment(data));
+
+    return data;
+  } else {
+    console.log(data);
+    dispatch(updateGarment(data));
+    return data;
+  }
+};
+
+export const editGarmentImages = (formData) => async (dispatch) => {
+  const garmentId = formData.get("garmentId");
+  const response = await fetch(`/api/garments/${garmentId}/edit/images`, {
+    method: "PUT",
+    body: formData,
+  });
+
   if (response.ok) {
     const data = await response.json();
 
@@ -247,7 +276,7 @@ export const editGarment = (formData) => async (dispatch) => {
       return;
     }
 
-    dispatch(updateGarment(data));
+    dispatch(updateGarmentImages(data));
 
     return data;
   }
@@ -279,6 +308,8 @@ function garmentReducer(state = initialState, action) {
       return { ...state, newGarmentImage: action.payload };
     case UPDATE_GARMENT:
       return { ...state, updatedGarment: action.payload };
+    case UPDATE_GARMENT_IMAGES:
+      return { ...state, updateGarmentImagesMessage: action.payload };
     default:
       return state;
   }

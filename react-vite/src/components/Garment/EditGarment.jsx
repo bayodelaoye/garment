@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoCloudUploadOutline } from "react-icons/io5";
-import { addGarment } from "../../redux/garment";
-import { addGarmentImage } from "../../redux/garment";
 import Loading from "../Loading";
 import { obtainUserGarments } from "../../redux/garment";
 import { obtainGarmentSingle } from "../../redux/garment";
 import { obtainGarmentImages } from "../../redux/garment";
 import { editGarment } from "../../redux/garment";
+import { editGarmentImages } from "../../redux/garment";
 
 const EditGarment = () => {
   const { garmentId } = useParams();
@@ -16,7 +15,7 @@ const EditGarment = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
   const [isSubmitted, setIsSubmitted] = useState(false);
-  const [garmentCreated, setGarmentCreated] = useState(false);
+  const [garmentEdited, setGarmentEdited] = useState(false);
   const [garmentLoaded, setGarmentLoaded] = useState(false);
   const garment = useSelector((state) => state.garments?.currentGarment);
   const garmentImages = useSelector((state) => state.garments?.garmentImages);
@@ -48,8 +47,9 @@ const EditGarment = () => {
     fetchGarments().then(() => {
       setGarmentLoaded(true);
     });
-    if (garmentCreated) return navigate(`/garments/${garment.id}`);
-  }, [garmentCreated]);
+
+    if (garmentEdited) return navigate(`/garments/${garment.id}`);
+  }, [garmentEdited]);
 
   useEffect(() => {
     if (garmentLoaded) {
@@ -194,7 +194,6 @@ const EditGarment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
-    setLoading(false);
 
     if (Object.keys(formErrors).length === 0) {
       const formData = new FormData();
@@ -207,15 +206,16 @@ const EditGarment = () => {
       formData.append("category", category);
 
       await dispatch(editGarment(formData)).then(async () => {
-        // const formImagesData = new FormData();
-        // formImagesData.append("title", title);
-        // formImagesData.append("image", previewImage);
-        // formImagesData.append("image", subImage1);
-        // formImagesData.append("image", subImage2);
-        // formImagesData.append("image", subImage3);
-        // await dispatch(addGarmentImage(formImagesData)).then(() =>
-        //   setGarmentCreated(true)
-        // );
+        setLoading(false);
+        const formImagesData = new FormData();
+        formImagesData.append("garmentId", garmentId);
+        formImagesData.append("image", previewImage);
+        formImagesData.append("image", subImage1);
+        formImagesData.append("image", subImage2);
+        formImagesData.append("image", subImage3);
+        await dispatch(editGarmentImages(formImagesData)).then(() =>
+          setGarmentEdited(true)
+        );
       });
     }
   };
@@ -491,17 +491,18 @@ const EditGarment = () => {
                     <></>
                   )}
                 </div>
-              </div>
-
-              {isSubmitted ? (
-                Object.keys(formErrors).length > 0 ? (
-                  <p className="login-sign-up-error">{formErrors.duplicate}</p>
+                {isSubmitted ? (
+                  Object.keys(formErrors).length > 0 ? (
+                    <p className="login-sign-up-error">
+                      {formErrors.duplicateTitle}
+                    </p>
+                  ) : (
+                    <></>
+                  )
                 ) : (
                   <></>
-                )
-              ) : (
-                <></>
-              )}
+                )}
+              </div>
 
               <div className="create-garment-submit-btn-container">
                 <button type="submit">Edit Garment</button>

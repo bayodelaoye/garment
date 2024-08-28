@@ -56,8 +56,6 @@ function GarmentDetailsPage() {
   const favoriteGarmentIds = new Set(favorites?.map((fav) => fav?.garment_id));
   const isFavorite = favoriteGarmentIds.has(garment?.id);
 
-  console.log(didUserCreateGarment, userGarments);
-
   useEffect(() => {
     const fetchGarment = async () => {
       await dispatch(obtainGarmentSingle(garmentId));

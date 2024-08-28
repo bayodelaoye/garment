@@ -167,9 +167,9 @@ const CreateGarment = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitted(true);
-    setLoading(false);
 
     if (Object.keys(formErrors).length === 0) {
+      setLoading(false);
       const formData = new FormData();
       formData.append("title", title);
       formData.append("price", price);
