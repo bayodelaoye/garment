@@ -8,6 +8,7 @@ import { obtainGarmentSingle } from "../../redux/garment";
 import { obtainGarmentImages } from "../../redux/garment";
 import { editGarment } from "../../redux/garment";
 import { editGarmentImages } from "../../redux/garment";
+import Page401 from "../Errors/Page401";
 
 const EditGarment = () => {
   const { garmentId } = useParams();
@@ -513,7 +514,7 @@ const EditGarment = () => {
           )}{" "}
         </>
       ) : (
-        <>404 Page Not Found</>
+        <Page401 />
       )}
     </>
   );
