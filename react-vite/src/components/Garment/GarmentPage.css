@@ -4,10 +4,8 @@
   flex-direction: column;
   gap: 30px;
   padding-bottom: 50px;
-}
-
-.category-page-title {
   margin-left: 50px;
+  margin-right: 50px;
 }
 
 .no-favorites-text {
@@ -30,6 +28,10 @@
 
 .individual-garment-container:hover {
   transform: scale(1.05);
+}
+
+.individual-garment-title {
+  width: 350px;
 }
 
 .index-preview-image {

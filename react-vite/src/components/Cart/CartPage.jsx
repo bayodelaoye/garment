@@ -48,27 +48,29 @@ function CartPage() {
         <div className="cart-page-container">
           <h2 className="cart-page-title">Cart</h2>
 
-          <div>
-            <div className="cart-item-headings-container">
-              <div className="cart-item-heading">Garment</div>
-              <div className="cart-item-heading">Title</div>
-              <div className="cart-item-heading">Price</div>
-              <div className="cart-item-heading">Quantity</div>
-              <div className="cart-item-heading">Total</div>
-              <div className="cart-item-heading">Remove</div>
-            </div>
-
-            <div className="individual-cart-item-container">
-              {cartItems?.map((cartItem, index) => {
-                return <CartItemIndex cartItem={cartItem} key={index} />;
-              })}
-            </div>
-          </div>
-
           {cartItems?.length === 0 || cartItems === undefined ? (
-            <></>
+            <h2 className="no-favorites-text">
+              Oh no, there's nothing in your cart!
+            </h2>
           ) : (
             <>
+              <div>
+                <div className="cart-item-headings-container">
+                  <div className="cart-item-heading">Garment</div>
+                  <div className="cart-item-heading">Title</div>
+                  <div className="cart-item-heading">Price</div>
+                  <div className="cart-item-heading">Quantity</div>
+                  <div className="cart-item-heading">Total</div>
+                  <div className="cart-item-heading">Remove</div>
+                </div>
+
+                <div className="individual-cart-item-container">
+                  {cartItems?.map((cartItem, index) => {
+                    return <CartItemIndex cartItem={cartItem} key={index} />;
+                  })}
+                </div>
+              </div>
+
               <div className="clear-cart-container">
                 <button onClick={handleRemoveAllItems}>Remove All Items</button>
               </div>

@@ -19,7 +19,7 @@ function GarmentCurrentIndex({ garment }) {
             alt="mens garment"
             className="index-preview-image"
           />
-          <p>{garment.title}</p>
+          <p className="individual-garment-title">{garment.title}</p>
           <div className="price-container">
             <p className="discounted-price">${garment.discounted_price}</p>
             <p className="price">${garment.price}</p>

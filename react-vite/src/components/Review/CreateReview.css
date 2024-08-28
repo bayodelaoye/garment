@@ -37,7 +37,7 @@
 
 .create-review-btn {
   padding: 8px 30px 8px 30px;
-  border: 1px solid var(--base-red);
+  border: 1.7px solid var(--base-red);
   background-color: var(--base-red);
   border-radius: 20px;
   color: var(--white);
@@ -47,6 +47,7 @@
 }
 
 .create-review-btn:hover {
+  border: 1.7px solid var(--base-red);
   background-color: var(--white);
   color: var(--base-red);
 }
