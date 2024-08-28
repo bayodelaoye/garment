@@ -265,12 +265,23 @@ function GarmentDetailsPage() {
                 </div>
               </div> */}
                   {user ? (
-                    <button
-                      className="add-to-cart-btn"
-                      onClick={handleAddToCart}
-                    >
-                      Add To Cart
-                    </button>
+                    <>
+                      {didUserCreateGarment ? (
+                        <button
+                          className="add-to-cart-btn-disabled"
+                          disabled={true}
+                        >
+                          Add To Cart
+                        </button>
+                      ) : (
+                        <button
+                          className="add-to-cart-btn"
+                          onClick={handleAddToCart}
+                        >
+                          Add To Cart
+                        </button>
+                      )}
+                    </>
                   ) : (
                     <OpenModalButton
                       buttonText={`Add To Cart`}

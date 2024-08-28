@@ -13,7 +13,7 @@ import GarmentPurchase from "../Garment/GarmentPurchase";
 function CartPage() {
   const dispatch = useDispatch();
   const { closeModal } = useModal();
-  const [isLoaded, setIsLoaded] = useState(true);
+  const [isLoaded, setIsLoaded] = useState(false);
   const cartItems = useSelector(
     (state) => state.cart?.cartItems?.cart?.cart_items
   );
