@@ -159,7 +159,9 @@ function GarmentDetailsPage() {
                 </div>
 
                 <div className="garment-details-text-container">
-                  <h2>{garment?.title}</h2>
+                  <h2 className="garment-details-text-title">
+                    {garment?.title}
+                  </h2>
 
                   {Math.floor(garmentReviewsRating?.average_reviews_rating) ===
                   0 ? (

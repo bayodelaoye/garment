@@ -1,283 +1,567 @@
-.garment-details-page-container {
-  display: flex;
-  flex-direction: column;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
-  gap: 30px;
+@media screen and (min-width: 360px) {
+  .garment-details-page-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    gap: 30px;
+  }
+
+  .garment-details-navigation {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .garment-details-link {
+    color: var(--black);
+  }
+
+  .garment-details-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-bottom: 2px solid var(--base-red);
+    padding-bottom: 50px;
+  }
+
+  .garment-details-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+  }
+
+  .garment-details-preview-image {
+    width: 200px;
+    height: auto;
+    object-fit: cover;
+  }
+
+  .heart-icon {
+    display: none;
+    position: absolute;
+    top: 20px;
+    left: 50px;
+    cursor: pointer;
+    z-index: 10;
+  }
+
+  .favorite-selected {
+    color: var(--base-red);
+  }
+
+  .garment-details-image-container:hover .heart-icon {
+    opacity: 1;
+  }
+
+  .garment-details-sub-image-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+  }
+
+  .garment-details-sub-image-container img {
+    width: 80px;
+    height: auto;
+    border: 5px solid transparent;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+  }
+
+  .garment-details-sub-image-container img:hover {
+    border: 5px solid var(--light-gray);
+  }
+
+  .garment-details-sub-image-container img:focus {
+    transform: scale(1.09);
+    filter: brightness(0.8);
+  }
+
+  .garment-details-text-container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+    gap: 30px;
+    width: fit-content;
+  }
+
+  .garment-details-text-title {
+    font-size: 12px;
+    text-align: center;
+  }
+
+  .rating-reviews-container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .star-rating-container {
+    display: flex;
+    gap: 4px;
+  }
+
+  .filled-star-rating {
+    color: var(--base-red);
+  }
+
+  .garment-details-price-container {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .price-discounted-price {
+    font-size: 18px;
+    font-weight: 400;
+  }
+
+  .garment-details-price {
+    text-decoration: line-through;
+    color: var(--mid-gray);
+  }
+
+  .garment-details-discounted-price {
+    color: var(--base-red);
+    font-weight: 550;
+  }
+
+  .garment-details-description {
+    width: 100%;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    box-sizing: border-box;
+    text-align: center;
+  }
+
+  .add-to-cart-btn {
+    padding: 8px 30px 8px 30px;
+    cursor: pointer;
+    background-color: var(--white);
+    color: var(--base-red);
+    border: 1.7px solid var(--base-red);
+    font-weight: 550;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  .add-to-cart-btn:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+  }
+
+  .add-to-cart-btn-disabled {
+    padding: 8px 30px 8px 30px;
+    font-weight: 550;
+  }
+
+  .reviews-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .review-heading-container {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+  }
+
+  .review-heading {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 12px;
+  }
+
+  .leave-review-btn {
+    padding: 5px 10px 5px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    background-color: var(--white);
+    color: var(--base-red);
+    border: 1.7px solid var(--base-red);
+    font-weight: 550;
+    margin-bottom: 20px;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  .leave-review-btn:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+  }
+
+  .review-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .individual-review-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+  }
+
+  .name-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: var(--base-red);
+    border-radius: 50%;
+    align-items: center;
+    font-size: 12px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .name-avatar p {
+    font-weight: 550;
+    color: var(--white);
+  }
+
+  .review-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 12px;
+    width: 100%;
+  }
+
+  .review-name-rating {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .review-first-name {
+    font-weight: 550;
+  }
+
+  .review-star-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .review-date {
+    font-size: 0.75em;
+  }
+
+  .edit-delete-review-container {
+    display: flex;
+    gap: 30px;
+  }
+
+  .first-review-text {
+    margin-top: 30px;
+    font-size: 20px;
+  }
 }
 
-.garment-details-navigation {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
+@media screen and (min-width: 1024px) {
+  .garment-details-page-container {
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+    gap: 30px;
+  }
 
-.garment-details-link {
-  color: var(--black);
-}
+  .garment-details-navigation {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+    align-items: center;
+  }
 
-.garment-details-container {
-  display: flex;
-  justify-content: space-around;
-  border-bottom: 2px solid var(--base-red);
-  padding-bottom: 50px;
-}
+  .garment-details-link {
+    color: var(--black);
+  }
 
-.garment-details-image-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 30px;
-  position: relative;
-}
+  .garment-details-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    border-bottom: 2px solid var(--base-red);
+    padding-bottom: 50px;
+  }
 
-.garment-details-preview-image {
-  width: 350px;
-  height: 418px;
-  object-fit: cover;
-}
+  .garment-details-image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    position: relative;
+  }
 
-.heart-icon {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 10;
-}
+  .garment-details-preview-image {
+    width: 350px;
+    height: 418px;
+    object-fit: cover;
+  }
 
-.favorite-selected {
-  color: var(--base-red);
-}
+  .heart-icon {
+    display: flex;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 10;
+  }
 
-.garment-details-image-container:hover .heart-icon {
-  opacity: 1;
-}
+  .favorite-selected {
+    color: var(--base-red);
+  }
 
-.garment-details-sub-image-container {
-  display: flex;
-  gap: 30px;
-}
+  .garment-details-image-container:hover .heart-icon {
+    opacity: 1;
+  }
 
-.garment-details-sub-image-container img {
-  width: 80px;
-  height: auto;
-  border: 5px solid transparent;
-  cursor: pointer;
-  transition: transform 0.5s ease;
-}
+  .garment-details-sub-image-container {
+    display: flex;
+    gap: 30px;
+  }
 
-.garment-details-sub-image-container img:hover {
-  border: 5px solid var(--light-gray);
-}
+  .garment-details-sub-image-container img {
+    width: 80px;
+    height: auto;
+    border: 5px solid transparent;
+    cursor: pointer;
+    transition: transform 0.5s ease;
+  }
 
-.garment-details-sub-image-container img:focus {
-  transform: scale(1.09);
-  filter: brightness(0.8);
-}
+  .garment-details-sub-image-container img:hover {
+    border: 5px solid var(--light-gray);
+  }
 
-.garment-details-text-container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  width: 550px;
-}
+  .garment-details-sub-image-container img:focus {
+    transform: scale(1.09);
+    filter: brightness(0.8);
+  }
 
-.rating-reviews-container {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
+  .garment-details-text-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    width: 550px;
+  }
 
-.star-rating-container {
-  display: flex;
-  gap: 4px;
-}
+  .garment-details-text-title {
+    font-size: 24px;
+    text-align: left;
+  }
 
-.filled-star-rating {
-  color: var(--base-red);
-}
+  .rating-reviews-container {
+    display: flex;
+    gap: 10px;
+    font-size: 16px;
+    align-items: center;
+    justify-content: start;
+  }
 
-.garment-details-price-container {
-  display: flex;
-  gap: 30px;
-}
+  .star-rating-container {
+    display: flex;
+    gap: 4px;
+  }
 
-.price-discounted-price {
-  font-size: 18px;
-  font-weight: 400;
-}
+  .filled-star-rating {
+    color: var(--base-red);
+  }
 
-.garment-details-price {
-  text-decoration: line-through;
-  color: var(--mid-gray);
-}
+  .garment-details-price-container {
+    display: flex;
+    gap: 30px;
+    justify-content: start;
+  }
 
-.garment-details-discounted-price {
-  color: var(--base-red);
-  font-weight: 550;
-}
+  .price-discounted-price {
+    font-size: 18px;
+    font-weight: 400;
+  }
 
-.garment-details-description {
-  width: 100%;
-  overflow-wrap: break-word;
-  word-break: break-word;
-  box-sizing: border-box;
-}
+  .garment-details-price {
+    text-decoration: line-through;
+    color: var(--mid-gray);
+  }
 
-.select-size-container {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
+  .garment-details-discounted-price {
+    color: var(--base-red);
+    font-weight: 550;
+  }
 
-.size-btn-container {
-  display: flex;
-  gap: 10px;
-}
+  .garment-details-description {
+    width: 100%;
+    font-size: 16px;
+    text-align: left;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    box-sizing: border-box;
+  }
 
-.size-btn-container button {
-  padding: 8px 30px 8px 30px;
-  cursor: pointer;
-  border-radius: 20px;
-  background-color: var(--white);
-  color: var(--base-red);
-  border: 1.7px solid var(--base-red);
-  font-weight: 550;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
+  .select-size-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
 
-.size-btn-container button:hover {
-  border: 1.7px solid var(--base-red);
-  background-color: var(--base-red);
-  color: var(--white);
-}
+  .size-btn-container {
+    display: flex;
+    gap: 10px;
+  }
 
-.size-btn-container button:focus {
-  border: 1.7px solid var(--base-red);
-  background-color: var(--base-red);
-  color: var(--white);
-  outline: none;
-}
+  .size-btn-container button {
+    padding: 8px 30px 8px 30px;
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: var(--white);
+    color: var(--base-red);
+    border: 1.7px solid var(--base-red);
+    font-weight: 550;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
 
-.add-to-cart-btn {
-  padding: 8px 30px 8px 30px;
-  cursor: pointer;
-  background-color: var(--white);
-  color: var(--base-red);
-  border: 1.7px solid var(--base-red);
-  font-weight: 550;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
+  .size-btn-container button:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+  }
 
-.add-to-cart-btn:hover {
-  border: 1.7px solid var(--base-red);
-  background-color: var(--base-red);
-  color: var(--white);
-}
+  .size-btn-container button:focus {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+    outline: none;
+  }
 
-.add-to-cart-btn-disabled {
-  padding: 8px 30px 8px 30px;
-  font-weight: 550;
-}
+  .add-to-cart-btn {
+    padding: 8px 30px 8px 30px;
+    cursor: pointer;
+    background-color: var(--white);
+    color: var(--base-red);
+    border: 1.7px solid var(--base-red);
+    font-weight: 550;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
 
-.reviews-container {
-  display: flex;
-  flex-direction: column;
-}
+  .add-to-cart-btn:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+  }
 
-.review-heading-container {
-  display: flex;
-  justify-content: space-between;
-}
+  .add-to-cart-btn-disabled {
+    padding: 8px 30px 8px 30px;
+    font-weight: 550;
+  }
 
-.review-heading {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  font-size: 32px;
-}
+  .reviews-container {
+    display: flex;
+    flex-direction: column;
+  }
 
-.leave-review-btn {
-  padding: 8px 30px 8px 30px;
-  cursor: pointer;
-  /* border-radius: 20px; */
-  background-color: var(--white);
-  color: var(--base-red);
-  border: 1.7px solid var(--base-red);
-  font-weight: 550;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
+  .review-heading-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
 
-.leave-review-btn:hover {
-  border: 1.7px solid var(--base-red);
-  background-color: var(--base-red);
-  color: var(--white);
-}
+  .review-heading {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    font-size: 32px;
+  }
 
-.review-container {
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-}
+  .leave-review-btn {
+    padding: 8px 30px 8px 30px;
+    cursor: pointer;
+    /* border-radius: 20px; */
+    background-color: var(--white);
+    color: var(--base-red);
+    border: 1.7px solid var(--base-red);
+    font-weight: 550;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
 
-.individual-review-container {
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  margin-top: 30px;
-}
+  .leave-review-btn:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+  }
 
-.name-avatar {
-  width: 50px;
-  height: 50px;
-  background-color: var(--base-red);
-  border-radius: 50%;
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  position: relative;
-}
+  .review-container {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+  }
 
-.name-avatar p {
-  font-weight: 550;
-  color: var(--white);
-}
+  .individual-review-container {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    margin-top: 30px;
+  }
 
-.review-content {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  font-size: 20px;
-  width: 100%;
-}
+  .name-avatar {
+    width: 50px;
+    height: 50px;
+    background-color: var(--base-red);
+    border-radius: 50%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
 
-.review-name-rating {
-  display: flex;
-  justify-content: space-between;
-}
+  .name-avatar p {
+    font-weight: 550;
+    color: var(--white);
+  }
 
-.review-first-name {
-  font-weight: 550;
-}
+  .review-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 20px;
+    width: 100%;
+  }
 
-.review-star-rating {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+  .review-name-rating {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.review-date {
-  font-size: 0.75em;
-}
+  .review-first-name {
+    font-weight: 550;
+  }
 
-.edit-delete-review-container {
-  display: flex;
-  gap: 30px;
-}
+  .review-star-rating {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
 
-.first-review-text {
-  margin-top: 30px;
-  font-size: 20px;
+  .review-date {
+    font-size: 0.75em;
+  }
+
+  .edit-delete-review-container {
+    display: flex;
+    gap: 30px;
+  }
+
+  .first-review-text {
+    margin-top: 30px;
+    font-size: 20px;
+  }
 }

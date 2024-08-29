@@ -86,9 +86,9 @@ const EditGarment = () => {
     const errors = {};
     const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg"];
 
-    if (title?.length < 15 || title?.length > 50)
+    if (title?.length < 15 || title?.length > 35)
       errors.title =
-        "Title is required and must be between 15 to 50 characters";
+        "Title is required and must be between 15 to 35 characters";
 
     if (isNaN(price) || price === "" || price < 1)
       errors.price = "Price is required and must be a positive number";

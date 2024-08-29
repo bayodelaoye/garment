@@ -19,8 +19,8 @@ def new_garment():
         "category": request.form["category"],
     }
 
-    if len(garment_info["title"]) > 50:
-        return {"message": "Length of title exceeds more than 50 characters"}, 400
+    if len(garment_info["title"]) > 35:
+        return {"message": "Length of title exceeds more than 35 characters"}, 400
 
     new_garment = Garment(
         user_id=current_user.get_id(),
