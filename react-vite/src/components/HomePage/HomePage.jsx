@@ -48,7 +48,9 @@ function HomePage() {
                 <p>Welcome</p>
                 <MdWavingHand />
               </div>
-              <p>New Collection Available</p>
+              <p className="new-collection-available-text">
+                New Collection Available
+              </p>
 
               <Link to="/kids">
                 <button className="latest-collection-btn">

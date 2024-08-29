@@ -1,58 +1,132 @@
-.user-garments-page-container {
-  padding-top: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding-bottom: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+@media screen and (min-width: 360px) {
+  .user-garments-page-container {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .user-garments-page-title {
+    font-size: 20px;
+  }
+
+  .create-garment-btn-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .create-garment-btn-container button {
+    padding: 8px 30px 8px 30px;
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    border-radius: 20px;
+    color: var(--white);
+    font-weight: 550;
+    cursor: pointer;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  .create-garment-btn-container button:hover {
+    background-color: var(--white);
+    color: var(--base-red);
+    border: 1.7px solid var(--base-red);
+  }
+
+  .individual-garment-container-with-btns {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .user-garments-edit-delete-btn-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 20px;
+  }
+
+  .user-garments-edit-delete-btn {
+    padding: 8px 30px 8px 30px;
+    border: 1.7px solid var(--base-red);
+    background-color: var(--white);
+    color: var(--base-red);
+    font-weight: 550;
+    cursor: pointer;
+    transition: all 0.5s ease, color 0.5s ease;
+  }
+
+  .user-garments-edit-delete-btn:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+  }
 }
 
-.create-garment-btn-container {
-  display: flex;
-  justify-content: right;
+@media screen and (min-width: 475px) {
+  .user-garments-page-title {
+    font-size: 24px;
+  }
 }
 
-.create-garment-btn-container button {
-  padding: 8px 30px 8px 30px;
-  border: 1.7px solid var(--base-red);
-  background-color: var(--base-red);
-  border-radius: 20px;
-  color: var(--white);
-  font-weight: 550;
-  cursor: pointer;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
+@media screen and (min-width: 1024px) {
+  .user-garments-page-container {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
 
-.create-garment-btn-container button:hover {
-  background-color: var(--white);
-  color: var(--base-red);
-  border: 1.7px solid var(--base-red);
-}
+  .create-garment-btn-container {
+    display: flex;
+    justify-content: right;
+  }
 
-.individual-garment-container-with-btns {
-  display: flex;
-  flex-direction: column;
-}
+  .create-garment-btn-container button {
+    padding: 8px 30px 8px 30px;
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    border-radius: 20px;
+    color: var(--white);
+    font-weight: 550;
+    cursor: pointer;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
 
-.user-garments-edit-delete-btn-container {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 20px;
-}
+  .create-garment-btn-container button:hover {
+    background-color: var(--white);
+    color: var(--base-red);
+    border: 1.7px solid var(--base-red);
+  }
 
-.user-garments-edit-delete-btn {
-  padding: 8px 30px 8px 30px;
-  border: 1.7px solid var(--base-red);
-  background-color: var(--white);
-  color: var(--base-red);
-  font-weight: 550;
-  cursor: pointer;
-  transition: all 0.5s ease, color 0.5s ease;
-}
+  .individual-garment-container-with-btns {
+    display: flex;
+    flex-direction: column;
+  }
 
-.user-garments-edit-delete-btn:hover {
-  border: 1.7px solid var(--base-red);
-  background-color: var(--base-red);
-  color: var(--white);
+  .user-garments-edit-delete-btn-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+
+  .user-garments-edit-delete-btn {
+    padding: 8px 30px 8px 30px;
+    border: 1.7px solid var(--base-red);
+    background-color: var(--white);
+    color: var(--base-red);
+    font-weight: 550;
+    cursor: pointer;
+    transition: all 0.5s ease, color 0.5s ease;
+  }
+
+  .user-garments-edit-delete-btn:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+  }
 }

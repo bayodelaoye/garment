@@ -32,7 +32,7 @@ function Navigation() {
       {!user ? (
         <div className="navbar-container">
           <Link to="/">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" className="logo" />
           </Link>
           <div className="nav-links-container">
             <NavLink to="/men" className="nav-link">
@@ -59,7 +59,7 @@ function Navigation() {
       ) : (
         <div className="navbar-container">
           <Link to="/">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" className="logo" />
           </Link>
           <div className="nav-links-container">
             <NavLink to="/men" className="nav-link">

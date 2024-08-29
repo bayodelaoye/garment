@@ -1,27 +1,67 @@
-#footer-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-  background-color: var(--base-red);
-  height: 55px;
-  color: var(--white);
-  padding: 0 50px;
+@media screen and (min-width: 360px) {
+  #footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    background-color: var(--base-red);
+    height: 55px;
+    color: var(--white);
+    padding: 0 50px;
+  }
+
+  #footer-container p {
+    font-size: 12px;
+  }
+
+  .github-linkedin-footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-icon {
+    color: white;
+    height: 30px;
+    width: 30px;
+    transition: transform 0.5s ease;
+  }
+
+  .footer-icon:hover {
+    transform: scale(1.15);
+  }
 }
 
-.github-linkedin-footer {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
+@media screen and (min-width: 1024px) {
+  #footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    background-color: var(--base-red);
+    height: 55px;
+    color: var(--white);
+    padding: 0 50px;
+  }
 
-.footer-icon {
-  color: white;
-  height: 30px;
-  width: 30px;
-  transition: transform 0.5s ease;
-}
+  #footer-container p {
+    font-size: 16px;
+  }
 
-.footer-icon:hover {
-  transform: scale(1.15);
+  .github-linkedin-footer {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .footer-icon {
+    color: white;
+    height: 30px;
+    width: 30px;
+    transition: transform 0.5s ease;
+  }
+
+  .footer-icon:hover {
+    transform: scale(1.15);
+  }
 }

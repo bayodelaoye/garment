@@ -1,77 +1,147 @@
-.category-page-container {
-  padding-top: 50px;
-  display: flex;
-  flex-direction: column;
-  gap: 30px;
-  padding-bottom: 50px;
-  margin-left: 50px;
-  margin-right: 50px;
+@media screen and (min-width: 360px) {
+  .category-page-container {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+
+  .individual-garment-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+  }
+
+  .individual-garment-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: var(--black);
+  }
+
+  .index-preview-image {
+    width: 200px;
+    height: auto;
+  }
+
+  .individual-garment-title {
+    width: fit-content;
+  }
+
+  .price-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  .discounted-price {
+    font-weight: 550;
+  }
+
+  .price {
+    text-decoration: line-through;
+    color: var(--mid-gray);
+  }
+
+  .heart-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+  }
+
+  .favorite-selected {
+    color: var(--base-red);
+  }
 }
 
-.no-favorites-text {
-  display: flex;
-  justify-content: center;
-}
+@media screen and (min-width: 1024px) {
+  .category-page-container {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    padding-bottom: 50px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
 
-.garment-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 50px;
-}
+  .no-favorites-text {
+    display: flex;
+    justify-content: center;
+  }
 
-.individual-garment-container {
-  transition: transform 0.5s ease;
-  cursor: pointer;
-  position: relative;
-}
+  .garment-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+  }
 
-.individual-garment-container:hover {
-  transform: scale(1.05);
-}
+  .individual-garment-container {
+    transition: transform 0.5s ease;
+    cursor: pointer;
+    position: relative;
+    font-size: 16px;
+  }
 
-.individual-garment-title {
-  width: 350px;
-}
+  .individual-garment-container:hover {
+    transform: scale(1.05);
+  }
 
-.index-preview-image {
-  width: 350px;
-  height: 418px;
-  object-fit: cover;
-}
+  .individual-garment-title {
+    width: 350px;
+  }
 
-.individual-garment-link {
-  color: var(--black);
-}
+  .index-preview-image {
+    width: 350px;
+    height: 418px;
+    object-fit: cover;
+  }
 
-.heart-icon {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  cursor: pointer;
-  z-index: 10;
-  opacity: 0;
-}
+  .individual-garment-link {
+    align-items: start;
+    color: var(--black);
+  }
 
-.individual-garment-container:hover .heart-icon {
-  opacity: 1;
-}
+  .heart-icon {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    cursor: pointer;
+    z-index: 10;
+    opacity: 0;
+  }
 
-.favorite-selected {
-  color: var(--base-red);
-}
+  .individual-garment-container:hover .heart-icon {
+    opacity: 1;
+  }
 
-.price-container {
-  display: flex;
-  gap: 30px;
-  align-items: center;
-}
+  .favorite-selected {
+    color: var(--base-red);
+  }
 
-.price {
-  text-decoration: line-through;
-  color: var(--mid-gray);
-}
+  .price-container {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
 
-.discounted-price {
-  font-weight: 550;
+  .price {
+    text-decoration: line-through;
+    color: var(--mid-gray);
+  }
+
+  .discounted-price {
+    font-weight: 550;
+  }
 }

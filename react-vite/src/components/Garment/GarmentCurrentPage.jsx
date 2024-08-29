@@ -31,7 +31,7 @@ function GarmentCurrentPage() {
     <>
       {isLoaded ? (
         <div className="user-garments-page-container">
-          <h2>User's Created Garments</h2>
+          <h2 className="user-garments-page-title">User's Created Garments</h2>
 
           <div className="create-garment-btn-container">
             <button onClick={() => navigate("/garments/new")}>
