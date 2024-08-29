@@ -197,7 +197,7 @@ const CreateGarment = () => {
     <>
       {loading ? (
         <form className="create-garment-form-container" onSubmit={handleSubmit}>
-          <h2>Create a new Garment</h2>
+          <h2 className="create-garment-form-title">Create a new Garment</h2>
 
           <div className="create-garment-fields-container">
             <label className="create-garment-label">
