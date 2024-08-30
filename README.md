@@ -133,7 +133,6 @@ https://garment-llvd.onrender.com
    'errors': 'No session'
 }
 ```
-##
 
 ## Cart Routes
 
@@ -224,7 +223,7 @@ https://garment-llvd.onrender.com
 ##
 * Purpose: This fetch is sent to delete an item from the cart.
 * Method: ```DELETE```
-* URL: ```/api/cart/delete/int:id```
+* URL: ```/api/cart/<int:cart_item_id>```
 * Successful Response: HTTP Status 200
 ```python
 {
@@ -324,7 +323,7 @@ https://garment-llvd.onrender.com
 
 ### Update Review Record
 ##
-* Purpose: This fetch is sent to update the shipping info record specified by the shipping id.
+* Purpose: This fetch is sent to update the review info record specified by the garment's id.
 * Method: ```PUT```
 * URL: ```/api/reviews/<int:garment_id>```
 * Body:
@@ -362,7 +361,7 @@ https://garment-llvd.onrender.com
 
 ### Delete Review Record
 ##
-* Purpose: This fetch sends a shipping info id in the body of the request of the record to be deleted.
+* Purpose: This fetch sends a garment's id in the url of the request of the record to be deleted.
 * Method: ```DELETE```
 * URL: ```/api/reviews/<int:garment_id>```
 * Successful Response: HTTP Status 200
@@ -381,7 +380,7 @@ https://garment-llvd.onrender.com
 
 ### Get Current User Favorites
 ##
-* Purpose: This fetch is sent to retrieve all billing info records for the user specified by the id.
+* Purpose: This fetch is sent to retrieve all the favorite records for the user.
 * Method: ```GET```
 * URL: ```/api/favorites/```
 * Successful Response: HTTP Status 200
@@ -404,7 +403,7 @@ https://garment-llvd.onrender.com
 ```
 
 ### Create new a Favorite Record
-* Purpose: This fetch is sent to add a new entry to the billing info table.
+* Purpose: This fetch is sent to add a new entry to the favorites table.
 * Method: ```POST```
 * URL: ```/api/favorites/```
 * Body:
@@ -438,9 +437,9 @@ https://garment-llvd.onrender.com
 
 ### Delete a Favorite Record
 ##
-* Purpose: This fetch sends a billing info id in the body of the request. Upon successful deletion we return the updated array of user entries.
+* Purpose: This fetch sends a garments's id in the url of the request of the record to be deleted.
 * Method: ```DELETE```
-* URL: ```/api/favorite/<int:garment_id>```
+* URL: ```/api/favorites/<int:garment_id>```
 * Successful Response: HTTP Status 200
 ```python
 {
@@ -451,6 +450,146 @@ https://garment-llvd.onrender.com
 ```python
 {
    'errors': 'Favorite record with given id Not Found'
+}
+```
+
+## Garment Routes
+
+### Get Garments
+##
+* Purpose: This fetch is sent to retrieve all the garments specified by the garment's id.
+* Method: ```GET```
+* URL: ```/api/garments/```
+* Successful Response: HTTP Status 200
+```python
+[
+   {
+        "id": self.id,
+        "user_id": self.user_id,
+        "title": self.title,
+        "price": self.price,
+        "discounted_price": self.discounted_price,
+        "description": self.description,
+        "inventory": self.inventory,
+        "category": self.category,
+        "created_at": self.created_at,
+        "updated_at": self.updated_at,
+        "preview_image_url": preview_image_url,
+   }
+]
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Not Found'
+}
+```
+
+### Create a new Garment
+##
+* Purpose: This fetch is sent to add a new garment to the garments table.
+* Method: ```POST```
+* URL: ```/api/garments/new```
+* Body:
+```python
+   {
+      "title": "Classic Blue Tailored Jacket",
+      "price": 200,
+      "discounted_price": 150,
+      "description": "A blue jacket typically features a sleek, tailored design with a rich blue hue. It can be crafted from various materials such as wool, cotton, or synthetic fabrics, offering both style and practicality.",
+      "inventory": 10,
+      "category": "MEN",
+   }
+```
+* Success Response: HTTP Status 201
+```python
+{
+     "id": self.id,
+     "user_id": self.user_id,
+     "title": self.title,
+     "price": self.price,
+     "discounted_price": self.discounted_price,
+     "description": self.description,
+     "inventory": self.inventory,
+     "category": self.category,
+     "created_at": self.created_at,
+     "updated_at": self.updated_at,
+     "preview_image_url": preview_image_url
+}
+```
+* Error Response1: HTTP Status 400
+```python
+{
+   'errors': ARRAY_OF_STRINGS
+}
+```
+* Error Response2: HTTP Status 404
+```python
+{
+   'errors': 'User with given id Not Found'
+}
+```
+
+### Update Garment Record
+##
+* Purpose: This fetch is sent to update the garment record specified by the garment's id.
+* Method: ```PUT```
+* URL: ```/api/garments/<int:id>/edit```
+* Body:
+```python
+   {
+      "title": "Classic Pink Tailored Jacket",
+      "price": 350,
+      "discounted_price": 250,
+      "description": "A pink jacket typically features a sleek, tailored design with a rich pink hue. It can be crafted from various materials such as wool, cotton, or synthetic fabrics, offering both style and practicality.",
+      "inventory": 20,
+      "category": "WOMEN",
+   }
+```
+* Successful Response: HTTP Status 200
+```python
+{
+     "id": self.id,
+     "user_id": self.user_id,
+     "title": self.title,
+     "price": self.price,
+     "discounted_price": self.discounted_price,
+     "description": self.description,
+     "inventory": self.inventory,
+     "category": self.category,
+     "created_at": self.created_at,
+     "updated_at": self.updated_at,
+     "preview_image_url": preview_image_url
+}
+```
+* Error Response1: HTTP Status 400
+```python
+{
+   'errors': ARRAY_OF_STRINGS
+}
+```
+* Error Response2: HTTP Status 404
+```python
+{
+   'errors': 'Garment Record with given id Not Found'
+}
+```
+
+### Delete Review Record
+##
+* Purpose: This fetch sends a garment's id in the url of the request of the record to be deleted.
+* Method: ```DELETE```
+* URL: ```/api/garments/<int:id>```
+* Successful Response: HTTP Status 200
+```python
+{
+     'message' : 'Garment deleted'
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'errors': 'Garment Record with given id Not Found'
 }
 ```
 
