@@ -76,9 +76,14 @@ https://garment-llvd.onrender.com
 * Successful Response: HTTP Status 201
 ```python
 {
-   'id': INT,
-   'username': STRING,
-   'email': STRING,
+     "id": self.id,
+     "first_name": self.first_name,
+     "last_name": self.last_name,
+     "email": self.email,
+     "username": self.username,
+     "hashed_password": self.hashed_password,
+     "created_at": self.created_at,
+     "updated_at": self.updated_at,
 }
 ```
 * Error Response: HTTP Status 400
@@ -95,9 +100,14 @@ https://garment-llvd.onrender.com
 * Successful Response: HTTP Status 200
 ```python
 {
-   'id': INT,
-   'username': STRING,
-   'email': STRING,
+     "id": self.id,
+     "first_name": self.first_name,
+     "last_name": self.last_name,
+     "email": self.email,
+     "username": self.username,
+     "hashed_password": self.hashed_password,
+     "created_at": self.created_at,
+     "updated_at": self.updated_at,
 }
 ```
 * Error Response: HTTP Status 400
@@ -131,27 +141,42 @@ https://garment-llvd.onrender.com
 ##
 * Purpose: This fetch is sent to add a new item to the cart table.
 * Method: ```POST```
-* URL: ```/api/cart/add```
+* URL: ```/api/cart/```
 * Body:
 ```python
 {
-   'item_id': INT
+   'garment_id': 1
 }
 ```
 * Successful Response: HTTP Status 201
 ```python
 {
-   'id': INT,
-   'category': STRING,
-   'vendor_name': STRING,
-   'manufacturer_id': STRING,
-   'name': STRING,
-   'model': STRING,
-   'serial': STRING,
-   'description': STRING,
-   'tech_specs': STRING,
-   'price': FLOAT,
-   'quantity': INT
+   'message': "Added item to cart"
+}
+```
+* Error Response: HTTP Status 404
+```python
+{
+   'error': 'Item with given id Not Found'
+}
+```
+
+### Read Cart Items
+##
+* Purpose: This fetch is sent and gets the items in the cart.
+* Method: ```GET```
+* URL: ```/api/cart/```
+* Body: none
+* Successful Response: HTTP Status 200
+```python
+{
+     "id": self.id,
+     "user_id": self.user_id,
+     "created_at": self.created_at,
+     "updated_at": self.updated_at,
+     "cart_items": [
+      cart_item.to_dict_with_garments() for cart_item in self.cart_items
+     ],
 }
 ```
 * Error Response: HTTP Status 404
@@ -165,28 +190,23 @@ https://garment-llvd.onrender.com
 ##
 * Purpose: This fetch is sent to update the quantity value of a cart item.
 * Method: ```PUT```
-* URL: ```/api/cart/quantity```
+* URL: ```/api/cart/<int:cart_item_id>```
 * Body:
 ```python
 {
-   'id': INT,
-   'val': INT
+   'quantity': 5,
 }
 ```
 * Successful Response: HTTP Status 200
 ```python
 {
-   'id': INT,
-   'category': STRING,
-   'vendor_name': STRING,
-   'manufacturer_id': STRING,
-   'name': STRING,
-   'model': STRING,
-   'serial': STRING,
-   'description': STRING,
-   'tech_specs': STRING,
-   'price': FLOAT,
-   'quantity': INT
+     "id": self.id,
+     "cart_id": self.cart_id,
+     "garment_id": self.garment_id,
+     "quantity": self.quantity,
+     "created_at": self.created_at,
+     "updated_at": self.updated_at,
+     "garment": self.garment.to_dict(),
 }
 ```
 * Error Response1: HTTP Status 404
@@ -209,7 +229,7 @@ https://garment-llvd.onrender.com
 * Successful Response: HTTP Status 200
 ```python
 {
-   'message': 'Success'
+   'message': 'Cart item deleted'
 }
 ```
 * Error Response: HTTP Status 404
@@ -223,11 +243,11 @@ https://garment-llvd.onrender.com
 ##
 * Purpose: This fetch is sent to delete all items from the cart.
 * Method: ```DELETE```
-* URL: ```/api/cart/clear/int:id```
+* URL: ```/api/cart/```
 * Successful Response: HTTP Status 200
 ```python
 {
-   'message': 'Cart Emptied'
+   'message': 'Cart and cart items deleted'
 }
 ```
 * Error Response: HTTP Status 404
