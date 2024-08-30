@@ -166,7 +166,6 @@ https://garment-llvd.onrender.com
 * Purpose: This fetch is sent and gets the items in the cart.
 * Method: ```GET```
 * URL: ```/api/cart/```
-* Body: none
 * Successful Response: HTTP Status 200
 ```python
 {
@@ -257,73 +256,58 @@ https://garment-llvd.onrender.com
 }
 ```
 
-## Shipping Info Routes
+## Reviews Routes
 
-### Get Current User Shipping Info
+### Get Reviews for a Garment
 ##
-* Purpose: This fetch is sent to retrieve all shipping info records for the user specified by the id.
+* Purpose: This fetch is sent to retrieve all the reviews for a garment specified by the garment's id.
 * Method: ```GET```
-* URL: ```/api/shipping/int:user_id```
+* URL: ```/api/reviews/<int:garment_id>```
 * Successful Response: HTTP Status 200
 ```python
 [
    {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
+        "id": self.id,
+        "user_id": self.user_id,
+        "garment_id": self.garment_id,
+        "review": self.review,
+        "stars": self.stars,
+        "created_at": self.created_at,
+        "updated_at": self.updated_at,
    }
 ]
 ```
 * Error Response: HTTP Status 404
 ```python
 {
-   'errors': 'User with given id Not Found'
+   'errors': 'Not Found'
 }
 ```
 
-### Create a new Shipping Record
+### Create a new Review
 ##
-* Purpose: This fetch is sent to add a new entry to the shipping info table.
+* Purpose: This fetch is sent to add a new review to the reviews table.
 * Method: ```POST```
-* URL: ```/api/shipping/add```
+* URL: ```/api/reviews/<int:garment_id>/new```
 * Body:
 ```python
    {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
+      garment_id: 1,
+      review: "This is a very nice jacket. I love to wear it in winter",
+      stars: 5,
    }
 ```
 * Success Response: HTTP Status 201
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
+{
+     "id": self.id,
+     "user_id": self.user_id,
+     "garment_id": self.garment_id,
+     "review": self.review,
+     "stars": self.stars,
+     "created_at": self.created_at,
+     "updated_at": self.updated_at,
+}
 ```
 * Error Response1: HTTP Status 400
 ```python
@@ -338,42 +322,30 @@ https://garment-llvd.onrender.com
 }
 ```
 
-### Update Shipping Record
+### Update Review Record
 ##
 * Purpose: This fetch is sent to update the shipping info record specified by the shipping id.
 * Method: ```PUT```
-* URL: ```/api/shipping/update/int:shipping_id```
+* URL: ```/api/reviews/<int:garment_id>```
 * Body:
 ```python
    {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
+      garment_id: 1,
+      review: "Updated the review for this garment",
+      stars: 2,
    }
 ```
 * Successful Response: HTTP Status 200
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
+{
+     "id": self.id,
+     "user_id": self.user_id,
+     "garment_id": self.garment_id,
+     "review": self.review,
+     "stars": self.stars,
+     "created_at": self.created_at,
+     "updated_at": self.updated_at,
+}
 ```
 * Error Response1: HTTP Status 400
 ```python
@@ -384,42 +356,25 @@ https://garment-llvd.onrender.com
 * Error Response2: HTTP Status 404
 ```python
 {
-   'errors': 'Shipping Record with given id Not Found'
+   'errors': 'Review Record with given id Not Found'
 }
 ```
 
-### Delete Shipping Record
+### Delete Review Record
 ##
 * Purpose: This fetch sends a shipping info id in the body of the request of the record to be deleted.
 * Method: ```DELETE```
-* URL: ```/api/shipping/delete```
-* Body:
-```python
-{
-   'id': INT
-}
-```
+* URL: ```/api/reviews/<int:garment_id>```
 * Successful Response: HTTP Status 200
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
+{
+     'message' : 'Review deleted'
+}
 ```
 * Error Response: HTTP Status 404
 ```python
 {
-   'errors': 'Shipping Record with given id Not Found'
+   'errors': 'Review Record with given id Not Found'
 }
 ```
 ## Billing Info Routes
