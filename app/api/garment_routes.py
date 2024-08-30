@@ -122,8 +122,8 @@ def update_garment(id):
 
     garment = Garment.query.get(id)
 
-    if len(garment_info["title"]) > 50:
-        return {"message": "Length of title exceeds more than 50 characters"}, 400
+    if len(garment_info["title"]) > 35:
+        return {"message": "Length of title exceeds more than 35 characters"}, 400
 
     garment.title = garment_info["title"]
     garment.price = garment_info["price"]

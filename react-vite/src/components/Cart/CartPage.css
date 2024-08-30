@@ -21,7 +21,6 @@
   .cart-item-container {
     display: flex;
     flex-direction: column;
-    /* grid-template-columns: repeat(6, 1fr); */
     gap: 10px;
     border-bottom: 1px solid var(--mid-gray);
     padding: 10px 0;
@@ -130,6 +129,48 @@
   }
 
   .purchase-btn-container button:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--white);
+    color: var(--base-red);
+  }
+
+  .order-confirmation-container {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+    height: auto;
+    padding: 30px;
+    gap: 30px;
+  }
+
+  .order-confirmation-container h2 {
+    text-align: center;
+    border-bottom: 1px solid var(--black);
+    padding-bottom: 20px;
+    font-size: 12px;
+  }
+
+  .order-confirmation-container p {
+    text-align: center;
+    font-size: 12px;
+  }
+
+  .continue-shopping-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .continue-shopping-container button {
+    padding: 8px 30px 8px 30px;
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+    font-weight: 550;
+    cursor: pointer;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  .continue-shopping-container button:hover {
     border: 1.7px solid var(--base-red);
     background-color: var(--white);
     color: var(--base-red);
@@ -289,10 +330,12 @@
     text-align: center;
     border-bottom: 1px solid var(--black);
     padding-bottom: 20px;
+    font-size: 24px;
   }
 
   .order-confirmation-container p {
     text-align: center;
+    font-size: 16px;
   }
 
   .continue-shopping-container {

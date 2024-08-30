@@ -1,28 +1,62 @@
-.review-delete-keep-form {
-  display: flex;
-  flex-direction: column;
-  width: 450px;
-  padding: 30px;
-  gap: 30px;
+@media screen and (min-width: 360px) {
+  .review-delete-keep-form {
+    display: flex;
+    flex-direction: column;
+    width: 350px;
+    padding: 30px;
+    gap: 30px;
+  }
+
+  .review-delete-keep-btn-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+  }
+
+  .review-delete-keep-btn {
+    padding: 8px 40px 8px 40px;
+    cursor: pointer;
+    background-color: var(--white);
+    color: var(--base-red);
+    border: 1.7px solid var(--base-red);
+    font-weight: 550;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  .review-delete-keep-btn:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+  }
 }
 
-.review-delete-keep-btn-container {
-  display: flex;
-  justify-content: space-between;
-}
+@media screen and (min-width: 475px) {
+  .review-delete-keep-form {
+    display: flex;
+    flex-direction: column;
+    width: 450px;
+    padding: 30px;
+    gap: 30px;
+  }
 
-.review-delete-keep-btn {
-  padding: 8px 40px 8px 40px;
-  cursor: pointer;
-  background-color: var(--white);
-  color: var(--base-red);
-  border: 1.7px solid var(--base-red);
-  font-weight: 550;
-  transition: background-color 0.5s ease, color 0.5s ease;
-}
+  .review-delete-keep-btn-container {
+    display: flex;
+    justify-content: space-between;
+  }
 
-.review-delete-keep-btn:hover {
-  border: 1.7px solid var(--base-red);
-  background-color: var(--base-red);
-  color: var(--white);
+  .review-delete-keep-btn {
+    padding: 8px 40px 8px 40px;
+    cursor: pointer;
+    background-color: var(--white);
+    color: var(--base-red);
+    border: 1.7px solid var(--base-red);
+    font-weight: 550;
+    transition: background-color 0.5s ease, color 0.5s ease;
+  }
+
+  .review-delete-keep-btn:hover {
+    border: 1.7px solid var(--base-red);
+    background-color: var(--base-red);
+    color: var(--white);
+  }
 }

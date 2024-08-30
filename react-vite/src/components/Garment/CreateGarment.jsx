@@ -46,7 +46,7 @@ const CreateGarment = () => {
     const errors = {};
     const ALLOWED_EXTENSIONS = ["png", "jpg", "jpeg"];
 
-    if (title.length < 15 || title.length > 35)
+    if (title?.length < 15 || title?.length > 35)
       errors.title =
         "Title is required and must be between 15 to 35 characters";
 
