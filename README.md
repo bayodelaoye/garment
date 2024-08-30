@@ -21,7 +21,7 @@ https://garment-llvd.onrender.com
 
 # Landing Page
 
-<img src="https://github.com/AppBK/Sweetwafer/assets/107947798/a0f0053b-f42f-4dab-8fbd-2d7ad58938ba" data-canonical-src="https://sweetwafers3bucket.s3.us-west-1.amazonaws.com/landing4gif.gif" width="600px"/>
+
 
  
  # Product Page
