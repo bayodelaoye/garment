@@ -20,18 +20,13 @@ https://garment-llvd.onrender.com
 [Feature List](https://github.com/bayodelaoye/garment/wiki/Feature-List) | [Database Schema](https://github.com/bayodelaoye/garment/wiki/Database-Schema) | [User Stories](https://github.com/bayodelaoye/garment/wiki/User-Stories) | [Wireframes](https://github.com/bayodelaoye/garment/wiki/Wireframes)
 
 # Landing Page
+<img width="600px" src="https://github.com/bayodelaoye/garment/blob/dev/react-vite/public/home_page.png" />
 
-
-
- 
  # Product Page
-<img width="600px" src="https://github.com/AppBK/Sweetwafer/assets/107947798/975d61c5-5b23-4686-9731-4525f3a9cd16" data-canonical-src="https://sweetwafers3bucket.s3.us-west-1.amazonaws.com/ProductPageSweetwaferCroppedTop.gif">
-
+<img width="600px" src="https://github.com/bayodelaoye/garment/blob/dev/react-vite/public/product_page.png" />
 
 # Cart
-<img src="https://github.com/AppBK/Sweetwafer/assets/107947798/e41c4b1e-73b4-44c6-99b8-f4d01bf38970" data-canonical-src="https://sweetwafers3bucket.s3.us-west-1.amazonaws.com/CartSweetwaferCroppedTop.gif" width="600px" />
- 
-
+<img src="https://github.com/bayodelaoye/garment/blob/dev/react-vite/public/cart.png" width="600px" />
 
 <!-- # Endpoints
 ## Auth
