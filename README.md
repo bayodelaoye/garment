@@ -377,27 +377,22 @@ https://garment-llvd.onrender.com
    'errors': 'Review Record with given id Not Found'
 }
 ```
-## Billing Info Routes
+## Favorites Routes
 
-### Get Current User Billing Info
+### Get Current User Favorites
 ##
 * Purpose: This fetch is sent to retrieve all billing info records for the user specified by the id.
 * Method: ```GET```
-* URL: ```/api/billing/int:user_id```
+* URL: ```/api/favorites/```
 * Successful Response: HTTP Status 200
 ```python
 [
    {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
+        "id": self.id,
+        "user_id": self.user_id,
+        "garment_id": self.garment_id,
+        "created_at": self.created_at,
+        "updated_at": self.updated_at,
    }
 ]
 ```
@@ -408,41 +403,25 @@ https://garment-llvd.onrender.com
 }
 ```
 
-### Create new Billing Record
+### Create new a Favorite Record
 * Purpose: This fetch is sent to add a new entry to the billing info table.
 * Method: ```POST```
-* URL: ```/api/billing/add```
+* URL: ```/api/favorites/```
 * Body:
 ```python
 {
-   apt_number: INT,
-   city: STRING,
-   company: STRING,
-   country: STRING,
-   primary: BOOLEAN,
-   shipping_name: STRING,
-   state: STRING,
-   street: STRING,
-   user_id: INT,
-   zip: STRING
+     garment_id: 1,
 }
 ```
 * Successful Response: HTTP 201
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
+{
+     "id": self.id,
+     "user_id": self.user_id,
+     "garment_id": self.garment_id,
+     "created_at": self.created_at,
+     "updated_at": self.updated_at
+}
 ```
 * Error Response1: HTTP Status 400
 ```python
@@ -457,110 +436,29 @@ https://garment-llvd.onrender.com
 }
 ```
 
-### Update Billing Record
-* Purpose: This fetch is sent to update the billing info record specified by the billing id.
-* Method: ```PUT```
-* URL: ```/api/shipping/update/int:billing_id```
-* Body:
-```python
-{
-   apt_number: INT,
-   city: STRING,
-   company: STRING,
-   country: STRING,
-   primary: BOOLEAN,
-   shipping_name: STRING,
-   state: STRING,
-   street: STRING,
-   user_id: INT,
-   zip: STRING
-}
-```
-* Successful Response: HTTP Status 200
-```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
-```
-* Error Response1: HTTP Status 400
-```python
-{
-   'errors': ARRAY_OF_STRINGS
-}
-```
-* Error Response2: HTTP Status 404
-```python
-{
-   'errors': 'Billing Record with given id Not Found'
-}
-```
-* Error Response3: HTTP Status 404
-```python
-{
-   'errors': 'User with given id Not Found'
-}
-```
-### Delete Billing Record
+### Delete a Favorite Record
 ##
 * Purpose: This fetch sends a billing info id in the body of the request. Upon successful deletion we return the updated array of user entries.
 * Method: ```DELETE```
-* URL: ```/api/billing/delete```
-* Body:
-```python
-{
-   'id': INT
-}
-```
+* URL: ```/api/favorite/<int:garment_id>```
 * Successful Response: HTTP Status 200
 ```python
-[
-   {
-      apt_number: INT,
-      city: STRING,
-      company: STRING,
-      country: STRING,
-      primary: BOOLEAN,
-      shipping_name: STRING,
-      state: STRING,
-      street: STRING,
-      user_id: INT,
-      zip: STRING
-   }
-]
+{
+     'message': 'Favorite item deleted'
+}
 ```
 * Error Response: HTTP Status 404
 ```python
 {
-   'errors': 'Billing record with given id Not Found'
+   'errors': 'Favorite record with given id Not Found'
 }
 ```
-##
-
 
 # Feature List
 1. Cart
-2. Shipping Entries
-3. Billing Accounts
-
-# Future Implementation Goals
-
-1. Reviews (w/AWS image uploads)
-2. ChatHelpBot (websockets)
-3. Search Bar
-4. Sales Professionals
-5. Payment Accounts (Credit Cards / PayPal)
-6. Make pixel perfect to target site.
+2. Reviews
+3. Favorites
+4. Garments
 
 # Connect
-[LinkedIn](https://www.linkedin.com/in/brian-kiesel-94475696/)
+[LinkedIn](https://www.linkedin.com/in/bayode-olaoye/)
