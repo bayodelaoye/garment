@@ -255,7 +255,7 @@ https://garment-llvd.onrender.com
 }
 ```
 
-## Reviews Routes
+## Review Routes
 
 ### Get Reviews for a Garment
 ##
@@ -376,7 +376,7 @@ https://garment-llvd.onrender.com
    'errors': 'Review Record with given id Not Found'
 }
 ```
-## Favorites Routes
+## Favorite Routes
 
 ### Get Current User Favorites
 ##
