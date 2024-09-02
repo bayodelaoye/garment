@@ -27,7 +27,7 @@ function GarmentReviews({ review, users, garment }) {
           </div>
         </div>
         <p className="review-date">{review?.created_at}</p>
-        <p>{review?.review}</p>
+        <p className="review-text-break-word">{review?.review}</p>
         {currentUser?.id === review?.user_id ? (
           <div className="edit-delete-review-container">
             <OpenModalButton

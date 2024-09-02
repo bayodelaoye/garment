@@ -42,6 +42,12 @@ function CartPage() {
     await dispatch(obtainAmountCartItems());
   };
 
+  const handlePurchase = async () => {
+    await dispatch(removeCart());
+    await dispatch(obtainCartItems());
+    await dispatch(obtainAmountCartItems());
+  };
+
   return (
     <>
       {isLoaded ? (
@@ -96,6 +102,7 @@ function CartPage() {
               <div className="purchase-btn-container">
                 <OpenModalButton
                   buttonText={`PURCHASE`}
+                  onButtonClick={handlePurchase}
                   // onClose={closeModal}
                   modalComponent={<GarmentPurchase />}
                 />

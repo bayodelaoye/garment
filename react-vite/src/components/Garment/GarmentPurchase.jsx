@@ -10,10 +10,7 @@ function GarmentPurchase() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handlePurchase = async () => {
-    await dispatch(removeCart());
-    await dispatch(obtainCartItems());
-    await dispatch(obtainAmountCartItems());
+  const handleNavigatePurchase = async () => {
     closeModal();
     navigate("/");
   };
@@ -31,7 +28,7 @@ function GarmentPurchase() {
         <p>-Coco Chanel</p>
       </div>
       <div className="continue-shopping-container">
-        <button onClick={handlePurchase}>Continue Shopping</button>
+        <button onClick={handleNavigatePurchase}>Continue Shopping</button>
       </div>
     </div>
   );

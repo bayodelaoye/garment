@@ -255,6 +255,12 @@
     font-size: 0.75em;
   }
 
+  .review-text-break-word {
+    overflow-wrap: break-word;
+    word-break: break-word;
+    box-sizing: border-box;
+  }
+
   .edit-delete-review-container {
     display: flex;
     gap: 30px;
