@@ -63,6 +63,7 @@ function GarmentDetailsPage() {
   const foundGarmentId = allGarments?.find((garment) => {
     return garment?.id === +garmentId;
   });
+  const [previewImage, setPreviewImage] = useState(garment?.preview_image_url);
 
   useEffect(() => {
     const fetchGarment = async () => {
@@ -116,7 +117,7 @@ function GarmentDetailsPage() {
               <div className="garment-details-container">
                 <div className="garment-details-image-container">
                   <img
-                    src={garment?.preview_image_url}
+                    src={previewImage}
                     alt="garment preview image"
                     className="garment-details-preview-image"
                   />
@@ -145,6 +146,15 @@ function GarmentDetailsPage() {
                   )}
 
                   <div className="garment-details-sub-image-container">
+                    <img
+                      src={garment?.preview_image_url}
+                      alt="garment preview image"
+                      tabindex="0"
+                      className="garment-details-all-images"
+                      onClick={() =>
+                        setPreviewImage(garment?.preview_image_url)
+                      }
+                    />
                     {garmentImages?.map((garmentImage, index) => {
                       return (
                         <img
@@ -152,6 +162,8 @@ function GarmentDetailsPage() {
                           alt="garment sub image"
                           key={index}
                           tabindex="0"
+                          className="garment-details-all-images"
+                          onClick={() => setPreviewImage(garmentImage?.url)}
                         />
                       );
                     })}

@@ -38,7 +38,7 @@
 
   .garment-details-preview-image {
     width: 200px;
-    height: auto;
+    height: 268px;
     object-fit: cover;
   }
 
@@ -62,24 +62,25 @@
   .garment-details-sub-image-container {
     display: flex;
     justify-content: center;
-    gap: 30px;
+    gap: 10px;
   }
 
-  .garment-details-sub-image-container img {
-    width: 80px;
+  .garment-details-all-images {
+    width: 60px;
     height: auto;
-    border: 5px solid transparent;
     cursor: pointer;
     transition: transform 0.5s ease;
+    border: 3px solid transparent;
+    object-fit: cover;
   }
 
-  .garment-details-sub-image-container img:hover {
-    border: 5px solid var(--light-gray);
+  .garment-details-all-images:hover {
+    border: 3px solid var(--light-gray);
   }
 
-  .garment-details-sub-image-container img:focus {
+  .garment-details-all-images:focus {
     transform: scale(1.09);
-    filter: brightness(0.8);
+    border: 3px solid var(--base-red);
   }
 
   .garment-details-text-container {
@@ -338,21 +339,22 @@
     gap: 30px;
   }
 
-  .garment-details-sub-image-container img {
+  .garment-details-all-images {
     width: 80px;
     height: auto;
-    border: 5px solid transparent;
     cursor: pointer;
     transition: transform 0.5s ease;
+    border: 3px solid transparent;
+    object-fit: cover;
   }
 
-  .garment-details-sub-image-container img:hover {
-    border: 5px solid var(--light-gray);
+  .garment-details-all-images:hover {
+    border: 3px solid var(--light-gray);
   }
 
-  .garment-details-sub-image-container img:focus {
+  .garment-details-all-images:focus {
     transform: scale(1.09);
-    filter: brightness(0.8);
+    border: 3px solid var(--base-red);
   }
 
   .garment-details-text-container {
