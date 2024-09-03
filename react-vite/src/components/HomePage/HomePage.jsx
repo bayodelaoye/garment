@@ -9,6 +9,7 @@ import Loading from "../Loading";
 import { MdWavingHand } from "react-icons/md";
 import { HiMiniArrowLongRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
+import { obtainFavoriteGarments } from "../../redux/favorite";
 
 function HomePage() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function HomePage() {
       await dispatch(obtainGarmentsMen());
       await dispatch(obtainGarmentsWomen());
       await dispatch(obtainGarmentsKids());
+      await dispatch(obtainFavoriteGarments());
     };
 
     getCategoryGarments().then(() => {
