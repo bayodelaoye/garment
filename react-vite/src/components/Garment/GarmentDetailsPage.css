@@ -49,6 +49,7 @@
     left: 50px;
     cursor: pointer;
     z-index: 10;
+    opacity: 0;
   }
 
   .favorite-selected {
@@ -321,9 +322,10 @@
     display: flex;
     position: absolute;
     top: 20px;
-    left: 20px;
+    left: 50px;
     cursor: pointer;
     z-index: 10;
+    opacity: 0;
   }
 
   .favorite-selected {

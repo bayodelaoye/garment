@@ -67,11 +67,14 @@ function GarmentIndex({ garment }) {
             <>
               {isFavorite ? (
                 <FaHeart
-                  className="heart-icon favorite-selected"
+                  className="heart-icon-index favorite-selected"
                   onClick={toggleFavorite}
                 />
               ) : (
-                <FaRegHeart className="heart-icon" onClick={toggleFavorite} />
+                <FaRegHeart
+                  className="heart-icon-index"
+                  onClick={toggleFavorite}
+                />
               )}
             </>
           )}

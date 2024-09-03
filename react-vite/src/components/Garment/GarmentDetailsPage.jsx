@@ -63,7 +63,7 @@ function GarmentDetailsPage() {
   const foundGarmentId = allGarments?.find((garment) => {
     return garment?.id === +garmentId;
   });
-  const [previewImage, setPreviewImage] = useState(garment?.preview_image_url);
+  const [previewImage, setPreviewImage] = useState("");
 
   useEffect(() => {
     const fetchGarment = async () => {
@@ -78,6 +78,12 @@ function GarmentDetailsPage() {
 
     fetchGarment().then(() => setIsLoaded(true));
   }, [dispatch]);
+
+  useEffect(() => {
+    if (garment) {
+      setPreviewImage(garment?.preview_image_url);
+    }
+  }, [garment]);
 
   const toggleFavorite = async () => {
     if (isFavorite) {

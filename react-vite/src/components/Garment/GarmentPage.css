@@ -50,7 +50,7 @@
     color: var(--mid-gray);
   }
 
-  .heart-icon {
+  .heart-icon-index {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -113,7 +113,7 @@
     color: var(--black);
   }
 
-  .heart-icon {
+  .heart-icon-index {
     position: absolute;
     top: 20px;
     left: 20px;
@@ -122,7 +122,7 @@
     opacity: 0;
   }
 
-  .individual-garment-container:hover .heart-icon {
+  .individual-garment-container:hover .heart-icon-index {
     opacity: 1;
   }
 
