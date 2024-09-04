@@ -3,7 +3,7 @@
 Garment is an e-commerce website that allows users to view, purchase and create garments. It provides a platform for fashion enthusiasts to connect, discover new styles of garments, and engage in transactions. It has the right amount of redundancy to make navigation easy and intuitive.
 
 # Live Link
-https://garment-llvd.onrender.com
+https://garment-project.onrender.com
 
 ## Tech Stack
 ### Frameworks and Libraries
