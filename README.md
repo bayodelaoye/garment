@@ -40,14 +40,14 @@ https://garment-project.onrender.com
 * Successful Response: HTTP Status Code 200
 ```python
 {
-     "id": self.id,
-     "first_name": self.first_name,
-     "last_name": self.last_name,
-     "email": self.email,
-     "username": self.username,
-     "hashed_password": self.hashed_password,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at,
+     "id": INT,
+     "first_name": STRING,
+     "last_name": STRING,
+     "email": STRING,
+     "username": STRING,
+     "hashed_password": STRING,
+     "created_at": DATE,
+     "updated_at": DATE,
 }
 ```
 * Error Response: HTTP Status Code 401
@@ -76,14 +76,14 @@ https://garment-project.onrender.com
 * Successful Response: HTTP Status 201
 ```python
 {
-     "id": self.id,
-     "first_name": self.first_name,
-     "last_name": self.last_name,
-     "email": self.email,
-     "username": self.username,
-     "hashed_password": self.hashed_password,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at,
+     "id": INT,
+     "first_name": STRING,
+     "last_name": STRING,
+     "email": STRING,
+     "username": STRING,
+     "hashed_password": STRING,
+     "created_at": DATE,
+     "updated_at": DATE,
 }
 ```
 * Error Response: HTTP Status 400
@@ -100,14 +100,14 @@ https://garment-project.onrender.com
 * Successful Response: HTTP Status 200
 ```python
 {
-     "id": self.id,
-     "first_name": self.first_name,
-     "last_name": self.last_name,
-     "email": self.email,
-     "username": self.username,
-     "hashed_password": self.hashed_password,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at,
+     "id": INT,
+     "first_name": STRING,
+     "last_name": STRING,
+     "email": STRING,
+     "username": STRING,
+     "hashed_password": STRING,
+     "created_at": DATE,
+     "updated_at": DATE,
 }
 ```
 * Error Response: HTTP Status 400
@@ -168,13 +168,11 @@ https://garment-project.onrender.com
 * Successful Response: HTTP Status 200
 ```python
 {
-     "id": self.id,
-     "user_id": self.user_id,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at,
-     "cart_items": [
-      cart_item.to_dict_with_garments() for cart_item in self.cart_items
-     ],
+     "id": INT,
+     "user_id": INT,
+     "created_at": DATE,
+     "updated_at": DATE,
+     "cart_items": ARRAY_OF_CART_ITEM_OBJECTS,
 }
 ```
 * Error Response: HTTP Status 404
@@ -198,13 +196,13 @@ https://garment-project.onrender.com
 * Successful Response: HTTP Status 200
 ```python
 {
-     "id": self.id,
-     "cart_id": self.cart_id,
-     "garment_id": self.garment_id,
-     "quantity": self.quantity,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at,
-     "garment": self.garment.to_dict(),
+     "id": INT,
+     "cart_id": INT,
+     "garment_id": INT,
+     "quantity": INT,
+     "created_at": DATE,
+     "updated_at": DATE,
+     "garment": OBJECT,
 }
 ```
 * Error Response1: HTTP Status 404
@@ -266,13 +264,13 @@ https://garment-project.onrender.com
 ```python
 [
    {
-        "id": self.id,
-        "user_id": self.user_id,
-        "garment_id": self.garment_id,
-        "review": self.review,
-        "stars": self.stars,
-        "created_at": self.created_at,
-        "updated_at": self.updated_at,
+        "id": INT,
+        "user_id": INT,
+        "garment_id": INT,
+        "review": STRING,
+        "stars": INT,
+        "created_at": DATE,
+        "updated_at": DATE,
    }
 ]
 ```
@@ -299,13 +297,13 @@ https://garment-project.onrender.com
 * Success Response: HTTP Status 201
 ```python
 {
-     "id": self.id,
-     "user_id": self.user_id,
-     "garment_id": self.garment_id,
-     "review": self.review,
-     "stars": self.stars,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at,
+     "id": INT,
+     "user_id": INT,
+     "garment_id": INT,
+     "review": STRING,
+     "stars": INT,
+     "created_at": DATE,
+     "updated_at": DATE,
 }
 ```
 * Error Response1: HTTP Status 400
@@ -337,13 +335,13 @@ https://garment-project.onrender.com
 * Successful Response: HTTP Status 200
 ```python
 {
-     "id": self.id,
-     "user_id": self.user_id,
-     "garment_id": self.garment_id,
-     "review": self.review,
-     "stars": self.stars,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at,
+     "id": INT,
+     "user_id": INT,
+     "garment_id": INT,
+     "review": STRING,
+     "stars": INT,
+     "created_at": DATE,
+     "updated_at": DATE,
 }
 ```
 * Error Response1: HTTP Status 400
@@ -387,11 +385,11 @@ https://garment-project.onrender.com
 ```python
 [
    {
-        "id": self.id,
-        "user_id": self.user_id,
-        "garment_id": self.garment_id,
-        "created_at": self.created_at,
-        "updated_at": self.updated_at,
+        "id": INT,
+        "user_id": INT,
+        "garment_id": INT,
+        "created_at": DATE,
+        "updated_at": DATE,
    }
 ]
 ```
@@ -415,11 +413,11 @@ https://garment-project.onrender.com
 * Successful Response: HTTP 201
 ```python
 {
-     "id": self.id,
-     "user_id": self.user_id,
-     "garment_id": self.garment_id,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at
+     "id": INT,
+     "user_id": INT,
+     "garment_id": INT,
+     "created_at": DATE,
+     "updated_at": DATE
 }
 ```
 * Error Response1: HTTP Status 400
@@ -464,17 +462,17 @@ https://garment-project.onrender.com
 ```python
 [
    {
-        "id": self.id,
-        "user_id": self.user_id,
-        "title": self.title,
-        "price": self.price,
-        "discounted_price": self.discounted_price,
-        "description": self.description,
-        "inventory": self.inventory,
-        "category": self.category,
-        "created_at": self.created_at,
-        "updated_at": self.updated_at,
-        "preview_image_url": preview_image_url,
+        "id": INT,
+        "user_id": INT,
+        "title": STRING,
+        "price": NUMERIC
+        "discounted_price": NUMERIC,
+        "description": STRING,
+        "inventory": INT,
+        "category": STRING,
+        "created_at": DATE,
+        "updated_at": DATE,
+        "preview_image_url": STRING,
    }
 ]
 ```
@@ -504,17 +502,17 @@ https://garment-project.onrender.com
 * Success Response: HTTP Status 201
 ```python
 {
-     "id": self.id,
-     "user_id": self.user_id,
-     "title": self.title,
-     "price": self.price,
-     "discounted_price": self.discounted_price,
-     "description": self.description,
-     "inventory": self.inventory,
-     "category": self.category,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at,
-     "preview_image_url": preview_image_url
+     "id": INT,
+     "user_id": INT,
+     "title": STRING,
+     "price": NUMERIC,
+     "discounted_price": NUMERIC,
+     "description": STRING,
+     "inventory": INT,
+     "category": STRING,
+     "created_at": DATE,
+     "updated_at": DATE,
+     "preview_image_url": STRING
 }
 ```
 * Error Response1: HTTP Status 400
@@ -549,17 +547,17 @@ https://garment-project.onrender.com
 * Successful Response: HTTP Status 200
 ```python
 {
-     "id": self.id,
-     "user_id": self.user_id,
-     "title": self.title,
-     "price": self.price,
-     "discounted_price": self.discounted_price,
-     "description": self.description,
-     "inventory": self.inventory,
-     "category": self.category,
-     "created_at": self.created_at,
-     "updated_at": self.updated_at,
-     "preview_image_url": preview_image_url
+     "id": INT,
+     "user_id": INT,
+     "title": STRING,
+     "price": NUMERIC,
+     "discounted_price": NUMERIC,
+     "description": STRING,
+     "inventory": INT,
+     "category": STRING,
+     "created_at": DATE,
+     "updated_at": DATE,
+     "preview_image_url": STRING
 }
 ```
 * Error Response1: HTTP Status 400
